@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpsertAlbumOne
+  outputType: Json!
+  arguments:
+    - name: object
+      type: AlbumInsertType!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: upsert_album_one
+  graphql:
+    rootFieldName: qdrant_upsertAlbumOne
+    rootFieldKind: Mutation
+  description: Upsert a single record into the album collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpsertAlbumOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

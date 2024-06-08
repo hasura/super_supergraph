@@ -1,0 +1,65 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: ArtistInsertType
+  description: Insert type for artist
+  fields:
+    - name: artistId
+      type: Int!
+    - name: name
+      type: String
+  graphql:
+    typeName: Turso_ArtistInsertType
+    inputTypeName: Turso_ArtistInsertTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: artist_InsertType
+      fieldMapping:
+        artistId:
+          column:
+            name: artist_id
+        name:
+          column:
+            name: name
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: ArtistInsertType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - artistId
+          - name
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertArtistOne
+  outputType: "[ArtistInsertType!]!"
+  arguments:
+    - name: object
+      type: ArtistInsertType!
+      description: The record to insert into the artist
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: insert_artist_one
+  graphql:
+    rootFieldName: turso_insertArtistOne
+    rootFieldKind: Mutation
+  description: Insert a single record into the artist collection.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertArtistOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpsertCustomerMany
+  outputType: Json!
+  arguments:
+    - name: objects
+      type: "[CustomerInsertType!]!"
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: upsert_customer_many
+  graphql:
+    rootFieldName: qdrant_upsertCustomerMany
+    rootFieldKind: Mutation
+  description: Upsert multiple records into the customer collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpsertCustomerMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,87 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: PlaylistTrackInsertType
+  fields:
+    - name: document
+      type: String
+    - name: id
+      type: String!
+    - name: playlistId
+      type: Int
+    - name: trackId
+      type: Int
+    - name: vectorNames
+      type: "[String!]!"
+    - name: vectors
+      type: "[[Float!]!]!"
+  graphql:
+    typeName: Qdrant_PlaylistTrackInsertType
+    inputTypeName: Qdrant_PlaylistTrackInsertTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: qdrant
+      dataConnectorObjectType: playlist_track_InsertType
+      fieldMapping:
+        document:
+          column:
+            name: document
+        id:
+          column:
+            name: id
+        playlistId:
+          column:
+            name: playlist_id
+        trackId:
+          column:
+            name: track_id
+        vectorNames:
+          column:
+            name: vector_names
+        vectors:
+          column:
+            name: vectors
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: PlaylistTrackInsertType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - document
+          - id
+          - playlistId
+          - trackId
+          - vectorNames
+          - vectors
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertPlaylistTrackOne
+  outputType: Json!
+  arguments:
+    - name: object
+      type: PlaylistTrackInsertType!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: insert_playlist_track_one
+  graphql:
+    rootFieldName: qdrant_insertPlaylistTrackOne
+    rootFieldKind: Mutation
+  description: Insert a single record into the playlist_track collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertPlaylistTrackOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

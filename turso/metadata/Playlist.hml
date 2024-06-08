@@ -1,0 +1,108 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Playlist
+  fields:
+    - name: name
+      type: String
+    - name: playlistId
+      type: Int!
+  graphql:
+    typeName: Turso_Playlist
+    inputTypeName: Turso_PlaylistInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: playlist
+      fieldMapping:
+        name:
+          column:
+            name: name
+        playlistId:
+          column:
+            name: playlist_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Playlist
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - name
+          - playlistId
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: PlaylistBoolExp
+  objectType: Playlist
+  dataConnectorName: turso
+  dataConnectorObjectType: playlist
+  comparableFields:
+    - fieldName: name
+      operators:
+        enableAll: true
+    - fieldName: playlistId
+      operators:
+        enableAll: true
+  graphql:
+    typeName: Turso_PlaylistBoolExp
+
+---
+kind: Model
+version: v1
+definition:
+  name: Playlist
+  objectType: Playlist
+  source:
+    dataConnectorName: turso
+    collection: playlist
+  filterExpressionType: PlaylistBoolExp
+  orderableFields:
+    - fieldName: name
+      orderByDirections:
+        enableAll: true
+    - fieldName: playlistId
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: turso_playlist
+    selectUniques:
+      - queryRootField: turso_playlistByPlaylistId
+        uniqueIdentifier:
+          - playlistId
+    orderByExpressionType: Turso_PlaylistOrderBy
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Playlist
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: playlistTracks
+  sourceType: Playlist
+  target:
+    model:
+      name: PlaylistTrack
+      relationshipType: Array
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: playlistId
+      target:
+        modelField:
+          - fieldName: playlistId
+

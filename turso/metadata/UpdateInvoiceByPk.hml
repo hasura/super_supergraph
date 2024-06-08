@@ -1,0 +1,191 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InvoiceIncType
+  description: Numeric fields to increment for invoice
+  fields:
+    - name: customerId
+      type: Int
+    - name: invoiceId
+      type: Int
+    - name: total
+      type: Float
+  graphql:
+    typeName: Turso_InvoiceIncType
+    inputTypeName: Turso_InvoiceIncTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: invoice_IncType
+      fieldMapping:
+        customerId:
+          column:
+            name: customer_id
+        invoiceId:
+          column:
+            name: invoice_id
+        total:
+          column:
+            name: total
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InvoiceIncType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - customerId
+          - invoiceId
+          - total
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InvoiceSetType
+  description: Fields to set for invoice
+  fields:
+    - name: billingAddress
+      type: String
+    - name: billingCity
+      type: String
+    - name: billingCountry
+      type: String
+    - name: billingPostalCode
+      type: String
+    - name: billingState
+      type: String
+    - name: customerId
+      type: Int
+    - name: invoiceDate
+      type: String
+    - name: invoiceId
+      type: Int
+    - name: total
+      type: Float
+  graphql:
+    typeName: Turso_InvoiceSetType
+    inputTypeName: Turso_InvoiceSetTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: invoice_SetType
+      fieldMapping:
+        billingAddress:
+          column:
+            name: billing_address
+        billingCity:
+          column:
+            name: billing_city
+        billingCountry:
+          column:
+            name: billing_country
+        billingPostalCode:
+          column:
+            name: billing_postal_code
+        billingState:
+          column:
+            name: billing_state
+        customerId:
+          column:
+            name: customer_id
+        invoiceDate:
+          column:
+            name: invoice_date
+        invoiceId:
+          column:
+            name: invoice_id
+        total:
+          column:
+            name: total
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InvoiceSetType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - billingAddress
+          - billingCity
+          - billingCountry
+          - billingPostalCode
+          - billingState
+          - customerId
+          - invoiceDate
+          - invoiceId
+          - total
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InvoicePkColumnsType
+  description: Primary key columns for invoice
+  fields:
+    - name: invoiceId
+      type: Int!
+  graphql:
+    typeName: Turso_InvoicePkColumnsType
+    inputTypeName: Turso_InvoicePkColumnsTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: invoice_PKColumnsType
+      fieldMapping:
+        invoiceId:
+          column:
+            name: invoice_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InvoicePkColumnsType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - invoiceId
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateInvoiceByPk
+  outputType: "[InvoiceInsertType!]!"
+  arguments:
+    - name: inc
+      type: InvoiceIncType
+      description: The numeric fields to increment for the invoice
+    - name: set
+      type: InvoiceSetType
+      description: The fields to set for the invoice
+    - name: pkColumns
+      type: InvoicePkColumnsType!
+      description: The primary key columns of the record to update in the invoice
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: update_invoice_by_pk
+    argumentMapping:
+      inc: _inc
+      set: _set
+      pkColumns: pk_columns
+  graphql:
+    rootFieldName: turso_updateInvoiceByPk
+    rootFieldKind: Mutation
+  description: Update a single record in the invoice collection by primary key.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateInvoiceByPk
+  permissions:
+    - role: admin
+      allowExecution: true
+

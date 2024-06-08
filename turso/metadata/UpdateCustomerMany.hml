@@ -1,0 +1,40 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateCustomerMany
+  outputType: "[CustomerInsertType!]!"
+  arguments:
+    - name: incArray
+      type: "[CustomerIncType!]!"
+      description: An array of _inc objects for incrementing fields in the customer
+    - name: setArray
+      type: "[CustomerSetType!]!"
+      description: An array of _set objects for updating the customer
+    - name: pkColumnsArray
+      type: "[CustomerPkColumnsType!]!"
+      description: An array of primary key structures for the records to update in the
+        customer
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: update_customer_many
+    argumentMapping:
+      incArray: _inc_array
+      setArray: _set_array
+      pkColumnsArray: pk_columns_array
+  graphql:
+    rootFieldName: turso_updateCustomerMany
+    rootFieldKind: Mutation
+  description: Update multiple records in the customer collection, with separate
+    arrays for PKs, _set, and _inc.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateCustomerMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

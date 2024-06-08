@@ -1,0 +1,99 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: PlaylistTrack
+  fields:
+    - name: id
+      type: ObjectId
+    - name: playlistId
+      type: Int
+    - name: trackId
+      type: Int
+  graphql:
+    typeName: Mongo_PlaylistTrack
+    inputTypeName: Mongo_PlaylistTrackInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: mongo
+      dataConnectorObjectType: playlist_track
+      fieldMapping:
+        id:
+          column:
+            name: _id
+        playlistId:
+          column:
+            name: playlist_id
+        trackId:
+          column:
+            name: track_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: PlaylistTrack
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - id
+          - playlistId
+          - trackId
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: PlaylistTrackBoolExp
+  objectType: PlaylistTrack
+  dataConnectorName: mongo
+  dataConnectorObjectType: playlist_track
+  comparableFields:
+    - fieldName: id
+      operators:
+        enableAll: true
+    - fieldName: playlistId
+      operators:
+        enableAll: true
+    - fieldName: trackId
+      operators:
+        enableAll: true
+  graphql:
+    typeName: Mongo_PlaylistTrackBoolExp
+
+---
+kind: Model
+version: v1
+definition:
+  name: PlaylistTrack
+  objectType: PlaylistTrack
+  source:
+    dataConnectorName: mongo
+    collection: playlist_track
+  filterExpressionType: PlaylistTrackBoolExp
+  orderableFields:
+    - fieldName: id
+      orderByDirections:
+        enableAll: true
+    - fieldName: playlistId
+      orderByDirections:
+        enableAll: true
+    - fieldName: trackId
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: mongo_playlistTrack
+    selectUniques: []
+    orderByExpressionType: Mongo_PlaylistTrackOrderBy
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: PlaylistTrack
+  permissions:
+    - role: admin
+      select:
+        filter: null
+

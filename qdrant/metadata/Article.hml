@@ -1,0 +1,143 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Article
+  fields:
+    - name: arr
+      type: "[Int]"
+    - name: bool
+      type: Bool
+    - name: float
+      type: Float
+    - name: id
+      type: Int!
+    - name: int
+      type: Int
+    - name: score
+      type: Float
+    - name: string
+      type: String
+    - name: vector
+      type: "[Float!]"
+  graphql:
+    typeName: Qdrant_Article
+    inputTypeName: Qdrant_ArticleInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: qdrant
+      dataConnectorObjectType: article
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Article
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - arr
+          - bool
+          - float
+          - id
+          - int
+          - score
+          - string
+          - vector
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: ArticleBoolExp
+  objectType: Article
+  dataConnectorName: qdrant
+  dataConnectorObjectType: article
+  comparableFields:
+    - fieldName: arr
+      operators:
+        enableAll: true
+    - fieldName: bool
+      operators:
+        enableAll: true
+    - fieldName: float
+      operators:
+        enableAll: true
+    - fieldName: id
+      operators:
+        enableAll: true
+    - fieldName: int
+      operators:
+        enableAll: true
+    - fieldName: score
+      operators:
+        enableAll: true
+    - fieldName: string
+      operators:
+        enableAll: true
+    - fieldName: vector
+      operators:
+        enableAll: true
+  graphql:
+    typeName: Qdrant_ArticleBoolExp
+
+---
+kind: Model
+version: v1
+definition:
+  name: Article
+  objectType: Article
+  arguments:
+    - name: recommend
+      type: RecommendInt
+    - name: search
+      type: Search
+  source:
+    dataConnectorName: qdrant
+    collection: article
+  filterExpressionType: ArticleBoolExp
+  orderableFields:
+    - fieldName: arr
+      orderByDirections:
+        enableAll: true
+    - fieldName: bool
+      orderByDirections:
+        enableAll: true
+    - fieldName: float
+      orderByDirections:
+        enableAll: true
+    - fieldName: id
+      orderByDirections:
+        enableAll: true
+    - fieldName: int
+      orderByDirections:
+        enableAll: true
+    - fieldName: score
+      orderByDirections:
+        enableAll: true
+    - fieldName: string
+      orderByDirections:
+        enableAll: true
+    - fieldName: vector
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: qdrant_article
+    selectUniques:
+      - queryRootField: qdrant_articleById
+        uniqueIdentifier:
+          - id
+    argumentsInputType: Qdrant_ArticleArguments
+    orderByExpressionType: Qdrant_ArticleOrderBy
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Article
+  permissions:
+    - role: admin
+      select:
+        filter: null
+

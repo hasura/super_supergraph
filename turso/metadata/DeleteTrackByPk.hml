@@ -1,0 +1,30 @@
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteTrackByPk
+  outputType: "[TrackInsertType!]!"
+  arguments:
+    - name: pkColumns
+      type: TrackPkColumnsType!
+      description: The primary key columns of the record to delete in the track
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: delete_track_by_pk
+    argumentMapping:
+      pkColumns: pk_columns
+  graphql:
+    rootFieldName: turso_deleteTrackByPk
+    rootFieldKind: Mutation
+  description: Delete a single record from the track collection by primary key.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteTrackByPk
+  permissions:
+    - role: admin
+      allowExecution: true
+

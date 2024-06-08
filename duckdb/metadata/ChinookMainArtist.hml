@@ -1,0 +1,87 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: ChinookMainArtist
+  fields:
+    - name: artistId
+      type: Int!
+    - name: name
+      type: String!
+  graphql:
+    typeName: Duckdb_ChinookMainArtist
+    inputTypeName: Duckdb_ChinookMainArtistInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: duckdb
+      dataConnectorObjectType: chinook_main_artist
+      fieldMapping:
+        artistId:
+          column:
+            name: artist_id
+        name:
+          column:
+            name: name
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: ChinookMainArtist
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - artistId
+          - name
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: ChinookMainArtistBoolExp
+  objectType: ChinookMainArtist
+  dataConnectorName: duckdb
+  dataConnectorObjectType: chinook_main_artist
+  comparableFields:
+    - fieldName: artistId
+      operators:
+        enableAll: true
+    - fieldName: name
+      operators:
+        enableAll: true
+  graphql:
+    typeName: Duckdb_ChinookMainArtistBoolExp
+
+---
+kind: Model
+version: v1
+definition:
+  name: ChinookMainArtist
+  objectType: ChinookMainArtist
+  source:
+    dataConnectorName: duckdb
+    collection: chinook_main_artist
+  filterExpressionType: ChinookMainArtistBoolExp
+  orderableFields:
+    - fieldName: artistId
+      orderByDirections:
+        enableAll: true
+    - fieldName: name
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: duckdb_chinookMainArtist
+    selectUniques: []
+    orderByExpressionType: Duckdb_ChinookMainArtistOrderBy
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: ChinookMainArtist
+  permissions:
+    - role: admin
+      select:
+        filter: null
+

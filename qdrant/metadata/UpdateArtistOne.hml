@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateArtistOne
+  outputType: Json!
+  arguments:
+    - name: object
+      type: ArtistInsertType!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: update_artist_one
+  graphql:
+    rootFieldName: qdrant_updateArtistOne
+    rootFieldKind: Mutation
+  description: Update a single record from the artist collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateArtistOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

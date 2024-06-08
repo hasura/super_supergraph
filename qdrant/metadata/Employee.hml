@@ -1,0 +1,300 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Employee
+  fields:
+    - name: address
+      type: String
+    - name: birthDate
+      type: String
+    - name: city
+      type: String
+    - name: country
+      type: String
+    - name: document
+      type: String
+    - name: email
+      type: String
+    - name: employeeId
+      type: Int
+    - name: fax
+      type: String
+    - name: firstName
+      type: String
+    - name: hireDate
+      type: String
+    - name: id
+      type: String!
+    - name: lastName
+      type: String
+    - name: phone
+      type: String
+    - name: postalCode
+      type: String
+    - name: reportsTo
+      type: Int
+    - name: score
+      type: Float
+    - name: state
+      type: String
+    - name: title
+      type: String
+    - name: vector
+      type: "[Float!]"
+  graphql:
+    typeName: Qdrant_Employee
+    inputTypeName: Qdrant_EmployeeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: qdrant
+      dataConnectorObjectType: employee
+      fieldMapping:
+        address:
+          column:
+            name: address
+        birthDate:
+          column:
+            name: birth_date
+        city:
+          column:
+            name: city
+        country:
+          column:
+            name: country
+        document:
+          column:
+            name: document
+        email:
+          column:
+            name: email
+        employeeId:
+          column:
+            name: employee_id
+        fax:
+          column:
+            name: fax
+        firstName:
+          column:
+            name: first_name
+        hireDate:
+          column:
+            name: hire_date
+        id:
+          column:
+            name: id
+        lastName:
+          column:
+            name: last_name
+        phone:
+          column:
+            name: phone
+        postalCode:
+          column:
+            name: postal_code
+        reportsTo:
+          column:
+            name: reports_to
+        score:
+          column:
+            name: score
+        state:
+          column:
+            name: state
+        title:
+          column:
+            name: title
+        vector:
+          column:
+            name: vector
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Employee
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - address
+          - birthDate
+          - city
+          - country
+          - document
+          - email
+          - employeeId
+          - fax
+          - firstName
+          - hireDate
+          - id
+          - lastName
+          - phone
+          - postalCode
+          - reportsTo
+          - score
+          - state
+          - title
+          - vector
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: EmployeeBoolExp
+  objectType: Employee
+  dataConnectorName: qdrant
+  dataConnectorObjectType: employee
+  comparableFields:
+    - fieldName: address
+      operators:
+        enableAll: true
+    - fieldName: birthDate
+      operators:
+        enableAll: true
+    - fieldName: city
+      operators:
+        enableAll: true
+    - fieldName: country
+      operators:
+        enableAll: true
+    - fieldName: document
+      operators:
+        enableAll: true
+    - fieldName: email
+      operators:
+        enableAll: true
+    - fieldName: employeeId
+      operators:
+        enableAll: true
+    - fieldName: fax
+      operators:
+        enableAll: true
+    - fieldName: firstName
+      operators:
+        enableAll: true
+    - fieldName: hireDate
+      operators:
+        enableAll: true
+    - fieldName: id
+      operators:
+        enableAll: true
+    - fieldName: lastName
+      operators:
+        enableAll: true
+    - fieldName: phone
+      operators:
+        enableAll: true
+    - fieldName: postalCode
+      operators:
+        enableAll: true
+    - fieldName: reportsTo
+      operators:
+        enableAll: true
+    - fieldName: score
+      operators:
+        enableAll: true
+    - fieldName: state
+      operators:
+        enableAll: true
+    - fieldName: title
+      operators:
+        enableAll: true
+    - fieldName: vector
+      operators:
+        enableAll: true
+  graphql:
+    typeName: Qdrant_EmployeeBoolExp
+
+---
+kind: Model
+version: v1
+definition:
+  name: Employee
+  objectType: Employee
+  arguments:
+    - name: recommend
+      type: RecommendStringVector
+    - name: search
+      type: SearchVector
+  source:
+    dataConnectorName: qdrant
+    collection: employee
+  filterExpressionType: EmployeeBoolExp
+  orderableFields:
+    - fieldName: address
+      orderByDirections:
+        enableAll: true
+    - fieldName: birthDate
+      orderByDirections:
+        enableAll: true
+    - fieldName: city
+      orderByDirections:
+        enableAll: true
+    - fieldName: country
+      orderByDirections:
+        enableAll: true
+    - fieldName: document
+      orderByDirections:
+        enableAll: true
+    - fieldName: email
+      orderByDirections:
+        enableAll: true
+    - fieldName: employeeId
+      orderByDirections:
+        enableAll: true
+    - fieldName: fax
+      orderByDirections:
+        enableAll: true
+    - fieldName: firstName
+      orderByDirections:
+        enableAll: true
+    - fieldName: hireDate
+      orderByDirections:
+        enableAll: true
+    - fieldName: id
+      orderByDirections:
+        enableAll: true
+    - fieldName: lastName
+      orderByDirections:
+        enableAll: true
+    - fieldName: phone
+      orderByDirections:
+        enableAll: true
+    - fieldName: postalCode
+      orderByDirections:
+        enableAll: true
+    - fieldName: reportsTo
+      orderByDirections:
+        enableAll: true
+    - fieldName: score
+      orderByDirections:
+        enableAll: true
+    - fieldName: state
+      orderByDirections:
+        enableAll: true
+    - fieldName: title
+      orderByDirections:
+        enableAll: true
+    - fieldName: vector
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: qdrant_employee
+    selectUniques:
+      - queryRootField: qdrant_employeeById
+        uniqueIdentifier:
+          - id
+    argumentsInputType: Qdrant_EmployeeArguments
+    orderByExpressionType: Qdrant_EmployeeOrderBy
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Employee
+  permissions:
+    - role: admin
+      select:
+        filter: null
+

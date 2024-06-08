@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: InsertArtistMany
+  outputType: Json!
+  arguments:
+    - name: objects
+      type: "[ArtistInsertType!]!"
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: insert_artist_many
+  graphql:
+    rootFieldName: qdrant_insertArtistMany
+    rootFieldKind: Mutation
+  description: Insert multiple records into the artist collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertArtistMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

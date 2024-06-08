@@ -1,0 +1,35 @@
+{
+  "name": "playlist",
+  "collections": {
+    "playlist": {
+      "type": "playlist"
+    }
+  },
+  "objectTypes": {
+    "playlist": {
+      "fields": {
+        "_id": {
+          "type": {
+            "nullable": {
+              "scalar": "objectId"
+            }
+          }
+        },
+        "name": {
+          "type": {
+            "nullable": {
+              "scalar": "string"
+            }
+          }
+        },
+        "playlist_id": {
+          "type": {
+            "nullable": {
+              "scalar": "int"
+            }
+          }
+        }
+      }
+    }
+  }
+}

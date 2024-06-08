@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpsertBooleanOne
+  outputType: Json!
+  arguments:
+    - name: object
+      type: BooleanInsertType!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: upsert_boolean_one
+  graphql:
+    rootFieldName: qdrant_upsertBooleanOne
+    rootFieldKind: Mutation
+  description: Upsert a single record into the boolean collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpsertBooleanOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

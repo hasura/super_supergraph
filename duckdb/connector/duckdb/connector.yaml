@@ -1,0 +1,8 @@
+kind: Connector
+version: v1
+definition:
+  name: duckdb
+  subgraph: duckdb
+  source: hasura/duckdb:v0.0.17
+  context: .
+  envFile: .env.local

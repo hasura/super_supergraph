@@ -1,0 +1,228 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Track
+  fields:
+    - name: albumId
+      type: Int
+    - name: bytes
+      type: Int
+    - name: composer
+      type: String
+    - name: document
+      type: String
+    - name: genreId
+      type: Int
+    - name: id
+      type: String!
+    - name: mediaTypeId
+      type: Int
+    - name: milliseconds
+      type: Int
+    - name: name
+      type: String
+    - name: score
+      type: Float
+    - name: trackId
+      type: Int
+    - name: unitPrice
+      type: String
+    - name: vector
+      type: "[Float!]"
+  graphql:
+    typeName: Qdrant_Track
+    inputTypeName: Qdrant_TrackInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: qdrant
+      dataConnectorObjectType: track
+      fieldMapping:
+        albumId:
+          column:
+            name: album_id
+        bytes:
+          column:
+            name: bytes
+        composer:
+          column:
+            name: composer
+        document:
+          column:
+            name: document
+        genreId:
+          column:
+            name: genre_id
+        id:
+          column:
+            name: id
+        mediaTypeId:
+          column:
+            name: media_type_id
+        milliseconds:
+          column:
+            name: milliseconds
+        name:
+          column:
+            name: name
+        score:
+          column:
+            name: score
+        trackId:
+          column:
+            name: track_id
+        unitPrice:
+          column:
+            name: unit_price
+        vector:
+          column:
+            name: vector
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Track
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - albumId
+          - bytes
+          - composer
+          - document
+          - genreId
+          - id
+          - mediaTypeId
+          - milliseconds
+          - name
+          - score
+          - trackId
+          - unitPrice
+          - vector
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: TrackBoolExp
+  objectType: Track
+  dataConnectorName: qdrant
+  dataConnectorObjectType: track
+  comparableFields:
+    - fieldName: albumId
+      operators:
+        enableAll: true
+    - fieldName: bytes
+      operators:
+        enableAll: true
+    - fieldName: composer
+      operators:
+        enableAll: true
+    - fieldName: document
+      operators:
+        enableAll: true
+    - fieldName: genreId
+      operators:
+        enableAll: true
+    - fieldName: id
+      operators:
+        enableAll: true
+    - fieldName: mediaTypeId
+      operators:
+        enableAll: true
+    - fieldName: milliseconds
+      operators:
+        enableAll: true
+    - fieldName: name
+      operators:
+        enableAll: true
+    - fieldName: score
+      operators:
+        enableAll: true
+    - fieldName: trackId
+      operators:
+        enableAll: true
+    - fieldName: unitPrice
+      operators:
+        enableAll: true
+    - fieldName: vector
+      operators:
+        enableAll: true
+  graphql:
+    typeName: Qdrant_TrackBoolExp
+
+---
+kind: Model
+version: v1
+definition:
+  name: Track
+  objectType: Track
+  arguments:
+    - name: recommend
+      type: RecommendStringVector
+    - name: search
+      type: SearchVector
+  source:
+    dataConnectorName: qdrant
+    collection: track
+  filterExpressionType: TrackBoolExp
+  orderableFields:
+    - fieldName: albumId
+      orderByDirections:
+        enableAll: true
+    - fieldName: bytes
+      orderByDirections:
+        enableAll: true
+    - fieldName: composer
+      orderByDirections:
+        enableAll: true
+    - fieldName: document
+      orderByDirections:
+        enableAll: true
+    - fieldName: genreId
+      orderByDirections:
+        enableAll: true
+    - fieldName: id
+      orderByDirections:
+        enableAll: true
+    - fieldName: mediaTypeId
+      orderByDirections:
+        enableAll: true
+    - fieldName: milliseconds
+      orderByDirections:
+        enableAll: true
+    - fieldName: name
+      orderByDirections:
+        enableAll: true
+    - fieldName: score
+      orderByDirections:
+        enableAll: true
+    - fieldName: trackId
+      orderByDirections:
+        enableAll: true
+    - fieldName: unitPrice
+      orderByDirections:
+        enableAll: true
+    - fieldName: vector
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: qdrant_track
+    selectUniques:
+      - queryRootField: qdrant_trackById
+        uniqueIdentifier:
+          - id
+    argumentsInputType: Qdrant_TrackArguments
+    orderByExpressionType: Qdrant_TrackOrderBy
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Track
+  permissions:
+    - role: admin
+      select:
+        filter: null
+

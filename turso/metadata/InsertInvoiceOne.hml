@@ -1,0 +1,107 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InvoiceInsertType
+  description: Insert type for invoice
+  fields:
+    - name: billingAddress
+      type: String
+    - name: billingCity
+      type: String
+    - name: billingCountry
+      type: String
+    - name: billingPostalCode
+      type: String
+    - name: billingState
+      type: String
+    - name: customerId
+      type: Int
+    - name: invoiceDate
+      type: String
+    - name: invoiceId
+      type: Int!
+    - name: total
+      type: Float
+  graphql:
+    typeName: Turso_InvoiceInsertType
+    inputTypeName: Turso_InvoiceInsertTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: invoice_InsertType
+      fieldMapping:
+        billingAddress:
+          column:
+            name: billing_address
+        billingCity:
+          column:
+            name: billing_city
+        billingCountry:
+          column:
+            name: billing_country
+        billingPostalCode:
+          column:
+            name: billing_postal_code
+        billingState:
+          column:
+            name: billing_state
+        customerId:
+          column:
+            name: customer_id
+        invoiceDate:
+          column:
+            name: invoice_date
+        invoiceId:
+          column:
+            name: invoice_id
+        total:
+          column:
+            name: total
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InvoiceInsertType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - billingAddress
+          - billingCity
+          - billingCountry
+          - billingPostalCode
+          - billingState
+          - customerId
+          - invoiceDate
+          - invoiceId
+          - total
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertInvoiceOne
+  outputType: "[InvoiceInsertType!]!"
+  arguments:
+    - name: object
+      type: InvoiceInsertType!
+      description: The record to insert into the invoice
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: insert_invoice_one
+  graphql:
+    rootFieldName: turso_insertInvoiceOne
+    rootFieldKind: Mutation
+  description: Insert a single record into the invoice collection.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertInvoiceOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

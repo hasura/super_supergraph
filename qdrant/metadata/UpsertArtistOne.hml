@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpsertArtistOne
+  outputType: Json!
+  arguments:
+    - name: object
+      type: ArtistInsertType!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: upsert_artist_one
+  graphql:
+    rootFieldName: qdrant_upsertArtistOne
+    rootFieldKind: Mutation
+  description: Upsert a single record into the artist collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpsertArtistOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,40 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateInvoiceLineMany
+  outputType: "[InvoiceLineInsertType!]!"
+  arguments:
+    - name: incArray
+      type: "[InvoiceLineIncType!]!"
+      description: An array of _inc objects for incrementing fields in the invoice_line
+    - name: setArray
+      type: "[InvoiceLineSetType!]!"
+      description: An array of _set objects for updating the invoice_line
+    - name: pkColumnsArray
+      type: "[InvoiceLinePkColumnsType!]!"
+      description: An array of primary key structures for the records to update in the
+        invoice_line
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: update_invoice_line_many
+    argumentMapping:
+      incArray: _inc_array
+      setArray: _set_array
+      pkColumnsArray: pk_columns_array
+  graphql:
+    rootFieldName: turso_updateInvoiceLineMany
+    rootFieldKind: Mutation
+  description: Update multiple records in the invoice_line collection, with
+    separate arrays for PKs, _set, and _inc.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateInvoiceLineMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

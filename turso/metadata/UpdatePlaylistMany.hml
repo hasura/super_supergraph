@@ -1,0 +1,40 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpdatePlaylistMany
+  outputType: "[PlaylistInsertType!]!"
+  arguments:
+    - name: incArray
+      type: "[PlaylistIncType!]!"
+      description: An array of _inc objects for incrementing fields in the playlist
+    - name: setArray
+      type: "[PlaylistSetType!]!"
+      description: An array of _set objects for updating the playlist
+    - name: pkColumnsArray
+      type: "[PlaylistPkColumnsType!]!"
+      description: An array of primary key structures for the records to update in the
+        playlist
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: update_playlist_many
+    argumentMapping:
+      incArray: _inc_array
+      setArray: _set_array
+      pkColumnsArray: pk_columns_array
+  graphql:
+    rootFieldName: turso_updatePlaylistMany
+    rootFieldKind: Mutation
+  description: Update multiple records in the playlist collection, with separate
+    arrays for PKs, _set, and _inc.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdatePlaylistMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,40 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateEmployeeMany
+  outputType: "[EmployeeInsertType!]!"
+  arguments:
+    - name: incArray
+      type: "[EmployeeIncType!]!"
+      description: An array of _inc objects for incrementing fields in the employee
+    - name: setArray
+      type: "[EmployeeSetType!]!"
+      description: An array of _set objects for updating the employee
+    - name: pkColumnsArray
+      type: "[EmployeePkColumnsType!]!"
+      description: An array of primary key structures for the records to update in the
+        employee
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: update_employee_many
+    argumentMapping:
+      incArray: _inc_array
+      setArray: _set_array
+      pkColumnsArray: pk_columns_array
+  graphql:
+    rootFieldName: turso_updateEmployeeMany
+    rootFieldKind: Mutation
+  description: Update multiple records in the employee collection, with separate
+    arrays for PKs, _set, and _inc.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateEmployeeMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

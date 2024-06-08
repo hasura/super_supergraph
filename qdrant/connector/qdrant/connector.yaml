@@ -1,0 +1,8 @@
+kind: Connector
+version: v1
+definition:
+  name: qdrant
+  subgraph: qdrant
+  source: hasura/qdrant:v0.2.0
+  context: .
+  envFile: .env.local

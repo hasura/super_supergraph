@@ -1,0 +1,127 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: PlaylistTrack
+  fields:
+    - name: playlistId
+      type: Int!
+    - name: trackId
+      type: Int
+  graphql:
+    typeName: Turso_PlaylistTrack
+    inputTypeName: Turso_PlaylistTrackInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: playlist_track
+      fieldMapping:
+        playlistId:
+          column:
+            name: playlist_id
+        trackId:
+          column:
+            name: track_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: PlaylistTrack
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - playlistId
+          - trackId
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: PlaylistTrackBoolExp
+  objectType: PlaylistTrack
+  dataConnectorName: turso
+  dataConnectorObjectType: playlist_track
+  comparableFields:
+    - fieldName: playlistId
+      operators:
+        enableAll: true
+    - fieldName: trackId
+      operators:
+        enableAll: true
+  graphql:
+    typeName: Turso_PlaylistTrackBoolExp
+
+---
+kind: Model
+version: v1
+definition:
+  name: PlaylistTrack
+  objectType: PlaylistTrack
+  source:
+    dataConnectorName: turso
+    collection: playlist_track
+  filterExpressionType: PlaylistTrackBoolExp
+  orderableFields:
+    - fieldName: playlistId
+      orderByDirections:
+        enableAll: true
+    - fieldName: trackId
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: turso_playlistTrack
+    selectUniques:
+      - queryRootField: turso_playlistTrackByPlaylistTrackById
+        uniqueIdentifier:
+          - playlistId
+          - trackId
+    orderByExpressionType: Turso_PlaylistTrackOrderBy
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: PlaylistTrack
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: playlist
+  sourceType: PlaylistTrack
+  target:
+    model:
+      name: Playlist
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: playlistId
+      target:
+        modelField:
+          - fieldName: playlistId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: track
+  sourceType: PlaylistTrack
+  target:
+    model:
+      name: Track
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: trackId
+      target:
+        modelField:
+          - fieldName: trackId
+

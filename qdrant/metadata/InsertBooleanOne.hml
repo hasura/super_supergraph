@@ -1,0 +1,87 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: BooleanInsertType
+  fields:
+    - name: a
+      type: Bool
+    - name: b
+      type: Bool
+    - name: c
+      type: Bool
+    - name: d
+      type: Bool
+    - name: id
+      type: Int!
+    - name: vector
+      type: "[Float!]!"
+  graphql:
+    typeName: Qdrant_BooleanInsertType
+    inputTypeName: Qdrant_BooleanInsertTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: qdrant
+      dataConnectorObjectType: boolean_InsertType
+      fieldMapping:
+        a:
+          column:
+            name: A
+        b:
+          column:
+            name: B
+        c:
+          column:
+            name: C
+        d:
+          column:
+            name: D
+        id:
+          column:
+            name: id
+        vector:
+          column:
+            name: vector
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: BooleanInsertType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - a
+          - b
+          - c
+          - d
+          - id
+          - vector
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertBooleanOne
+  outputType: Json!
+  arguments:
+    - name: object
+      type: BooleanInsertType!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: insert_boolean_one
+  graphql:
+    rootFieldName: qdrant_insertBooleanOne
+    rootFieldKind: Mutation
+  description: Insert a single record into the boolean collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertBooleanOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

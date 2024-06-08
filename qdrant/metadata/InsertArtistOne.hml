@@ -1,0 +1,87 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: ArtistInsertType
+  fields:
+    - name: artistId
+      type: Int
+    - name: document
+      type: String
+    - name: id
+      type: String!
+    - name: name
+      type: String
+    - name: vectorNames
+      type: "[String!]!"
+    - name: vectors
+      type: "[[Float!]!]!"
+  graphql:
+    typeName: Qdrant_ArtistInsertType
+    inputTypeName: Qdrant_ArtistInsertTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: qdrant
+      dataConnectorObjectType: artist_InsertType
+      fieldMapping:
+        artistId:
+          column:
+            name: artist_id
+        document:
+          column:
+            name: document
+        id:
+          column:
+            name: id
+        name:
+          column:
+            name: name
+        vectorNames:
+          column:
+            name: vector_names
+        vectors:
+          column:
+            name: vectors
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: ArtistInsertType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - artistId
+          - document
+          - id
+          - name
+          - vectorNames
+          - vectors
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertArtistOne
+  outputType: Json!
+  arguments:
+    - name: object
+      type: ArtistInsertType!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: insert_artist_one
+  graphql:
+    rootFieldName: qdrant_insertArtistOne
+    rootFieldKind: Mutation
+  description: Insert a single record into the artist collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertArtistOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

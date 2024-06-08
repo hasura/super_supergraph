@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpsertInvoiceOne
+  outputType: Json!
+  arguments:
+    - name: object
+      type: InvoiceInsertType!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: upsert_invoice_one
+  graphql:
+    rootFieldName: qdrant_upsertInvoiceOne
+    rootFieldKind: Mutation
+  description: Upsert a single record into the invoice collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpsertInvoiceOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

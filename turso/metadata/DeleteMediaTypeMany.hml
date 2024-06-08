@@ -1,0 +1,33 @@
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteMediaTypeMany
+  outputType: "[MediaTypeInsertType!]!"
+  arguments:
+    - name: pkColumnsArray
+      type: "[MediaTypePkColumnsType!]!"
+      description: An array of primary key structures for the records to delete in the
+        media_type. Each item in the array represents a condition that
+        identifies one or more records to be deleted.
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: delete_media_type_many
+    argumentMapping:
+      pkColumnsArray: pk_columns_array
+  graphql:
+    rootFieldName: turso_deleteMediaTypeMany
+    rootFieldKind: Mutation
+  description: Delete multiple records from the media_type collection based on
+    primary key conditions.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteMediaTypeMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

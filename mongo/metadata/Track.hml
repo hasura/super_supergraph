@@ -1,0 +1,183 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Track
+  fields:
+    - name: id
+      type: ObjectId
+    - name: albumId
+      type: Int
+    - name: bytes
+      type: Int
+    - name: composer
+      type: String
+    - name: genreId
+      type: Int
+    - name: mediaTypeId
+      type: Int
+    - name: milliseconds
+      type: Int
+    - name: name
+      type: String
+    - name: trackId
+      type: Int
+    - name: unitPrice
+      type: Double
+  graphql:
+    typeName: Mongo_Track
+    inputTypeName: Mongo_TrackInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: mongo
+      dataConnectorObjectType: track
+      fieldMapping:
+        id:
+          column:
+            name: _id
+        albumId:
+          column:
+            name: album_id
+        bytes:
+          column:
+            name: bytes
+        composer:
+          column:
+            name: composer
+        genreId:
+          column:
+            name: genre_id
+        mediaTypeId:
+          column:
+            name: media_type_id
+        milliseconds:
+          column:
+            name: milliseconds
+        name:
+          column:
+            name: name
+        trackId:
+          column:
+            name: track_id
+        unitPrice:
+          column:
+            name: unit_price
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Track
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - id
+          - albumId
+          - bytes
+          - composer
+          - genreId
+          - mediaTypeId
+          - milliseconds
+          - name
+          - trackId
+          - unitPrice
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: TrackBoolExp
+  objectType: Track
+  dataConnectorName: mongo
+  dataConnectorObjectType: track
+  comparableFields:
+    - fieldName: id
+      operators:
+        enableAll: true
+    - fieldName: albumId
+      operators:
+        enableAll: true
+    - fieldName: bytes
+      operators:
+        enableAll: true
+    - fieldName: composer
+      operators:
+        enableAll: true
+    - fieldName: genreId
+      operators:
+        enableAll: true
+    - fieldName: mediaTypeId
+      operators:
+        enableAll: true
+    - fieldName: milliseconds
+      operators:
+        enableAll: true
+    - fieldName: name
+      operators:
+        enableAll: true
+    - fieldName: trackId
+      operators:
+        enableAll: true
+    - fieldName: unitPrice
+      operators:
+        enableAll: true
+  graphql:
+    typeName: Mongo_TrackBoolExp
+
+---
+kind: Model
+version: v1
+definition:
+  name: Track
+  objectType: Track
+  source:
+    dataConnectorName: mongo
+    collection: track
+  filterExpressionType: TrackBoolExp
+  orderableFields:
+    - fieldName: id
+      orderByDirections:
+        enableAll: true
+    - fieldName: albumId
+      orderByDirections:
+        enableAll: true
+    - fieldName: bytes
+      orderByDirections:
+        enableAll: true
+    - fieldName: composer
+      orderByDirections:
+        enableAll: true
+    - fieldName: genreId
+      orderByDirections:
+        enableAll: true
+    - fieldName: mediaTypeId
+      orderByDirections:
+        enableAll: true
+    - fieldName: milliseconds
+      orderByDirections:
+        enableAll: true
+    - fieldName: name
+      orderByDirections:
+        enableAll: true
+    - fieldName: trackId
+      orderByDirections:
+        enableAll: true
+    - fieldName: unitPrice
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: mongo_track
+    selectUniques: []
+    orderByExpressionType: Mongo_TrackOrderBy
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Track
+  permissions:
+    - role: admin
+      select:
+        filter: null
+

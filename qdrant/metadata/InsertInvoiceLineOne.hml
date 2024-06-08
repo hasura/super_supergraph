@@ -1,0 +1,105 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InvoiceLineInsertType
+  fields:
+    - name: document
+      type: String
+    - name: id
+      type: String!
+    - name: invoiceId
+      type: Int
+    - name: invoiceLineId
+      type: Int
+    - name: quantity
+      type: Int
+    - name: trackId
+      type: Int
+    - name: unitPrice
+      type: String
+    - name: vectorNames
+      type: "[String!]!"
+    - name: vectors
+      type: "[[Float!]!]!"
+  graphql:
+    typeName: Qdrant_InvoiceLineInsertType
+    inputTypeName: Qdrant_InvoiceLineInsertTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: qdrant
+      dataConnectorObjectType: invoice_line_InsertType
+      fieldMapping:
+        document:
+          column:
+            name: document
+        id:
+          column:
+            name: id
+        invoiceId:
+          column:
+            name: invoice_id
+        invoiceLineId:
+          column:
+            name: invoice_line_id
+        quantity:
+          column:
+            name: quantity
+        trackId:
+          column:
+            name: track_id
+        unitPrice:
+          column:
+            name: unit_price
+        vectorNames:
+          column:
+            name: vector_names
+        vectors:
+          column:
+            name: vectors
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InvoiceLineInsertType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - document
+          - id
+          - invoiceId
+          - invoiceLineId
+          - quantity
+          - trackId
+          - unitPrice
+          - vectorNames
+          - vectors
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertInvoiceLineOne
+  outputType: Json!
+  arguments:
+    - name: object
+      type: InvoiceLineInsertType!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: insert_invoice_line_one
+  graphql:
+    rootFieldName: qdrant_insertInvoiceLineOne
+    rootFieldKind: Mutation
+  description: Insert a single record into the invoice_line collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertInvoiceLineOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

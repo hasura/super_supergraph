@@ -1,0 +1,952 @@
+kind: DataConnectorLink
+version: v1
+definition:
+  name: postgres
+  url:
+    readWriteUrls:
+      read:
+        valueFromEnv: POSTGRES_POSTGRES_READ_URL
+      write:
+        valueFromEnv: POSTGRES_POSTGRES_WRITE_URL
+  schema:
+    version: v0.1
+    schema:
+      scalar_types:
+        int4:
+          representation:
+            type: int32
+          aggregate_functions:
+            avg:
+              result_type:
+                type: named
+                name: numeric
+            bit_and:
+              result_type:
+                type: named
+                name: int4
+            bit_or:
+              result_type:
+                type: named
+                name: int4
+            bit_xor:
+              result_type:
+                type: named
+                name: int4
+            max:
+              result_type:
+                type: named
+                name: int4
+            min:
+              result_type:
+                type: named
+                name: int4
+            stddev:
+              result_type:
+                type: named
+                name: numeric
+            stddev_pop:
+              result_type:
+                type: named
+                name: numeric
+            stddev_samp:
+              result_type:
+                type: named
+                name: numeric
+            sum:
+              result_type:
+                type: named
+                name: int8
+            var_pop:
+              result_type:
+                type: named
+                name: numeric
+            var_samp:
+              result_type:
+                type: named
+                name: numeric
+            variance:
+              result_type:
+                type: named
+                name: numeric
+          comparison_operators:
+            _eq:
+              type: equal
+            _gt:
+              type: custom
+              argument_type:
+                type: named
+                name: int4
+            _gte:
+              type: custom
+              argument_type:
+                type: named
+                name: int4
+            _in:
+              type: in
+            _lt:
+              type: custom
+              argument_type:
+                type: named
+                name: int4
+            _lte:
+              type: custom
+              argument_type:
+                type: named
+                name: int4
+        int8:
+          representation:
+            type: int64
+          aggregate_functions:
+            avg:
+              result_type:
+                type: named
+                name: numeric
+            bit_and:
+              result_type:
+                type: named
+                name: int8
+            bit_or:
+              result_type:
+                type: named
+                name: int8
+            bit_xor:
+              result_type:
+                type: named
+                name: int8
+            max:
+              result_type:
+                type: named
+                name: int8
+            min:
+              result_type:
+                type: named
+                name: int8
+            stddev:
+              result_type:
+                type: named
+                name: numeric
+            stddev_pop:
+              result_type:
+                type: named
+                name: numeric
+            stddev_samp:
+              result_type:
+                type: named
+                name: numeric
+            sum:
+              result_type:
+                type: named
+                name: numeric
+            var_pop:
+              result_type:
+                type: named
+                name: numeric
+            var_samp:
+              result_type:
+                type: named
+                name: numeric
+            variance:
+              result_type:
+                type: named
+                name: numeric
+          comparison_operators:
+            _eq:
+              type: equal
+            _gt:
+              type: custom
+              argument_type:
+                type: named
+                name: int8
+            _gte:
+              type: custom
+              argument_type:
+                type: named
+                name: int8
+            _in:
+              type: in
+            _lt:
+              type: custom
+              argument_type:
+                type: named
+                name: int8
+            _lte:
+              type: custom
+              argument_type:
+                type: named
+                name: int8
+        numeric:
+          representation:
+            type: bigdecimal
+          aggregate_functions:
+            avg:
+              result_type:
+                type: named
+                name: numeric
+            max:
+              result_type:
+                type: named
+                name: numeric
+            min:
+              result_type:
+                type: named
+                name: numeric
+            stddev:
+              result_type:
+                type: named
+                name: numeric
+            stddev_pop:
+              result_type:
+                type: named
+                name: numeric
+            stddev_samp:
+              result_type:
+                type: named
+                name: numeric
+            sum:
+              result_type:
+                type: named
+                name: numeric
+            var_pop:
+              result_type:
+                type: named
+                name: numeric
+            var_samp:
+              result_type:
+                type: named
+                name: numeric
+            variance:
+              result_type:
+                type: named
+                name: numeric
+          comparison_operators:
+            _eq:
+              type: equal
+            _gt:
+              type: custom
+              argument_type:
+                type: named
+                name: numeric
+            _gte:
+              type: custom
+              argument_type:
+                type: named
+                name: numeric
+            _in:
+              type: in
+            _lt:
+              type: custom
+              argument_type:
+                type: named
+                name: numeric
+            _lte:
+              type: custom
+              argument_type:
+                type: named
+                name: numeric
+        text:
+          representation:
+            type: string
+          aggregate_functions:
+            max:
+              result_type:
+                type: named
+                name: text
+            min:
+              result_type:
+                type: named
+                name: text
+          comparison_operators:
+            _eq:
+              type: equal
+            _gt:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _gte:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _ilike:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _in:
+              type: in
+            _iregex:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _like:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _lt:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _lte:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _nilike:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _niregex:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _nlike:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _nregex:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _regex:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            starts_with:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            ts_match_tt:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+        timestamp:
+          representation:
+            type: timestamp
+          aggregate_functions:
+            max:
+              result_type:
+                type: named
+                name: timestamp
+            min:
+              result_type:
+                type: named
+                name: timestamp
+          comparison_operators:
+            _eq:
+              type: equal
+            _gt:
+              type: custom
+              argument_type:
+                type: named
+                name: timestamp
+            _gte:
+              type: custom
+              argument_type:
+                type: named
+                name: timestamp
+            _in:
+              type: in
+            _lt:
+              type: custom
+              argument_type:
+                type: named
+                name: timestamp
+            _lte:
+              type: custom
+              argument_type:
+                type: named
+                name: timestamp
+        varchar:
+          representation:
+            type: string
+          aggregate_functions:
+            max:
+              result_type:
+                type: named
+                name: text
+            min:
+              result_type:
+                type: named
+                name: text
+          comparison_operators:
+            _eq:
+              type: equal
+            _gt:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _gte:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _ilike:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _in:
+              type: in
+            _iregex:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _like:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _lt:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _lte:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _nilike:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _niregex:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _nlike:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _nregex:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _regex:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            starts_with:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            ts_match_tt:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+      object_types:
+        album:
+          fields:
+            album_id:
+              type:
+                type: named
+                name: int4
+            artist_id:
+              type:
+                type: named
+                name: int4
+            title:
+              type:
+                type: named
+                name: varchar
+        artist:
+          fields:
+            artist_id:
+              type:
+                type: named
+                name: int4
+            name:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: varchar
+        customer:
+          fields:
+            address:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: varchar
+            city:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: varchar
+            company:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: varchar
+            country:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: varchar
+            customer_id:
+              type:
+                type: named
+                name: int4
+            email:
+              type:
+                type: named
+                name: varchar
+            fax:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: varchar
+            first_name:
+              type:
+                type: named
+                name: varchar
+            last_name:
+              type:
+                type: named
+                name: varchar
+            phone:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: varchar
+            postal_code:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: varchar
+            state:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: varchar
+            support_rep_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: int4
+        employee:
+          fields:
+            address:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: varchar
+            birth_date:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: timestamp
+            city:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: varchar
+            country:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: varchar
+            email:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: varchar
+            employee_id:
+              type:
+                type: named
+                name: int4
+            fax:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: varchar
+            first_name:
+              type:
+                type: named
+                name: varchar
+            hire_date:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: timestamp
+            last_name:
+              type:
+                type: named
+                name: varchar
+            phone:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: varchar
+            postal_code:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: varchar
+            reports_to:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: int4
+            state:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: varchar
+            title:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: varchar
+        genre:
+          fields:
+            genre_id:
+              type:
+                type: named
+                name: int4
+            name:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: varchar
+        invoice:
+          fields:
+            billing_address:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: varchar
+            billing_city:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: varchar
+            billing_country:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: varchar
+            billing_postal_code:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: varchar
+            billing_state:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: varchar
+            customer_id:
+              type:
+                type: named
+                name: int4
+            invoice_date:
+              type:
+                type: named
+                name: timestamp
+            invoice_id:
+              type:
+                type: named
+                name: int4
+            total:
+              type:
+                type: named
+                name: numeric
+        invoice_line:
+          fields:
+            invoice_id:
+              type:
+                type: named
+                name: int4
+            invoice_line_id:
+              type:
+                type: named
+                name: int4
+            quantity:
+              type:
+                type: named
+                name: int4
+            track_id:
+              type:
+                type: named
+                name: int4
+            unit_price:
+              type:
+                type: named
+                name: numeric
+        media_type:
+          fields:
+            media_type_id:
+              type:
+                type: named
+                name: int4
+            name:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: varchar
+        playlist:
+          fields:
+            name:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: varchar
+            playlist_id:
+              type:
+                type: named
+                name: int4
+        playlist_track:
+          fields:
+            playlist_id:
+              type:
+                type: named
+                name: int4
+            track_id:
+              type:
+                type: named
+                name: int4
+        track:
+          fields:
+            album_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: int4
+            bytes:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: int4
+            composer:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: varchar
+            genre_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: int4
+            media_type_id:
+              type:
+                type: named
+                name: int4
+            milliseconds:
+              type:
+                type: named
+                name: int4
+            name:
+              type:
+                type: named
+                name: varchar
+            track_id:
+              type:
+                type: named
+                name: int4
+            unit_price:
+              type:
+                type: named
+                name: numeric
+      collections:
+        - name: album
+          arguments: {}
+          type: album
+          uniqueness_constraints:
+            album_pkey:
+              unique_columns:
+                - album_id
+          foreign_keys:
+            album_artist_id_fkey:
+              column_mapping:
+                artist_id: artist_id
+              foreign_collection: artist
+        - name: artist
+          arguments: {}
+          type: artist
+          uniqueness_constraints:
+            artist_pkey:
+              unique_columns:
+                - artist_id
+          foreign_keys: {}
+        - name: customer
+          arguments: {}
+          type: customer
+          uniqueness_constraints:
+            customer_pkey:
+              unique_columns:
+                - customer_id
+          foreign_keys:
+            customer_support_rep_id_fkey:
+              column_mapping:
+                support_rep_id: employee_id
+              foreign_collection: employee
+        - name: employee
+          arguments: {}
+          type: employee
+          uniqueness_constraints:
+            employee_pkey:
+              unique_columns:
+                - employee_id
+          foreign_keys:
+            employee_reports_to_fkey:
+              column_mapping:
+                reports_to: employee_id
+              foreign_collection: employee
+        - name: genre
+          arguments: {}
+          type: genre
+          uniqueness_constraints:
+            genre_pkey:
+              unique_columns:
+                - genre_id
+          foreign_keys: {}
+        - name: invoice
+          arguments: {}
+          type: invoice
+          uniqueness_constraints:
+            invoice_pkey:
+              unique_columns:
+                - invoice_id
+          foreign_keys:
+            invoice_customer_id_fkey:
+              column_mapping:
+                customer_id: customer_id
+              foreign_collection: customer
+        - name: invoice_line
+          arguments: {}
+          type: invoice_line
+          uniqueness_constraints:
+            invoice_line_pkey:
+              unique_columns:
+                - invoice_line_id
+          foreign_keys:
+            invoice_line_invoice_id_fkey:
+              column_mapping:
+                invoice_id: invoice_id
+              foreign_collection: invoice
+            invoice_line_track_id_fkey:
+              column_mapping:
+                track_id: track_id
+              foreign_collection: track
+        - name: media_type
+          arguments: {}
+          type: media_type
+          uniqueness_constraints:
+            media_type_pkey:
+              unique_columns:
+                - media_type_id
+          foreign_keys: {}
+        - name: playlist
+          arguments: {}
+          type: playlist
+          uniqueness_constraints:
+            playlist_pkey:
+              unique_columns:
+                - playlist_id
+          foreign_keys: {}
+        - name: playlist_track
+          arguments: {}
+          type: playlist_track
+          uniqueness_constraints:
+            playlist_track_pkey:
+              unique_columns:
+                - playlist_id
+                - track_id
+          foreign_keys:
+            playlist_track_playlist_id_fkey:
+              column_mapping:
+                playlist_id: playlist_id
+              foreign_collection: playlist
+            playlist_track_track_id_fkey:
+              column_mapping:
+                track_id: track_id
+              foreign_collection: track
+        - name: track
+          arguments: {}
+          type: track
+          uniqueness_constraints:
+            track_pkey:
+              unique_columns:
+                - track_id
+          foreign_keys:
+            track_album_id_fkey:
+              column_mapping:
+                album_id: album_id
+              foreign_collection: album
+            track_genre_id_fkey:
+              column_mapping:
+                genre_id: genre_id
+              foreign_collection: genre
+            track_media_type_id_fkey:
+              column_mapping:
+                media_type_id: media_type_id
+              foreign_collection: media_type
+      functions: []
+      procedures: []
+    capabilities:
+      version: 0.1.2
+      capabilities:
+        query:
+          aggregates: {}
+          variables: {}
+          explain: {}
+        mutation:
+          transactional: {}
+          explain: {}
+        relationships:
+          relation_comparisons: {}
+          order_by_aggregate: {}

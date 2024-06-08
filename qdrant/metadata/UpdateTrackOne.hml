@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateTrackOne
+  outputType: Json!
+  arguments:
+    - name: object
+      type: TrackInsertType!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: update_track_one
+  graphql:
+    rootFieldName: qdrant_updateTrackOne
+    rootFieldKind: Mutation
+  description: Update a single record from the track collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateTrackOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

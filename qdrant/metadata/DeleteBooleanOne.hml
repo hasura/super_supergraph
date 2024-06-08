@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteBooleanOne
+  outputType: Json!
+  arguments:
+    - name: id
+      type: Int!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: delete_boolean_one
+  graphql:
+    rootFieldName: qdrant_deleteBooleanOne
+    rootFieldKind: Mutation
+  description: Delete a single record from the boolean collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteBooleanOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

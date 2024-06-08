@@ -1,0 +1,985 @@
+{
+    "config": {
+        "collection_names": [
+            "artist",
+            "media_type",
+            "employee",
+            "customer",
+            "invoice",
+            "invoice_line",
+            "track",
+            "playlist",
+            "playlist_track",
+            "genre",
+            "album"
+        ],
+        "object_fields": {
+            "artist": {
+                "field_names": [
+                    "artist_id",
+                    "name"
+                ],
+                "field_types": {
+                    "artist_id": "Int",
+                    "name": "String"
+                },
+                "primary_keys": [
+                    "artist_id"
+                ],
+                "unique_keys": [],
+                "nullable_keys": [
+                    "name"
+                ],
+                "foreign_keys": {}
+            },
+            "media_type": {
+                "field_names": [
+                    "media_type_id",
+                    "name"
+                ],
+                "field_types": {
+                    "media_type_id": "Int",
+                    "name": "String"
+                },
+                "primary_keys": [
+                    "media_type_id"
+                ],
+                "unique_keys": [],
+                "nullable_keys": [
+                    "name"
+                ],
+                "foreign_keys": {}
+            },
+            "employee": {
+                "field_names": [
+                    "birth_date",
+                    "hire_date",
+                    "reports_to",
+                    "employee_id",
+                    "address",
+                    "city",
+                    "state",
+                    "country",
+                    "postal_code",
+                    "phone",
+                    "fax",
+                    "email",
+                    "last_name",
+                    "first_name",
+                    "title"
+                ],
+                "field_types": {
+                    "birth_date": "String",
+                    "hire_date": "String",
+                    "reports_to": "Int",
+                    "employee_id": "Int",
+                    "address": "String",
+                    "city": "String",
+                    "state": "String",
+                    "country": "String",
+                    "postal_code": "String",
+                    "phone": "String",
+                    "fax": "String",
+                    "email": "String",
+                    "last_name": "String",
+                    "first_name": "String",
+                    "title": "String"
+                },
+                "primary_keys": [
+                    "employee_id"
+                ],
+                "unique_keys": [],
+                "nullable_keys": [
+                    "birth_date",
+                    "hire_date",
+                    "reports_to",
+                    "address",
+                    "city",
+                    "state",
+                    "country",
+                    "postal_code",
+                    "phone",
+                    "fax",
+                    "email",
+                    "last_name",
+                    "first_name",
+                    "title"
+                ],
+                "foreign_keys": {
+                    "reports_to": {
+                        "table": "employee",
+                        "column": "employee_id"
+                    }
+                }
+            },
+            "customer": {
+                "field_names": [
+                    "customer_id",
+                    "support_rep_id",
+                    "last_name",
+                    "company",
+                    "address",
+                    "city",
+                    "state",
+                    "country",
+                    "postal_code",
+                    "phone",
+                    "fax",
+                    "email",
+                    "first_name"
+                ],
+                "field_types": {
+                    "customer_id": "Int",
+                    "support_rep_id": "Int",
+                    "last_name": "String",
+                    "company": "String",
+                    "address": "String",
+                    "city": "String",
+                    "state": "String",
+                    "country": "String",
+                    "postal_code": "String",
+                    "phone": "String",
+                    "fax": "String",
+                    "email": "String",
+                    "first_name": "String"
+                },
+                "primary_keys": [
+                    "customer_id"
+                ],
+                "unique_keys": [],
+                "nullable_keys": [
+                    "support_rep_id",
+                    "last_name",
+                    "company",
+                    "address",
+                    "city",
+                    "state",
+                    "country",
+                    "postal_code",
+                    "phone",
+                    "fax",
+                    "email",
+                    "first_name"
+                ],
+                "foreign_keys": {
+                    "support_rep_id": {
+                        "table": "employee",
+                        "column": "employee_id"
+                    }
+                }
+            },
+            "invoice": {
+                "field_names": [
+                    "invoice_id",
+                    "customer_id",
+                    "invoice_date",
+                    "total",
+                    "billing_city",
+                    "billing_state",
+                    "billing_country",
+                    "billing_postal_code",
+                    "billing_address"
+                ],
+                "field_types": {
+                    "invoice_id": "Int",
+                    "customer_id": "Int",
+                    "invoice_date": "String",
+                    "total": "Float",
+                    "billing_city": "String",
+                    "billing_state": "String",
+                    "billing_country": "String",
+                    "billing_postal_code": "String",
+                    "billing_address": "String"
+                },
+                "primary_keys": [
+                    "invoice_id"
+                ],
+                "unique_keys": [],
+                "nullable_keys": [
+                    "customer_id",
+                    "invoice_date",
+                    "total",
+                    "billing_city",
+                    "billing_state",
+                    "billing_country",
+                    "billing_postal_code",
+                    "billing_address"
+                ],
+                "foreign_keys": {
+                    "customer_id": {
+                        "table": "customer",
+                        "column": "customer_id"
+                    }
+                }
+            },
+            "invoice_line": {
+                "field_names": [
+                    "invoice_line_id",
+                    "invoice_id",
+                    "track_id",
+                    "unit_price",
+                    "quantity"
+                ],
+                "field_types": {
+                    "invoice_line_id": "Int",
+                    "invoice_id": "Int",
+                    "track_id": "Int",
+                    "unit_price": "Float",
+                    "quantity": "Int"
+                },
+                "primary_keys": [
+                    "invoice_line_id"
+                ],
+                "unique_keys": [],
+                "nullable_keys": [
+                    "invoice_id",
+                    "track_id",
+                    "unit_price",
+                    "quantity"
+                ],
+                "foreign_keys": {
+                    "track_id": {
+                        "table": "track",
+                        "column": "track_id"
+                    },
+                    "invoice_id": {
+                        "table": "invoice",
+                        "column": "invoice_id"
+                    }
+                }
+            },
+            "track": {
+                "field_names": [
+                    "unit_price",
+                    "bytes",
+                    "track_id",
+                    "album_id",
+                    "media_type_id",
+                    "genre_id",
+                    "milliseconds",
+                    "name",
+                    "composer"
+                ],
+                "field_types": {
+                    "unit_price": "Float",
+                    "bytes": "Int",
+                    "track_id": "Int",
+                    "album_id": "Int",
+                    "media_type_id": "Int",
+                    "genre_id": "Int",
+                    "milliseconds": "Int",
+                    "name": "String",
+                    "composer": "String"
+                },
+                "primary_keys": [
+                    "track_id"
+                ],
+                "unique_keys": [],
+                "nullable_keys": [
+                    "unit_price",
+                    "bytes",
+                    "album_id",
+                    "media_type_id",
+                    "genre_id",
+                    "milliseconds",
+                    "name",
+                    "composer"
+                ],
+                "foreign_keys": {
+                    "media_type_id": {
+                        "table": "media_type",
+                        "column": "media_type_id"
+                    },
+                    "genre_id": {
+                        "table": "genre",
+                        "column": "genre_id"
+                    },
+                    "album_id": {
+                        "table": "album",
+                        "column": "album_id"
+                    }
+                }
+            },
+            "playlist": {
+                "field_names": [
+                    "playlist_id",
+                    "name"
+                ],
+                "field_types": {
+                    "playlist_id": "Int",
+                    "name": "String"
+                },
+                "primary_keys": [
+                    "playlist_id"
+                ],
+                "unique_keys": [],
+                "nullable_keys": [
+                    "name"
+                ],
+                "foreign_keys": {}
+            },
+            "playlist_track": {
+                "field_names": [
+                    "playlist_id",
+                    "track_id"
+                ],
+                "field_types": {
+                    "playlist_id": "Int",
+                    "track_id": "Int"
+                },
+                "primary_keys": [
+                    "playlist_id",
+                    "track_id"
+                ],
+                "unique_keys": [
+                    "playlist_id",
+                    "track_id"
+                ],
+                "nullable_keys": [],
+                "foreign_keys": {
+                    "track_id": {
+                        "table": "track",
+                        "column": "track_id"
+                    },
+                    "playlist_id": {
+                        "table": "playlist",
+                        "column": "playlist_id"
+                    }
+                }
+            },
+            "genre": {
+                "field_names": [
+                    "genre_id",
+                    "name"
+                ],
+                "field_types": {
+                    "genre_id": "Int",
+                    "name": "String"
+                },
+                "primary_keys": [
+                    "genre_id"
+                ],
+                "unique_keys": [],
+                "nullable_keys": [
+                    "name"
+                ],
+                "foreign_keys": {}
+            },
+            "album": {
+                "field_names": [
+                    "album_id",
+                    "artist_id",
+                    "title"
+                ],
+                "field_types": {
+                    "album_id": "Int",
+                    "artist_id": "Int",
+                    "title": "String"
+                },
+                "primary_keys": [
+                    "album_id"
+                ],
+                "unique_keys": [],
+                "nullable_keys": [
+                    "artist_id",
+                    "title"
+                ],
+                "foreign_keys": {
+                    "artist_id": {
+                        "table": "artist",
+                        "column": "artist_id"
+                    }
+                }
+            }
+        },
+        "object_types": {
+            "artist": {
+                "fields": {
+                    "artist_id": {
+                        "type": {
+                            "type": "named",
+                            "name": "Int"
+                        }
+                    },
+                    "name": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    }
+                }
+            },
+            "media_type": {
+                "fields": {
+                    "media_type_id": {
+                        "type": {
+                            "type": "named",
+                            "name": "Int"
+                        }
+                    },
+                    "name": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    }
+                }
+            },
+            "employee": {
+                "fields": {
+                    "birth_date": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "hire_date": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "reports_to": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "employee_id": {
+                        "type": {
+                            "type": "named",
+                            "name": "Int"
+                        }
+                    },
+                    "address": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "city": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "state": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "country": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "postal_code": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "phone": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "fax": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "email": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "last_name": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "first_name": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "title": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    }
+                }
+            },
+            "customer": {
+                "fields": {
+                    "customer_id": {
+                        "type": {
+                            "type": "named",
+                            "name": "Int"
+                        }
+                    },
+                    "support_rep_id": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "last_name": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "company": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "address": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "city": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "state": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "country": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "postal_code": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "phone": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "fax": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "email": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "first_name": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    }
+                }
+            },
+            "invoice": {
+                "fields": {
+                    "invoice_id": {
+                        "type": {
+                            "type": "named",
+                            "name": "Int"
+                        }
+                    },
+                    "customer_id": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "invoice_date": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "total": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Float"
+                            }
+                        }
+                    },
+                    "billing_city": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "billing_state": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "billing_country": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "billing_postal_code": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "billing_address": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    }
+                }
+            },
+            "invoice_line": {
+                "fields": {
+                    "invoice_line_id": {
+                        "type": {
+                            "type": "named",
+                            "name": "Int"
+                        }
+                    },
+                    "invoice_id": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "track_id": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "unit_price": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Float"
+                            }
+                        }
+                    },
+                    "quantity": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    }
+                }
+            },
+            "track": {
+                "fields": {
+                    "unit_price": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Float"
+                            }
+                        }
+                    },
+                    "bytes": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "track_id": {
+                        "type": {
+                            "type": "named",
+                            "name": "Int"
+                        }
+                    },
+                    "album_id": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "media_type_id": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "genre_id": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "milliseconds": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "name": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "composer": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    }
+                }
+            },
+            "playlist": {
+                "fields": {
+                    "playlist_id": {
+                        "type": {
+                            "type": "named",
+                            "name": "Int"
+                        }
+                    },
+                    "name": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    }
+                }
+            },
+            "playlist_track": {
+                "fields": {
+                    "playlist_id": {
+                        "type": {
+                            "type": "named",
+                            "name": "Int"
+                        }
+                    },
+                    "track_id": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    }
+                }
+            },
+            "genre": {
+                "fields": {
+                    "genre_id": {
+                        "type": {
+                            "type": "named",
+                            "name": "Int"
+                        }
+                    },
+                    "name": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    }
+                }
+            },
+            "album": {
+                "fields": {
+                    "album_id": {
+                        "type": {
+                            "type": "named",
+                            "name": "Int"
+                        }
+                    },
+                    "artist_id": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "title": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

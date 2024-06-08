@@ -1,0 +1,123 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: ChinookMainInvoiceLine
+  fields:
+    - name: invoiceId
+      type: Int!
+    - name: invoiceLineId
+      type: Int!
+    - name: quantity
+      type: Int!
+    - name: trackId
+      type: Int!
+    - name: unitPrice
+      type: Float!
+  graphql:
+    typeName: Duckdb_ChinookMainInvoiceLine
+    inputTypeName: Duckdb_ChinookMainInvoiceLineInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: duckdb
+      dataConnectorObjectType: chinook_main_invoice_line
+      fieldMapping:
+        invoiceId:
+          column:
+            name: invoice_id
+        invoiceLineId:
+          column:
+            name: invoice_line_id
+        quantity:
+          column:
+            name: quantity
+        trackId:
+          column:
+            name: track_id
+        unitPrice:
+          column:
+            name: unit_price
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: ChinookMainInvoiceLine
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - invoiceId
+          - invoiceLineId
+          - quantity
+          - trackId
+          - unitPrice
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: ChinookMainInvoiceLineBoolExp
+  objectType: ChinookMainInvoiceLine
+  dataConnectorName: duckdb
+  dataConnectorObjectType: chinook_main_invoice_line
+  comparableFields:
+    - fieldName: invoiceId
+      operators:
+        enableAll: true
+    - fieldName: invoiceLineId
+      operators:
+        enableAll: true
+    - fieldName: quantity
+      operators:
+        enableAll: true
+    - fieldName: trackId
+      operators:
+        enableAll: true
+    - fieldName: unitPrice
+      operators:
+        enableAll: true
+  graphql:
+    typeName: Duckdb_ChinookMainInvoiceLineBoolExp
+
+---
+kind: Model
+version: v1
+definition:
+  name: ChinookMainInvoiceLine
+  objectType: ChinookMainInvoiceLine
+  source:
+    dataConnectorName: duckdb
+    collection: chinook_main_invoice_line
+  filterExpressionType: ChinookMainInvoiceLineBoolExp
+  orderableFields:
+    - fieldName: invoiceId
+      orderByDirections:
+        enableAll: true
+    - fieldName: invoiceLineId
+      orderByDirections:
+        enableAll: true
+    - fieldName: quantity
+      orderByDirections:
+        enableAll: true
+    - fieldName: trackId
+      orderByDirections:
+        enableAll: true
+    - fieldName: unitPrice
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: duckdb_chinookMainInvoiceLine
+    selectUniques: []
+    orderByExpressionType: Duckdb_ChinookMainInvoiceLineOrderBy
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: ChinookMainInvoiceLine
+  permissions:
+    - role: admin
+      select:
+        filter: null
+

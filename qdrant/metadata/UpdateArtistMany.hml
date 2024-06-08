@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateArtistMany
+  outputType: Json!
+  arguments:
+    - name: objects
+      type: "[ArtistInsertType!]!"
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: update_artist_many
+  graphql:
+    rootFieldName: qdrant_updateArtistMany
+    rootFieldKind: Mutation
+  description: Update multiple records in the artist collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateArtistMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

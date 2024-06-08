@@ -1,0 +1,215 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: TrackIncType
+  description: Numeric fields to increment for track
+  fields:
+    - name: albumId
+      type: Int
+    - name: bytes
+      type: Int
+    - name: genreId
+      type: Int
+    - name: mediaTypeId
+      type: Int
+    - name: milliseconds
+      type: Int
+    - name: trackId
+      type: Int
+    - name: unitPrice
+      type: Float
+  graphql:
+    typeName: Turso_TrackIncType
+    inputTypeName: Turso_TrackIncTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: track_IncType
+      fieldMapping:
+        albumId:
+          column:
+            name: album_id
+        bytes:
+          column:
+            name: bytes
+        genreId:
+          column:
+            name: genre_id
+        mediaTypeId:
+          column:
+            name: media_type_id
+        milliseconds:
+          column:
+            name: milliseconds
+        trackId:
+          column:
+            name: track_id
+        unitPrice:
+          column:
+            name: unit_price
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: TrackIncType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - albumId
+          - bytes
+          - genreId
+          - mediaTypeId
+          - milliseconds
+          - trackId
+          - unitPrice
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: TrackSetType
+  description: Fields to set for track
+  fields:
+    - name: albumId
+      type: Int
+    - name: bytes
+      type: Int
+    - name: composer
+      type: String
+    - name: genreId
+      type: Int
+    - name: mediaTypeId
+      type: Int
+    - name: milliseconds
+      type: Int
+    - name: name
+      type: String
+    - name: trackId
+      type: Int
+    - name: unitPrice
+      type: Float
+  graphql:
+    typeName: Turso_TrackSetType
+    inputTypeName: Turso_TrackSetTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: track_SetType
+      fieldMapping:
+        albumId:
+          column:
+            name: album_id
+        bytes:
+          column:
+            name: bytes
+        composer:
+          column:
+            name: composer
+        genreId:
+          column:
+            name: genre_id
+        mediaTypeId:
+          column:
+            name: media_type_id
+        milliseconds:
+          column:
+            name: milliseconds
+        name:
+          column:
+            name: name
+        trackId:
+          column:
+            name: track_id
+        unitPrice:
+          column:
+            name: unit_price
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: TrackSetType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - albumId
+          - bytes
+          - composer
+          - genreId
+          - mediaTypeId
+          - milliseconds
+          - name
+          - trackId
+          - unitPrice
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: TrackPkColumnsType
+  description: Primary key columns for track
+  fields:
+    - name: trackId
+      type: Int!
+  graphql:
+    typeName: Turso_TrackPkColumnsType
+    inputTypeName: Turso_TrackPkColumnsTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: track_PKColumnsType
+      fieldMapping:
+        trackId:
+          column:
+            name: track_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: TrackPkColumnsType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - trackId
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateTrackByPk
+  outputType: "[TrackInsertType!]!"
+  arguments:
+    - name: inc
+      type: TrackIncType
+      description: The numeric fields to increment for the track
+    - name: set
+      type: TrackSetType
+      description: The fields to set for the track
+    - name: pkColumns
+      type: TrackPkColumnsType!
+      description: The primary key columns of the record to update in the track
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: update_track_by_pk
+    argumentMapping:
+      inc: _inc
+      set: _set
+      pkColumns: pk_columns
+  graphql:
+    rootFieldName: turso_updateTrackByPk
+    rootFieldKind: Mutation
+  description: Update a single record in the track collection by primary key.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateTrackByPk
+  permissions:
+    - role: admin
+      allowExecution: true
+

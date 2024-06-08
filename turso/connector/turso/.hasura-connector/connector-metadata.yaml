@@ -1,0 +1,18 @@
+packagingDefinition:
+  type: PrebuiltDockerImage
+  dockerImage: ghcr.io/hasura/ndc-turso:v0.0.14
+supportedEnvironmentVariables:
+  - name: TURSO_URL
+    description: The url for the Turso database
+  - name: TURSO_AUTH_TOKEN
+    description: The turso auth token
+commands:
+  update:
+    type: Dockerized
+    dockerImage: ghcr.io/hasura/ndc-turso:v0.0.14
+    commandArgs:
+      - update
+dockerComposeWatch:
+  - path: ./
+    target: /etc/connector
+    action: sync+restart

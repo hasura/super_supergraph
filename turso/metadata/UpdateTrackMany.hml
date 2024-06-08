@@ -1,0 +1,39 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateTrackMany
+  outputType: "[TrackInsertType!]!"
+  arguments:
+    - name: incArray
+      type: "[TrackIncType!]!"
+      description: An array of _inc objects for incrementing fields in the track
+    - name: setArray
+      type: "[TrackSetType!]!"
+      description: An array of _set objects for updating the track
+    - name: pkColumnsArray
+      type: "[TrackPkColumnsType!]!"
+      description: An array of primary key structures for the records to update in the track
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: update_track_many
+    argumentMapping:
+      incArray: _inc_array
+      setArray: _set_array
+      pkColumnsArray: pk_columns_array
+  graphql:
+    rootFieldName: turso_updateTrackMany
+    rootFieldKind: Mutation
+  description: Update multiple records in the track collection, with separate
+    arrays for PKs, _set, and _inc.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateTrackMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

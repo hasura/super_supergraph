@@ -1,0 +1,45 @@
+kind: Supergraph
+version: v1
+definition:
+  supergraph_globals:
+    generator:
+      rootPath: ./supergraph_globals
+    envFile: ./supergraph_globals/.env.supergraph_globals
+    includePaths:
+      - ./supergraph_globals/auth-config.hml
+      - ./supergraph_globals/compatibility-config.hml
+      - ./supergraph_globals/graphql-config.hml
+  subgraphs:
+    duckdb:
+      generator:
+        rootPath: duckdb
+      envFile: duckdb/.env.duckdb
+      # envFile: duckdb/.env.duckdb.dev # Easily switch environments
+      includePaths:
+        - duckdb/metadata
+    mongo:
+      generator:
+        rootPath: mongo
+      envFile: mongo/.env.mongo
+      includePaths:
+        - mongo/metadata
+    postgres:
+      generator:
+        rootPath: postgres
+      envFile: postgres/.env.postgres
+      includePaths:
+        - postgres/metadata
+    qdrant:
+      generator:
+        rootPath: qdrant
+      envFile: qdrant/.env.qdrant
+      # envFile: qdrant/.env.qdrant.dev
+      includePaths:
+        - qdrant/metadata
+    turso:
+      generator:
+        rootPath: turso
+      envFile: turso/.env.turso
+      # envFile: turso/.env.turso.dev
+      includePaths:
+        - turso/metadata

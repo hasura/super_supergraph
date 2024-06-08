@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpsertTrackOne
+  outputType: Json!
+  arguments:
+    - name: object
+      type: TrackInsertType!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: upsert_track_one
+  graphql:
+    rootFieldName: qdrant_upsertTrackOne
+    rootFieldKind: Mutation
+  description: Upsert a single record into the track collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpsertTrackOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

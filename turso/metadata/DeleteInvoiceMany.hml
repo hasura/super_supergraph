@@ -1,0 +1,33 @@
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteInvoiceMany
+  outputType: "[InvoiceInsertType!]!"
+  arguments:
+    - name: pkColumnsArray
+      type: "[InvoicePkColumnsType!]!"
+      description: An array of primary key structures for the records to delete in the
+        invoice. Each item in the array represents a condition that identifies
+        one or more records to be deleted.
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: delete_invoice_many
+    argumentMapping:
+      pkColumnsArray: pk_columns_array
+  graphql:
+    rootFieldName: turso_deleteInvoiceMany
+    rootFieldKind: Mutation
+  description: Delete multiple records from the invoice collection based on
+    primary key conditions.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteInvoiceMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

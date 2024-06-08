@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateMediaTypeOne
+  outputType: Json!
+  arguments:
+    - name: object
+      type: MediaTypeInsertType!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: update_media_type_one
+  graphql:
+    rootFieldName: qdrant_updateMediaTypeOne
+    rootFieldKind: Mutation
+  description: Update a single record from the media_type collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateMediaTypeOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

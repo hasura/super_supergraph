@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpsertTrackMany
+  outputType: Json!
+  arguments:
+    - name: objects
+      type: "[TrackInsertType!]!"
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: upsert_track_many
+  graphql:
+    rootFieldName: qdrant_upsertTrackMany
+    rootFieldKind: Mutation
+  description: Upsert multiple records into the track collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpsertTrackMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

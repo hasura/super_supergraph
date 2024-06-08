@@ -1,0 +1,30 @@
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteCustomerByPk
+  outputType: "[CustomerInsertType!]!"
+  arguments:
+    - name: pkColumns
+      type: CustomerPkColumnsType!
+      description: The primary key columns of the record to delete in the customer
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: delete_customer_by_pk
+    argumentMapping:
+      pkColumns: pk_columns
+  graphql:
+    rootFieldName: turso_deleteCustomerByPk
+    rootFieldKind: Mutation
+  description: Delete a single record from the customer collection by primary key.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteCustomerByPk
+  permissions:
+    - role: admin
+      allowExecution: true
+

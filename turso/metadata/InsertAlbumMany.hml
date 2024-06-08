@@ -1,0 +1,28 @@
+---
+kind: Command
+version: v1
+definition:
+  name: InsertAlbumMany
+  outputType: "[AlbumInsertType!]!"
+  arguments:
+    - name: objects
+      type: "[AlbumInsertType!]!"
+      description: The records to insert into the album
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: insert_album_many
+  graphql:
+    rootFieldName: turso_insertAlbumMany
+    rootFieldKind: Mutation
+  description: Insert multiple records into the album collection.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertAlbumMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteEmployeeOne
+  outputType: Json!
+  arguments:
+    - name: id
+      type: String!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: delete_employee_one
+  graphql:
+    rootFieldName: qdrant_deleteEmployeeOne
+    rootFieldKind: Mutation
+  description: Delete a single record from the employee collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteEmployeeOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

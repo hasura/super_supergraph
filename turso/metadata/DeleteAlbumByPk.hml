@@ -1,0 +1,30 @@
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteAlbumByPk
+  outputType: "[AlbumInsertType!]!"
+  arguments:
+    - name: pkColumns
+      type: AlbumPkColumnsType!
+      description: The primary key columns of the record to delete in the album
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: delete_album_by_pk
+    argumentMapping:
+      pkColumns: pk_columns
+  graphql:
+    rootFieldName: turso_deleteAlbumByPk
+    rootFieldKind: Mutation
+  description: Delete a single record from the album collection by primary key.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteAlbumByPk
+  permissions:
+    - role: admin
+      allowExecution: true
+

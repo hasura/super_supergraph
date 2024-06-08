@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteInvoiceOne
+  outputType: Json!
+  arguments:
+    - name: id
+      type: String!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: delete_invoice_one
+  graphql:
+    rootFieldName: qdrant_deleteInvoiceOne
+    rootFieldKind: Mutation
+  description: Delete a single record from the invoice collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteInvoiceOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

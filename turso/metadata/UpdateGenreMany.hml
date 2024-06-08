@@ -1,0 +1,39 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateGenreMany
+  outputType: "[GenreInsertType!]!"
+  arguments:
+    - name: incArray
+      type: "[GenreIncType!]!"
+      description: An array of _inc objects for incrementing fields in the genre
+    - name: setArray
+      type: "[GenreSetType!]!"
+      description: An array of _set objects for updating the genre
+    - name: pkColumnsArray
+      type: "[GenrePkColumnsType!]!"
+      description: An array of primary key structures for the records to update in the genre
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: update_genre_many
+    argumentMapping:
+      incArray: _inc_array
+      setArray: _set_array
+      pkColumnsArray: pk_columns_array
+  graphql:
+    rootFieldName: turso_updateGenreMany
+    rootFieldKind: Mutation
+  description: Update multiple records in the genre collection, with separate
+    arrays for PKs, _set, and _inc.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateGenreMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

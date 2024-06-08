@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteGenreOne
+  outputType: Json!
+  arguments:
+    - name: id
+      type: String!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: delete_genre_one
+  graphql:
+    rootFieldName: qdrant_deleteGenreOne
+    rootFieldKind: Mutation
+  description: Delete a single record from the genre collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteGenreOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

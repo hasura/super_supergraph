@@ -1,0 +1,71 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: ArticleInsertType
+  fields:
+    - name: arr
+      type: "[Int]"
+    - name: bool
+      type: Bool
+    - name: float
+      type: Float
+    - name: id
+      type: Int!
+    - name: int
+      type: Int
+    - name: string
+      type: String
+    - name: vector
+      type: "[Float!]!"
+  graphql:
+    typeName: Qdrant_ArticleInsertType
+    inputTypeName: Qdrant_ArticleInsertTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: qdrant
+      dataConnectorObjectType: article_InsertType
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: ArticleInsertType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - arr
+          - bool
+          - float
+          - id
+          - int
+          - string
+          - vector
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertArticleOne
+  outputType: Json!
+  arguments:
+    - name: object
+      type: ArticleInsertType!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: insert_article_one
+  graphql:
+    rootFieldName: qdrant_insertArticleOne
+    rootFieldKind: Mutation
+  description: Insert a single record into the article collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertArticleOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

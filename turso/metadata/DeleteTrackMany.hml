@@ -1,0 +1,33 @@
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteTrackMany
+  outputType: "[TrackInsertType!]!"
+  arguments:
+    - name: pkColumnsArray
+      type: "[TrackPkColumnsType!]!"
+      description: An array of primary key structures for the records to delete in the
+        track. Each item in the array represents a condition that identifies one
+        or more records to be deleted.
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: delete_track_many
+    argumentMapping:
+      pkColumnsArray: pk_columns_array
+  graphql:
+    rootFieldName: turso_deleteTrackMany
+    rootFieldKind: Mutation
+  description: Delete multiple records from the track collection based on primary
+    key conditions.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteTrackMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

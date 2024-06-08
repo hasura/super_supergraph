@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateEmployeeMany
+  outputType: Json!
+  arguments:
+    - name: objects
+      type: "[EmployeeInsertType!]!"
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: update_employee_many
+  graphql:
+    rootFieldName: qdrant_updateEmployeeMany
+    rootFieldKind: Mutation
+  description: Update multiple records in the employee collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateEmployeeMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

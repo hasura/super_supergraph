@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpsertArticleOne
+  outputType: Json!
+  arguments:
+    - name: object
+      type: ArticleInsertType!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: upsert_article_one
+  graphql:
+    rootFieldName: qdrant_upsertArticleOne
+    rootFieldKind: Mutation
+  description: Upsert a single record into the article collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpsertArticleOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

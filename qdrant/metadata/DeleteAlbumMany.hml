@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteAlbumMany
+  outputType: Json!
+  arguments:
+    - name: ids
+      type: "[String!]!"
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: delete_album_many
+  graphql:
+    rootFieldName: qdrant_deleteAlbumMany
+    rootFieldKind: Mutation
+  description: Delete multiple records from the album collection using their IDs
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteAlbumMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

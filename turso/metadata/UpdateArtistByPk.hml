@@ -1,0 +1,137 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: ArtistIncType
+  description: Numeric fields to increment for artist
+  fields:
+    - name: artistId
+      type: Int
+  graphql:
+    typeName: Turso_ArtistIncType
+    inputTypeName: Turso_ArtistIncTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: artist_IncType
+      fieldMapping:
+        artistId:
+          column:
+            name: artist_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: ArtistIncType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - artistId
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: ArtistSetType
+  description: Fields to set for artist
+  fields:
+    - name: artistId
+      type: Int
+    - name: name
+      type: String
+  graphql:
+    typeName: Turso_ArtistSetType
+    inputTypeName: Turso_ArtistSetTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: artist_SetType
+      fieldMapping:
+        artistId:
+          column:
+            name: artist_id
+        name:
+          column:
+            name: name
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: ArtistSetType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - artistId
+          - name
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: ArtistPkColumnsType
+  description: Primary key columns for artist
+  fields:
+    - name: artistId
+      type: Int!
+  graphql:
+    typeName: Turso_ArtistPkColumnsType
+    inputTypeName: Turso_ArtistPkColumnsTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: artist_PKColumnsType
+      fieldMapping:
+        artistId:
+          column:
+            name: artist_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: ArtistPkColumnsType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - artistId
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateArtistByPk
+  outputType: "[ArtistInsertType!]!"
+  arguments:
+    - name: inc
+      type: ArtistIncType
+      description: The numeric fields to increment for the artist
+    - name: set
+      type: ArtistSetType
+      description: The fields to set for the artist
+    - name: pkColumns
+      type: ArtistPkColumnsType!
+      description: The primary key columns of the record to update in the artist
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: update_artist_by_pk
+    argumentMapping:
+      inc: _inc
+      set: _set
+      pkColumns: pk_columns
+  graphql:
+    rootFieldName: turso_updateArtistByPk
+    rootFieldKind: Mutation
+  description: Update a single record in the artist collection by primary key.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateArtistByPk
+  permissions:
+    - role: admin
+      allowExecution: true
+

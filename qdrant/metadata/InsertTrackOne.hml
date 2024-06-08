@@ -1,0 +1,129 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: TrackInsertType
+  fields:
+    - name: albumId
+      type: Int
+    - name: bytes
+      type: Int
+    - name: composer
+      type: String
+    - name: document
+      type: String
+    - name: genreId
+      type: Int
+    - name: id
+      type: String!
+    - name: mediaTypeId
+      type: Int
+    - name: milliseconds
+      type: Int
+    - name: name
+      type: String
+    - name: trackId
+      type: Int
+    - name: unitPrice
+      type: String
+    - name: vectorNames
+      type: "[String!]!"
+    - name: vectors
+      type: "[[Float!]!]!"
+  graphql:
+    typeName: Qdrant_TrackInsertType
+    inputTypeName: Qdrant_TrackInsertTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: qdrant
+      dataConnectorObjectType: track_InsertType
+      fieldMapping:
+        albumId:
+          column:
+            name: album_id
+        bytes:
+          column:
+            name: bytes
+        composer:
+          column:
+            name: composer
+        document:
+          column:
+            name: document
+        genreId:
+          column:
+            name: genre_id
+        id:
+          column:
+            name: id
+        mediaTypeId:
+          column:
+            name: media_type_id
+        milliseconds:
+          column:
+            name: milliseconds
+        name:
+          column:
+            name: name
+        trackId:
+          column:
+            name: track_id
+        unitPrice:
+          column:
+            name: unit_price
+        vectorNames:
+          column:
+            name: vector_names
+        vectors:
+          column:
+            name: vectors
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: TrackInsertType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - albumId
+          - bytes
+          - composer
+          - document
+          - genreId
+          - id
+          - mediaTypeId
+          - milliseconds
+          - name
+          - trackId
+          - unitPrice
+          - vectorNames
+          - vectors
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertTrackOne
+  outputType: Json!
+  arguments:
+    - name: object
+      type: TrackInsertType!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: insert_track_one
+  graphql:
+    rootFieldName: qdrant_insertTrackOne
+    rootFieldKind: Mutation
+  description: Insert a single record into the track collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertTrackOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

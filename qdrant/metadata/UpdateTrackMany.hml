@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateTrackMany
+  outputType: Json!
+  arguments:
+    - name: objects
+      type: "[TrackInsertType!]!"
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: update_track_many
+  graphql:
+    rootFieldName: qdrant_updateTrackMany
+    rootFieldKind: Mutation
+  description: Update multiple records in the track collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateTrackMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

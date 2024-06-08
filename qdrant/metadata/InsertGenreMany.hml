@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: InsertGenreMany
+  outputType: Json!
+  arguments:
+    - name: objects
+      type: "[GenreInsertType!]!"
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: insert_genre_many
+  graphql:
+    rootFieldName: qdrant_insertGenreMany
+    rootFieldKind: Mutation
+  description: Insert multiple records into the genre collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertGenreMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

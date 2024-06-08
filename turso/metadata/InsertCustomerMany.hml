@@ -1,0 +1,28 @@
+---
+kind: Command
+version: v1
+definition:
+  name: InsertCustomerMany
+  outputType: "[CustomerInsertType!]!"
+  arguments:
+    - name: objects
+      type: "[CustomerInsertType!]!"
+      description: The records to insert into the customer
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: insert_customer_many
+  graphql:
+    rootFieldName: turso_insertCustomerMany
+    rootFieldKind: Mutation
+  description: Insert multiple records into the customer collection.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertCustomerMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

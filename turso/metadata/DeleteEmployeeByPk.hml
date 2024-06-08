@@ -1,0 +1,30 @@
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteEmployeeByPk
+  outputType: "[EmployeeInsertType!]!"
+  arguments:
+    - name: pkColumns
+      type: EmployeePkColumnsType!
+      description: The primary key columns of the record to delete in the employee
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: delete_employee_by_pk
+    argumentMapping:
+      pkColumns: pk_columns
+  graphql:
+    rootFieldName: turso_deleteEmployeeByPk
+    rootFieldKind: Mutation
+  description: Delete a single record from the employee collection by primary key.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteEmployeeByPk
+  permissions:
+    - role: admin
+      allowExecution: true
+

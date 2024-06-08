@@ -1,0 +1,137 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: MediaTypeIncType
+  description: Numeric fields to increment for media_type
+  fields:
+    - name: mediaTypeId
+      type: Int
+  graphql:
+    typeName: Turso_MediaTypeIncType
+    inputTypeName: Turso_MediaTypeIncTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: media_type_IncType
+      fieldMapping:
+        mediaTypeId:
+          column:
+            name: media_type_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: MediaTypeIncType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - mediaTypeId
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: MediaTypeSetType
+  description: Fields to set for media_type
+  fields:
+    - name: mediaTypeId
+      type: Int
+    - name: name
+      type: String
+  graphql:
+    typeName: Turso_MediaTypeSetType
+    inputTypeName: Turso_MediaTypeSetTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: media_type_SetType
+      fieldMapping:
+        mediaTypeId:
+          column:
+            name: media_type_id
+        name:
+          column:
+            name: name
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: MediaTypeSetType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - mediaTypeId
+          - name
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: MediaTypePkColumnsType
+  description: Primary key columns for media_type
+  fields:
+    - name: mediaTypeId
+      type: Int!
+  graphql:
+    typeName: Turso_MediaTypePkColumnsType
+    inputTypeName: Turso_MediaTypePkColumnsTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: media_type_PKColumnsType
+      fieldMapping:
+        mediaTypeId:
+          column:
+            name: media_type_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: MediaTypePkColumnsType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - mediaTypeId
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateMediaTypeByPk
+  outputType: "[MediaTypeInsertType!]!"
+  arguments:
+    - name: inc
+      type: MediaTypeIncType
+      description: The numeric fields to increment for the media_type
+    - name: set
+      type: MediaTypeSetType
+      description: The fields to set for the media_type
+    - name: pkColumns
+      type: MediaTypePkColumnsType!
+      description: The primary key columns of the record to update in the media_type
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: update_media_type_by_pk
+    argumentMapping:
+      inc: _inc
+      set: _set
+      pkColumns: pk_columns
+  graphql:
+    rootFieldName: turso_updateMediaTypeByPk
+    rootFieldKind: Mutation
+  description: Update a single record in the media_type collection by primary key.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateMediaTypeByPk
+  permissions:
+    - role: admin
+      allowExecution: true
+

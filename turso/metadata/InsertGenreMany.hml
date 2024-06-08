@@ -1,0 +1,28 @@
+---
+kind: Command
+version: v1
+definition:
+  name: InsertGenreMany
+  outputType: "[GenreInsertType!]!"
+  arguments:
+    - name: objects
+      type: "[GenreInsertType!]!"
+      description: The records to insert into the genre
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: insert_genre_many
+  graphql:
+    rootFieldName: turso_insertGenreMany
+    rootFieldKind: Mutation
+  description: Insert multiple records into the genre collection.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertGenreMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

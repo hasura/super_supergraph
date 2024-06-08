@@ -1,0 +1,135 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InvoiceLine
+  fields:
+    - name: id
+      type: ObjectId
+    - name: invoiceId
+      type: Int
+    - name: invoiceLineId
+      type: Int
+    - name: quantity
+      type: Int
+    - name: trackId
+      type: Int
+    - name: unitPrice
+      type: Double
+  graphql:
+    typeName: Mongo_InvoiceLine
+    inputTypeName: Mongo_InvoiceLineInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: mongo
+      dataConnectorObjectType: invoice_line
+      fieldMapping:
+        id:
+          column:
+            name: _id
+        invoiceId:
+          column:
+            name: invoice_id
+        invoiceLineId:
+          column:
+            name: invoice_line_id
+        quantity:
+          column:
+            name: quantity
+        trackId:
+          column:
+            name: track_id
+        unitPrice:
+          column:
+            name: unit_price
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InvoiceLine
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - id
+          - invoiceId
+          - invoiceLineId
+          - quantity
+          - trackId
+          - unitPrice
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: InvoiceLineBoolExp
+  objectType: InvoiceLine
+  dataConnectorName: mongo
+  dataConnectorObjectType: invoice_line
+  comparableFields:
+    - fieldName: id
+      operators:
+        enableAll: true
+    - fieldName: invoiceId
+      operators:
+        enableAll: true
+    - fieldName: invoiceLineId
+      operators:
+        enableAll: true
+    - fieldName: quantity
+      operators:
+        enableAll: true
+    - fieldName: trackId
+      operators:
+        enableAll: true
+    - fieldName: unitPrice
+      operators:
+        enableAll: true
+  graphql:
+    typeName: Mongo_InvoiceLineBoolExp
+
+---
+kind: Model
+version: v1
+definition:
+  name: InvoiceLine
+  objectType: InvoiceLine
+  source:
+    dataConnectorName: mongo
+    collection: invoice_line
+  filterExpressionType: InvoiceLineBoolExp
+  orderableFields:
+    - fieldName: id
+      orderByDirections:
+        enableAll: true
+    - fieldName: invoiceId
+      orderByDirections:
+        enableAll: true
+    - fieldName: invoiceLineId
+      orderByDirections:
+        enableAll: true
+    - fieldName: quantity
+      orderByDirections:
+        enableAll: true
+    - fieldName: trackId
+      orderByDirections:
+        enableAll: true
+    - fieldName: unitPrice
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: mongo_invoiceLine
+    selectUniques: []
+    orderByExpressionType: Mongo_InvoiceLineOrderBy
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: InvoiceLine
+  permissions:
+    - role: admin
+      select:
+        filter: null
+

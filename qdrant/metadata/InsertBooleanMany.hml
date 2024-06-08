@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: InsertBooleanMany
+  outputType: Json!
+  arguments:
+    - name: objects
+      type: "[BooleanInsertType!]!"
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: insert_boolean_many
+  graphql:
+    rootFieldName: qdrant_insertBooleanMany
+    rootFieldKind: Mutation
+  description: Insert multiple records into the boolean collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertBooleanMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

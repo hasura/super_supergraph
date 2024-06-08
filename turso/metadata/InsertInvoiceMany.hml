@@ -1,0 +1,28 @@
+---
+kind: Command
+version: v1
+definition:
+  name: InsertInvoiceMany
+  outputType: "[InvoiceInsertType!]!"
+  arguments:
+    - name: objects
+      type: "[InvoiceInsertType!]!"
+      description: The records to insert into the invoice
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: insert_invoice_many
+  graphql:
+    rootFieldName: turso_insertInvoiceMany
+    rootFieldKind: Mutation
+  description: Insert multiple records into the invoice collection.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertInvoiceMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

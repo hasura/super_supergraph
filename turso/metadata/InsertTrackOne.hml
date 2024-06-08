@@ -1,0 +1,107 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: TrackInsertType
+  description: Insert type for track
+  fields:
+    - name: albumId
+      type: Int
+    - name: bytes
+      type: Int
+    - name: composer
+      type: String
+    - name: genreId
+      type: Int
+    - name: mediaTypeId
+      type: Int
+    - name: milliseconds
+      type: Int
+    - name: name
+      type: String
+    - name: trackId
+      type: Int!
+    - name: unitPrice
+      type: Float
+  graphql:
+    typeName: Turso_TrackInsertType
+    inputTypeName: Turso_TrackInsertTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: track_InsertType
+      fieldMapping:
+        albumId:
+          column:
+            name: album_id
+        bytes:
+          column:
+            name: bytes
+        composer:
+          column:
+            name: composer
+        genreId:
+          column:
+            name: genre_id
+        mediaTypeId:
+          column:
+            name: media_type_id
+        milliseconds:
+          column:
+            name: milliseconds
+        name:
+          column:
+            name: name
+        trackId:
+          column:
+            name: track_id
+        unitPrice:
+          column:
+            name: unit_price
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: TrackInsertType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - albumId
+          - bytes
+          - composer
+          - genreId
+          - mediaTypeId
+          - milliseconds
+          - name
+          - trackId
+          - unitPrice
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertTrackOne
+  outputType: "[TrackInsertType!]!"
+  arguments:
+    - name: object
+      type: TrackInsertType!
+      description: The record to insert into the track
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: insert_track_one
+  graphql:
+    rootFieldName: turso_insertTrackOne
+    rootFieldKind: Mutation
+  description: Insert a single record into the track collection.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertTrackOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

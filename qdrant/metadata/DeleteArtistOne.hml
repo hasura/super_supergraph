@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteArtistOne
+  outputType: Json!
+  arguments:
+    - name: id
+      type: String!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: delete_artist_one
+  graphql:
+    rootFieldName: qdrant_deleteArtistOne
+    rootFieldKind: Mutation
+  description: Delete a single record from the artist collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteArtistOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

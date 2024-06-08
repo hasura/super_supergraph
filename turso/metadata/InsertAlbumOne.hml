@@ -1,0 +1,71 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: AlbumInsertType
+  description: Insert type for album
+  fields:
+    - name: albumId
+      type: Int!
+    - name: artistId
+      type: Int
+    - name: title
+      type: String
+  graphql:
+    typeName: Turso_AlbumInsertType
+    inputTypeName: Turso_AlbumInsertTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: album_InsertType
+      fieldMapping:
+        albumId:
+          column:
+            name: album_id
+        artistId:
+          column:
+            name: artist_id
+        title:
+          column:
+            name: title
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: AlbumInsertType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - albumId
+          - artistId
+          - title
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertAlbumOne
+  outputType: "[AlbumInsertType!]!"
+  arguments:
+    - name: object
+      type: AlbumInsertType!
+      description: The record to insert into the album
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: insert_album_one
+  graphql:
+    rootFieldName: turso_insertAlbumOne
+    rootFieldKind: Mutation
+  description: Insert a single record into the album collection.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertAlbumOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

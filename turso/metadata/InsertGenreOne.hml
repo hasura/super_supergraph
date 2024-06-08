@@ -1,0 +1,65 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: GenreInsertType
+  description: Insert type for genre
+  fields:
+    - name: genreId
+      type: Int!
+    - name: name
+      type: String
+  graphql:
+    typeName: Turso_GenreInsertType
+    inputTypeName: Turso_GenreInsertTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: genre_InsertType
+      fieldMapping:
+        genreId:
+          column:
+            name: genre_id
+        name:
+          column:
+            name: name
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: GenreInsertType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - genreId
+          - name
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertGenreOne
+  outputType: "[GenreInsertType!]!"
+  arguments:
+    - name: object
+      type: GenreInsertType!
+      description: The record to insert into the genre
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: insert_genre_one
+  graphql:
+    rootFieldName: turso_insertGenreOne
+    rootFieldKind: Mutation
+  description: Insert a single record into the genre collection.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertGenreOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

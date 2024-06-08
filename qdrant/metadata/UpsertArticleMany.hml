@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpsertArticleMany
+  outputType: Json!
+  arguments:
+    - name: objects
+      type: "[ArticleInsertType!]!"
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: upsert_article_many
+  graphql:
+    rootFieldName: qdrant_upsertArticleMany
+    rootFieldKind: Mutation
+  description: Upsert multiple records into the article collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpsertArticleMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

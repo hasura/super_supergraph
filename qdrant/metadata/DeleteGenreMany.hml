@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteGenreMany
+  outputType: Json!
+  arguments:
+    - name: ids
+      type: "[String!]!"
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: delete_genre_many
+  graphql:
+    rootFieldName: qdrant_deleteGenreMany
+    rootFieldKind: Mutation
+  description: Delete multiple records from the genre collection using their IDs
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteGenreMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

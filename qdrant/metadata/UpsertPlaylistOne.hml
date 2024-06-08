@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpsertPlaylistOne
+  outputType: Json!
+  arguments:
+    - name: object
+      type: PlaylistInsertType!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: upsert_playlist_one
+  graphql:
+    rootFieldName: qdrant_upsertPlaylistOne
+    rootFieldKind: Mutation
+  description: Upsert a single record into the playlist collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpsertPlaylistOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

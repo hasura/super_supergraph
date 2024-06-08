@@ -1,0 +1,137 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: PlaylistIncType
+  description: Numeric fields to increment for playlist
+  fields:
+    - name: playlistId
+      type: Int
+  graphql:
+    typeName: Turso_PlaylistIncType
+    inputTypeName: Turso_PlaylistIncTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: playlist_IncType
+      fieldMapping:
+        playlistId:
+          column:
+            name: playlist_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: PlaylistIncType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - playlistId
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: PlaylistSetType
+  description: Fields to set for playlist
+  fields:
+    - name: name
+      type: String
+    - name: playlistId
+      type: Int
+  graphql:
+    typeName: Turso_PlaylistSetType
+    inputTypeName: Turso_PlaylistSetTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: playlist_SetType
+      fieldMapping:
+        name:
+          column:
+            name: name
+        playlistId:
+          column:
+            name: playlist_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: PlaylistSetType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - name
+          - playlistId
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: PlaylistPkColumnsType
+  description: Primary key columns for playlist
+  fields:
+    - name: playlistId
+      type: Int!
+  graphql:
+    typeName: Turso_PlaylistPkColumnsType
+    inputTypeName: Turso_PlaylistPkColumnsTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: playlist_PKColumnsType
+      fieldMapping:
+        playlistId:
+          column:
+            name: playlist_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: PlaylistPkColumnsType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - playlistId
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdatePlaylistByPk
+  outputType: "[PlaylistInsertType!]!"
+  arguments:
+    - name: inc
+      type: PlaylistIncType
+      description: The numeric fields to increment for the playlist
+    - name: set
+      type: PlaylistSetType
+      description: The fields to set for the playlist
+    - name: pkColumns
+      type: PlaylistPkColumnsType!
+      description: The primary key columns of the record to update in the playlist
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: update_playlist_by_pk
+    argumentMapping:
+      inc: _inc
+      set: _set
+      pkColumns: pk_columns
+  graphql:
+    rootFieldName: turso_updatePlaylistByPk
+    rootFieldKind: Mutation
+  description: Update a single record in the playlist collection by primary key.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdatePlaylistByPk
+  permissions:
+    - role: admin
+      allowExecution: true
+

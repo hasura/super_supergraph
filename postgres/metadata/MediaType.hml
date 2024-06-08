@@ -1,0 +1,108 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: MediaType
+  fields:
+    - name: mediaTypeId
+      type: Int4!
+    - name: name
+      type: Varchar
+  graphql:
+    typeName: Postgres_MediaType
+    inputTypeName: Postgres_MediaTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: postgres
+      dataConnectorObjectType: media_type
+      fieldMapping:
+        mediaTypeId:
+          column:
+            name: media_type_id
+        name:
+          column:
+            name: name
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: MediaType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - mediaTypeId
+          - name
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: MediaTypeBoolExp
+  objectType: MediaType
+  dataConnectorName: postgres
+  dataConnectorObjectType: media_type
+  comparableFields:
+    - fieldName: mediaTypeId
+      operators:
+        enableAll: true
+    - fieldName: name
+      operators:
+        enableAll: true
+  graphql:
+    typeName: Postgres_MediaTypeBoolExp
+
+---
+kind: Model
+version: v1
+definition:
+  name: MediaType
+  objectType: MediaType
+  source:
+    dataConnectorName: postgres
+    collection: media_type
+  filterExpressionType: MediaTypeBoolExp
+  orderableFields:
+    - fieldName: mediaTypeId
+      orderByDirections:
+        enableAll: true
+    - fieldName: name
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: postgres_mediaType
+    selectUniques:
+      - queryRootField: postgres_mediaTypeByMediaTypeId
+        uniqueIdentifier:
+          - mediaTypeId
+    orderByExpressionType: Postgres_MediaTypeOrderBy
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: MediaType
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: tracks
+  sourceType: MediaType
+  target:
+    model:
+      name: Track
+      relationshipType: Array
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: mediaTypeId
+      target:
+        modelField:
+          - fieldName: mediaTypeId
+

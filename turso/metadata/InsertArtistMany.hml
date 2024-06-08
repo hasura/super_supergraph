@@ -1,0 +1,28 @@
+---
+kind: Command
+version: v1
+definition:
+  name: InsertArtistMany
+  outputType: "[ArtistInsertType!]!"
+  arguments:
+    - name: objects
+      type: "[ArtistInsertType!]!"
+      description: The records to insert into the artist
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: insert_artist_many
+  graphql:
+    rootFieldName: turso_insertArtistMany
+    rootFieldKind: Mutation
+  description: Insert multiple records into the artist collection.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertArtistMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

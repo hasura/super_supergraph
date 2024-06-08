@@ -1,0 +1,35 @@
+{
+  "name": "media_type",
+  "collections": {
+    "media_type": {
+      "type": "media_type"
+    }
+  },
+  "objectTypes": {
+    "media_type": {
+      "fields": {
+        "_id": {
+          "type": {
+            "nullable": {
+              "scalar": "objectId"
+            }
+          }
+        },
+        "media_type_id": {
+          "type": {
+            "nullable": {
+              "scalar": "int"
+            }
+          }
+        },
+        "name": {
+          "type": {
+            "nullable": {
+              "scalar": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

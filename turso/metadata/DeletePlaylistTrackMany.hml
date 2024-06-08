@@ -1,0 +1,33 @@
+---
+kind: Command
+version: v1
+definition:
+  name: DeletePlaylistTrackMany
+  outputType: "[PlaylistTrackInsertType!]!"
+  arguments:
+    - name: pkColumnsArray
+      type: "[PlaylistTrackPkColumnsType!]!"
+      description: An array of primary key structures for the records to delete in the
+        playlist_track. Each item in the array represents a condition that
+        identifies one or more records to be deleted.
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: delete_playlist_track_many
+    argumentMapping:
+      pkColumnsArray: pk_columns_array
+  graphql:
+    rootFieldName: turso_deletePlaylistTrackMany
+    rootFieldKind: Mutation
+  description: Delete multiple records from the playlist_track collection based on
+    primary key conditions.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeletePlaylistTrackMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

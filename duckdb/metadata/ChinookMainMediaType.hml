@@ -1,0 +1,87 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: ChinookMainMediaType
+  fields:
+    - name: mediaTypeId
+      type: Int!
+    - name: name
+      type: String!
+  graphql:
+    typeName: Duckdb_ChinookMainMediaType
+    inputTypeName: Duckdb_ChinookMainMediaTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: duckdb
+      dataConnectorObjectType: chinook_main_media_type
+      fieldMapping:
+        mediaTypeId:
+          column:
+            name: media_type_id
+        name:
+          column:
+            name: name
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: ChinookMainMediaType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - mediaTypeId
+          - name
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: ChinookMainMediaTypeBoolExp
+  objectType: ChinookMainMediaType
+  dataConnectorName: duckdb
+  dataConnectorObjectType: chinook_main_media_type
+  comparableFields:
+    - fieldName: mediaTypeId
+      operators:
+        enableAll: true
+    - fieldName: name
+      operators:
+        enableAll: true
+  graphql:
+    typeName: Duckdb_ChinookMainMediaTypeBoolExp
+
+---
+kind: Model
+version: v1
+definition:
+  name: ChinookMainMediaType
+  objectType: ChinookMainMediaType
+  source:
+    dataConnectorName: duckdb
+    collection: chinook_main_media_type
+  filterExpressionType: ChinookMainMediaTypeBoolExp
+  orderableFields:
+    - fieldName: mediaTypeId
+      orderByDirections:
+        enableAll: true
+    - fieldName: name
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: duckdb_chinookMainMediaType
+    selectUniques: []
+    orderByExpressionType: Duckdb_ChinookMainMediaTypeOrderBy
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: ChinookMainMediaType
+  permissions:
+    - role: admin
+      select:
+        filter: null
+

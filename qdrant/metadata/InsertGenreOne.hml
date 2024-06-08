@@ -1,0 +1,87 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: GenreInsertType
+  fields:
+    - name: document
+      type: String
+    - name: genreId
+      type: Int
+    - name: id
+      type: String!
+    - name: name
+      type: String
+    - name: vectorNames
+      type: "[String!]!"
+    - name: vectors
+      type: "[[Float!]!]!"
+  graphql:
+    typeName: Qdrant_GenreInsertType
+    inputTypeName: Qdrant_GenreInsertTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: qdrant
+      dataConnectorObjectType: genre_InsertType
+      fieldMapping:
+        document:
+          column:
+            name: document
+        genreId:
+          column:
+            name: genre_id
+        id:
+          column:
+            name: id
+        name:
+          column:
+            name: name
+        vectorNames:
+          column:
+            name: vector_names
+        vectors:
+          column:
+            name: vectors
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: GenreInsertType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - document
+          - genreId
+          - id
+          - name
+          - vectorNames
+          - vectors
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertGenreOne
+  outputType: Json!
+  arguments:
+    - name: object
+      type: GenreInsertType!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: insert_genre_one
+  graphql:
+    rootFieldName: qdrant_insertGenreOne
+    rootFieldKind: Mutation
+  description: Insert a single record into the genre collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertGenreOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

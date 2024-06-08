@@ -1,0 +1,144 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Playlist
+  fields:
+    - name: document
+      type: String
+    - name: id
+      type: String!
+    - name: name
+      type: String
+    - name: playlistId
+      type: Int
+    - name: score
+      type: Float
+    - name: vector
+      type: "[Float!]"
+  graphql:
+    typeName: Qdrant_Playlist
+    inputTypeName: Qdrant_PlaylistInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: qdrant
+      dataConnectorObjectType: playlist
+      fieldMapping:
+        document:
+          column:
+            name: document
+        id:
+          column:
+            name: id
+        name:
+          column:
+            name: name
+        playlistId:
+          column:
+            name: playlist_id
+        score:
+          column:
+            name: score
+        vector:
+          column:
+            name: vector
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Playlist
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - document
+          - id
+          - name
+          - playlistId
+          - score
+          - vector
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: PlaylistBoolExp
+  objectType: Playlist
+  dataConnectorName: qdrant
+  dataConnectorObjectType: playlist
+  comparableFields:
+    - fieldName: document
+      operators:
+        enableAll: true
+    - fieldName: id
+      operators:
+        enableAll: true
+    - fieldName: name
+      operators:
+        enableAll: true
+    - fieldName: playlistId
+      operators:
+        enableAll: true
+    - fieldName: score
+      operators:
+        enableAll: true
+    - fieldName: vector
+      operators:
+        enableAll: true
+  graphql:
+    typeName: Qdrant_PlaylistBoolExp
+
+---
+kind: Model
+version: v1
+definition:
+  name: Playlist
+  objectType: Playlist
+  arguments:
+    - name: recommend
+      type: RecommendStringVector
+    - name: search
+      type: SearchVector
+  source:
+    dataConnectorName: qdrant
+    collection: playlist
+  filterExpressionType: PlaylistBoolExp
+  orderableFields:
+    - fieldName: document
+      orderByDirections:
+        enableAll: true
+    - fieldName: id
+      orderByDirections:
+        enableAll: true
+    - fieldName: name
+      orderByDirections:
+        enableAll: true
+    - fieldName: playlistId
+      orderByDirections:
+        enableAll: true
+    - fieldName: score
+      orderByDirections:
+        enableAll: true
+    - fieldName: vector
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: qdrant_playlist
+    selectUniques:
+      - queryRootField: qdrant_playlistById
+        uniqueIdentifier:
+          - id
+    argumentsInputType: Qdrant_PlaylistArguments
+    orderByExpressionType: Qdrant_PlaylistOrderBy
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Playlist
+  permissions:
+    - role: admin
+      select:
+        filter: null
+

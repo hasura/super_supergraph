@@ -1,0 +1,3267 @@
+{
+    "config": {
+        "collection_names": [
+            "genre",
+            "media_type",
+            "invoice",
+            "artist",
+            "article",
+            "playlist",
+            "boolean",
+            "customer",
+            "invoice_line",
+            "album",
+            "playlist_track",
+            "track",
+            "employee"
+        ],
+        "object_fields": {
+            "_quantization": [
+                "ignore",
+                "rescore",
+                "oversampling"
+            ],
+            "_params": [
+                "hnsw_ef",
+                "exact",
+                "indexed_only",
+                "quantization"
+            ],
+            "_search": [
+                "vector",
+                "params",
+                "score_threshold"
+            ],
+            "_searchVector": [
+                "vector",
+                "name",
+                "params",
+                "score_threshold"
+            ],
+            "_recommendInt": [
+                "positive",
+                "negative",
+                "params",
+                "score_threshold"
+            ],
+            "_recommendString": [
+                "positive",
+                "negative",
+                "params",
+                "score_threshold"
+            ],
+            "_recommendIntVector": [
+                "positive",
+                "negative",
+                "using",
+                "params",
+                "score_threshold"
+            ],
+            "_recommendStringVector": [
+                "positive",
+                "negative",
+                "using",
+                "params",
+                "score_threshold"
+            ],
+            "genre": [
+                "document",
+                "genre_id",
+                "name",
+                "id",
+                "score",
+                "vector"
+            ],
+            "genre_InsertType": [
+                "document",
+                "genre_id",
+                "name",
+                "id",
+                "vectors",
+                "vector_names"
+            ],
+            "media_type": [
+                "document",
+                "media_type_id",
+                "name",
+                "id",
+                "score",
+                "vector"
+            ],
+            "media_type_InsertType": [
+                "document",
+                "media_type_id",
+                "name",
+                "id",
+                "vectors",
+                "vector_names"
+            ],
+            "invoice": [
+                "billing_address",
+                "billing_city",
+                "billing_country",
+                "billing_postal_code",
+                "billing_state",
+                "customer_id",
+                "document",
+                "invoice_date",
+                "invoice_id",
+                "total",
+                "id",
+                "score",
+                "vector"
+            ],
+            "invoice_InsertType": [
+                "billing_address",
+                "billing_city",
+                "billing_country",
+                "billing_postal_code",
+                "billing_state",
+                "customer_id",
+                "document",
+                "invoice_date",
+                "invoice_id",
+                "total",
+                "id",
+                "vectors",
+                "vector_names"
+            ],
+            "artist": [
+                "artist_id",
+                "document",
+                "name",
+                "id",
+                "score",
+                "vector"
+            ],
+            "artist_InsertType": [
+                "artist_id",
+                "document",
+                "name",
+                "id",
+                "vectors",
+                "vector_names"
+            ],
+            "article": [
+                "arr",
+                "bool",
+                "float",
+                "int",
+                "string",
+                "id",
+                "score",
+                "vector"
+            ],
+            "article_InsertType": [
+                "arr",
+                "bool",
+                "float",
+                "int",
+                "string",
+                "id",
+                "vector"
+            ],
+            "playlist": [
+                "document",
+                "name",
+                "playlist_id",
+                "id",
+                "score",
+                "vector"
+            ],
+            "playlist_InsertType": [
+                "document",
+                "name",
+                "playlist_id",
+                "id",
+                "vectors",
+                "vector_names"
+            ],
+            "boolean": [
+                "A",
+                "B",
+                "C",
+                "D",
+                "id",
+                "score",
+                "vector"
+            ],
+            "boolean_InsertType": [
+                "A",
+                "B",
+                "C",
+                "D",
+                "id",
+                "vector"
+            ],
+            "customer": [
+                "address",
+                "city",
+                "company",
+                "country",
+                "customer_id",
+                "document",
+                "email",
+                "fax",
+                "first_name",
+                "last_name",
+                "phone",
+                "postal_code",
+                "state",
+                "support_rep_id",
+                "id",
+                "score",
+                "vector"
+            ],
+            "customer_InsertType": [
+                "address",
+                "city",
+                "company",
+                "country",
+                "customer_id",
+                "document",
+                "email",
+                "fax",
+                "first_name",
+                "last_name",
+                "phone",
+                "postal_code",
+                "state",
+                "support_rep_id",
+                "id",
+                "vectors",
+                "vector_names"
+            ],
+            "invoice_line": [
+                "document",
+                "invoice_id",
+                "invoice_line_id",
+                "quantity",
+                "track_id",
+                "unit_price",
+                "id",
+                "score",
+                "vector"
+            ],
+            "invoice_line_InsertType": [
+                "document",
+                "invoice_id",
+                "invoice_line_id",
+                "quantity",
+                "track_id",
+                "unit_price",
+                "id",
+                "vectors",
+                "vector_names"
+            ],
+            "album": [
+                "album_id",
+                "artist_id",
+                "document",
+                "title",
+                "id",
+                "score",
+                "vector"
+            ],
+            "album_InsertType": [
+                "album_id",
+                "artist_id",
+                "document",
+                "title",
+                "id",
+                "vectors",
+                "vector_names"
+            ],
+            "playlist_track": [
+                "document",
+                "playlist_id",
+                "track_id",
+                "id",
+                "score",
+                "vector"
+            ],
+            "playlist_track_InsertType": [
+                "document",
+                "playlist_id",
+                "track_id",
+                "id",
+                "vectors",
+                "vector_names"
+            ],
+            "track": [
+                "album_id",
+                "bytes",
+                "composer",
+                "document",
+                "genre_id",
+                "media_type_id",
+                "milliseconds",
+                "name",
+                "track_id",
+                "unit_price",
+                "id",
+                "score",
+                "vector"
+            ],
+            "track_InsertType": [
+                "album_id",
+                "bytes",
+                "composer",
+                "document",
+                "genre_id",
+                "media_type_id",
+                "milliseconds",
+                "name",
+                "track_id",
+                "unit_price",
+                "id",
+                "vectors",
+                "vector_names"
+            ],
+            "employee": [
+                "address",
+                "birth_date",
+                "city",
+                "country",
+                "document",
+                "email",
+                "employee_id",
+                "fax",
+                "first_name",
+                "hire_date",
+                "last_name",
+                "phone",
+                "postal_code",
+                "reports_to",
+                "state",
+                "title",
+                "id",
+                "score",
+                "vector"
+            ],
+            "employee_InsertType": [
+                "address",
+                "birth_date",
+                "city",
+                "country",
+                "document",
+                "email",
+                "employee_id",
+                "fax",
+                "first_name",
+                "hire_date",
+                "last_name",
+                "phone",
+                "postal_code",
+                "reports_to",
+                "state",
+                "title",
+                "id",
+                "vectors",
+                "vector_names"
+            ]
+        },
+        "object_types": {
+            "_quantization": {
+                "description": "Quantization Parameters for Qdrant",
+                "fields": {
+                    "ignore": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Bool"
+                            }
+                        }
+                    },
+                    "rescore": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Bool"
+                            }
+                        }
+                    },
+                    "oversampling": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Float"
+                            }
+                        }
+                    }
+                }
+            },
+            "_params": {
+                "description": "Search parameters for Qdrant",
+                "fields": {
+                    "hnsw_ef": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "exact": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Bool"
+                            }
+                        }
+                    },
+                    "indexed_only": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Bool"
+                            }
+                        }
+                    },
+                    "quantization": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "_quantization"
+                            }
+                        }
+                    }
+                }
+            },
+            "_search": {
+                "description": "Search the vector database for similar vectors",
+                "fields": {
+                    "vector": {
+                        "type": {
+                            "type": "array",
+                            "element_type": {
+                                "type": "named",
+                                "name": "Float"
+                            }
+                        }
+                    },
+                    "params": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "_params"
+                            }
+                        }
+                    },
+                    "score_threshold": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Float"
+                            }
+                        }
+                    }
+                }
+            },
+            "_searchVector": {
+                "description": "Search the vector database for similar vectors",
+                "fields": {
+                    "vector": {
+                        "type": {
+                            "type": "array",
+                            "element_type": {
+                                "type": "named",
+                                "name": "Float"
+                            }
+                        }
+                    },
+                    "name": {
+                        "type": {
+                            "type": "named",
+                            "name": "String"
+                        }
+                    },
+                    "params": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "_params"
+                            }
+                        }
+                    },
+                    "score_threshold": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Float"
+                            }
+                        }
+                    }
+                }
+            },
+            "_recommendInt": {
+                "description": "Provide an array of positive and negative example points and get a recommendation",
+                "fields": {
+                    "positive": {
+                        "type": {
+                            "type": "array",
+                            "element_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "negative": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "array",
+                                "element_type": {
+                                    "type": "named",
+                                    "name": "Int"
+                                }
+                            }
+                        }
+                    },
+                    "params": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "_params"
+                            }
+                        }
+                    },
+                    "score_threshold": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Float"
+                            }
+                        }
+                    }
+                }
+            },
+            "_recommendString": {
+                "description": "Provide an array of positive and negative example points and get a recommendation",
+                "fields": {
+                    "positive": {
+                        "type": {
+                            "type": "array",
+                            "element_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "negative": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "array",
+                                "element_type": {
+                                    "type": "named",
+                                    "name": "String"
+                                }
+                            }
+                        }
+                    },
+                    "params": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "_params"
+                            }
+                        }
+                    },
+                    "score_threshold": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Float"
+                            }
+                        }
+                    }
+                }
+            },
+            "_recommendIntVector": {
+                "description": "Provide an array of positive and negative example points and get a recommendation",
+                "fields": {
+                    "positive": {
+                        "type": {
+                            "type": "array",
+                            "element_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "negative": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "array",
+                                "element_type": {
+                                    "type": "named",
+                                    "name": "Int"
+                                }
+                            }
+                        }
+                    },
+                    "using": {
+                        "type": {
+                            "type": "named",
+                            "name": "String"
+                        }
+                    },
+                    "params": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "_params"
+                            }
+                        }
+                    },
+                    "score_threshold": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Float"
+                            }
+                        }
+                    }
+                }
+            },
+            "_recommendStringVector": {
+                "description": "Provide an array of positive and negative example points and get a recommendation",
+                "fields": {
+                    "positive": {
+                        "type": {
+                            "type": "array",
+                            "element_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "negative": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "array",
+                                "element_type": {
+                                    "type": "named",
+                                    "name": "String"
+                                }
+                            }
+                        }
+                    },
+                    "using": {
+                        "type": {
+                            "type": "named",
+                            "name": "String"
+                        }
+                    },
+                    "params": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "_params"
+                            }
+                        }
+                    },
+                    "score_threshold": {
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Float"
+                            }
+                        }
+                    }
+                }
+            },
+            "genre": {
+                "description": null,
+                "fields": {
+                    "document": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "genre_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "name": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "id": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "String"
+                        }
+                    },
+                    "score": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Float"
+                            }
+                        }
+                    },
+                    "vector": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "array",
+                                "element_type": {
+                                    "type": "named",
+                                    "name": "Float"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "genre_InsertType": {
+                "description": null,
+                "fields": {
+                    "document": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "genre_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "name": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "id": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "String"
+                        }
+                    },
+                    "vectors": {
+                        "description": null,
+                        "type": {
+                            "type": "array",
+                            "element_type": {
+                                "type": "array",
+                                "element_type": {
+                                    "type": "named",
+                                    "name": "Float"
+                                }
+                            }
+                        }
+                    },
+                    "vector_names": {
+                        "description": null,
+                        "type": {
+                            "type": "array",
+                            "element_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    }
+                }
+            },
+            "media_type": {
+                "description": null,
+                "fields": {
+                    "document": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "media_type_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "name": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "id": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "String"
+                        }
+                    },
+                    "score": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Float"
+                            }
+                        }
+                    },
+                    "vector": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "array",
+                                "element_type": {
+                                    "type": "named",
+                                    "name": "Float"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "media_type_InsertType": {
+                "description": null,
+                "fields": {
+                    "document": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "media_type_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "name": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "id": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "String"
+                        }
+                    },
+                    "vectors": {
+                        "description": null,
+                        "type": {
+                            "type": "array",
+                            "element_type": {
+                                "type": "array",
+                                "element_type": {
+                                    "type": "named",
+                                    "name": "Float"
+                                }
+                            }
+                        }
+                    },
+                    "vector_names": {
+                        "description": null,
+                        "type": {
+                            "type": "array",
+                            "element_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    }
+                }
+            },
+            "invoice": {
+                "description": null,
+                "fields": {
+                    "billing_address": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "billing_city": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "billing_country": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "billing_postal_code": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "billing_state": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "JSON"
+                        }
+                    },
+                    "customer_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "document": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "invoice_date": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "invoice_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "total": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "id": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "String"
+                        }
+                    },
+                    "score": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Float"
+                            }
+                        }
+                    },
+                    "vector": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "array",
+                                "element_type": {
+                                    "type": "named",
+                                    "name": "Float"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "invoice_InsertType": {
+                "description": null,
+                "fields": {
+                    "billing_address": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "billing_city": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "billing_country": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "billing_postal_code": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "billing_state": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "JSON"
+                        }
+                    },
+                    "customer_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "document": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "invoice_date": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "invoice_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "total": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "id": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "String"
+                        }
+                    },
+                    "vectors": {
+                        "description": null,
+                        "type": {
+                            "type": "array",
+                            "element_type": {
+                                "type": "array",
+                                "element_type": {
+                                    "type": "named",
+                                    "name": "Float"
+                                }
+                            }
+                        }
+                    },
+                    "vector_names": {
+                        "description": null,
+                        "type": {
+                            "type": "array",
+                            "element_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    }
+                }
+            },
+            "artist": {
+                "description": null,
+                "fields": {
+                    "artist_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "document": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "name": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "id": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "String"
+                        }
+                    },
+                    "score": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Float"
+                            }
+                        }
+                    },
+                    "vector": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "array",
+                                "element_type": {
+                                    "type": "named",
+                                    "name": "Float"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "artist_InsertType": {
+                "description": null,
+                "fields": {
+                    "artist_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "document": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "name": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "id": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "String"
+                        }
+                    },
+                    "vectors": {
+                        "description": null,
+                        "type": {
+                            "type": "array",
+                            "element_type": {
+                                "type": "array",
+                                "element_type": {
+                                    "type": "named",
+                                    "name": "Float"
+                                }
+                            }
+                        }
+                    },
+                    "vector_names": {
+                        "description": null,
+                        "type": {
+                            "type": "array",
+                            "element_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    }
+                }
+            },
+            "article": {
+                "description": null,
+                "fields": {
+                    "arr": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "array",
+                                "element_type": {
+                                    "type": "nullable",
+                                    "underlying_type": {
+                                        "type": "named",
+                                        "name": "Int"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "bool": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Bool"
+                            }
+                        }
+                    },
+                    "float": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Float"
+                            }
+                        }
+                    },
+                    "int": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "string": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "id": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "Int"
+                        }
+                    },
+                    "score": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Float"
+                            }
+                        }
+                    },
+                    "vector": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "array",
+                                "element_type": {
+                                    "type": "named",
+                                    "name": "Float"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "article_InsertType": {
+                "description": null,
+                "fields": {
+                    "arr": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "array",
+                                "element_type": {
+                                    "type": "nullable",
+                                    "underlying_type": {
+                                        "type": "named",
+                                        "name": "Int"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "bool": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Bool"
+                            }
+                        }
+                    },
+                    "float": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Float"
+                            }
+                        }
+                    },
+                    "int": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "string": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "id": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "Int"
+                        }
+                    },
+                    "vector": {
+                        "description": null,
+                        "type": {
+                            "type": "array",
+                            "element_type": {
+                                "type": "named",
+                                "name": "Float"
+                            }
+                        }
+                    }
+                }
+            },
+            "playlist": {
+                "description": null,
+                "fields": {
+                    "document": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "name": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "playlist_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "id": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "String"
+                        }
+                    },
+                    "score": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Float"
+                            }
+                        }
+                    },
+                    "vector": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "array",
+                                "element_type": {
+                                    "type": "named",
+                                    "name": "Float"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "playlist_InsertType": {
+                "description": null,
+                "fields": {
+                    "document": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "name": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "playlist_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "id": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "String"
+                        }
+                    },
+                    "vectors": {
+                        "description": null,
+                        "type": {
+                            "type": "array",
+                            "element_type": {
+                                "type": "array",
+                                "element_type": {
+                                    "type": "named",
+                                    "name": "Float"
+                                }
+                            }
+                        }
+                    },
+                    "vector_names": {
+                        "description": null,
+                        "type": {
+                            "type": "array",
+                            "element_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    }
+                }
+            },
+            "boolean": {
+                "description": null,
+                "fields": {
+                    "A": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Bool"
+                            }
+                        }
+                    },
+                    "B": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Bool"
+                            }
+                        }
+                    },
+                    "C": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Bool"
+                            }
+                        }
+                    },
+                    "D": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Bool"
+                            }
+                        }
+                    },
+                    "id": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "Int"
+                        }
+                    },
+                    "score": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Float"
+                            }
+                        }
+                    },
+                    "vector": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "array",
+                                "element_type": {
+                                    "type": "named",
+                                    "name": "Float"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "boolean_InsertType": {
+                "description": null,
+                "fields": {
+                    "A": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Bool"
+                            }
+                        }
+                    },
+                    "B": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Bool"
+                            }
+                        }
+                    },
+                    "C": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Bool"
+                            }
+                        }
+                    },
+                    "D": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Bool"
+                            }
+                        }
+                    },
+                    "id": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "Int"
+                        }
+                    },
+                    "vector": {
+                        "description": null,
+                        "type": {
+                            "type": "array",
+                            "element_type": {
+                                "type": "named",
+                                "name": "Float"
+                            }
+                        }
+                    }
+                }
+            },
+            "customer": {
+                "description": null,
+                "fields": {
+                    "address": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "city": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "company": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "JSON"
+                        }
+                    },
+                    "country": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "customer_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "document": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "email": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "fax": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "JSON"
+                        }
+                    },
+                    "first_name": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "last_name": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "phone": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "postal_code": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "state": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "JSON"
+                        }
+                    },
+                    "support_rep_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "id": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "String"
+                        }
+                    },
+                    "score": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Float"
+                            }
+                        }
+                    },
+                    "vector": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "array",
+                                "element_type": {
+                                    "type": "named",
+                                    "name": "Float"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "customer_InsertType": {
+                "description": null,
+                "fields": {
+                    "address": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "city": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "company": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "JSON"
+                        }
+                    },
+                    "country": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "customer_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "document": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "email": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "fax": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "JSON"
+                        }
+                    },
+                    "first_name": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "last_name": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "phone": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "postal_code": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "state": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "JSON"
+                        }
+                    },
+                    "support_rep_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "id": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "String"
+                        }
+                    },
+                    "vectors": {
+                        "description": null,
+                        "type": {
+                            "type": "array",
+                            "element_type": {
+                                "type": "array",
+                                "element_type": {
+                                    "type": "named",
+                                    "name": "Float"
+                                }
+                            }
+                        }
+                    },
+                    "vector_names": {
+                        "description": null,
+                        "type": {
+                            "type": "array",
+                            "element_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    }
+                }
+            },
+            "invoice_line": {
+                "description": null,
+                "fields": {
+                    "document": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "invoice_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "invoice_line_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "quantity": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "track_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "unit_price": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "id": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "String"
+                        }
+                    },
+                    "score": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Float"
+                            }
+                        }
+                    },
+                    "vector": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "array",
+                                "element_type": {
+                                    "type": "named",
+                                    "name": "Float"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "invoice_line_InsertType": {
+                "description": null,
+                "fields": {
+                    "document": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "invoice_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "invoice_line_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "quantity": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "track_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "unit_price": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "id": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "String"
+                        }
+                    },
+                    "vectors": {
+                        "description": null,
+                        "type": {
+                            "type": "array",
+                            "element_type": {
+                                "type": "array",
+                                "element_type": {
+                                    "type": "named",
+                                    "name": "Float"
+                                }
+                            }
+                        }
+                    },
+                    "vector_names": {
+                        "description": null,
+                        "type": {
+                            "type": "array",
+                            "element_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    }
+                }
+            },
+            "album": {
+                "description": null,
+                "fields": {
+                    "album_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "artist_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "document": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "title": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "id": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "String"
+                        }
+                    },
+                    "score": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Float"
+                            }
+                        }
+                    },
+                    "vector": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "array",
+                                "element_type": {
+                                    "type": "named",
+                                    "name": "Float"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "album_InsertType": {
+                "description": null,
+                "fields": {
+                    "album_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "artist_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "document": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "title": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "id": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "String"
+                        }
+                    },
+                    "vectors": {
+                        "description": null,
+                        "type": {
+                            "type": "array",
+                            "element_type": {
+                                "type": "array",
+                                "element_type": {
+                                    "type": "named",
+                                    "name": "Float"
+                                }
+                            }
+                        }
+                    },
+                    "vector_names": {
+                        "description": null,
+                        "type": {
+                            "type": "array",
+                            "element_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    }
+                }
+            },
+            "playlist_track": {
+                "description": null,
+                "fields": {
+                    "document": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "playlist_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "track_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "id": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "String"
+                        }
+                    },
+                    "score": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Float"
+                            }
+                        }
+                    },
+                    "vector": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "array",
+                                "element_type": {
+                                    "type": "named",
+                                    "name": "Float"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "playlist_track_InsertType": {
+                "description": null,
+                "fields": {
+                    "document": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "playlist_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "track_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "id": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "String"
+                        }
+                    },
+                    "vectors": {
+                        "description": null,
+                        "type": {
+                            "type": "array",
+                            "element_type": {
+                                "type": "array",
+                                "element_type": {
+                                    "type": "named",
+                                    "name": "Float"
+                                }
+                            }
+                        }
+                    },
+                    "vector_names": {
+                        "description": null,
+                        "type": {
+                            "type": "array",
+                            "element_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    }
+                }
+            },
+            "track": {
+                "description": null,
+                "fields": {
+                    "album_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "bytes": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "composer": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "document": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "genre_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "media_type_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "milliseconds": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "name": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "track_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "unit_price": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "id": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "String"
+                        }
+                    },
+                    "score": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Float"
+                            }
+                        }
+                    },
+                    "vector": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "array",
+                                "element_type": {
+                                    "type": "named",
+                                    "name": "Float"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "track_InsertType": {
+                "description": null,
+                "fields": {
+                    "album_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "bytes": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "composer": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "document": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "genre_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "media_type_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "milliseconds": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "name": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "track_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "unit_price": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "id": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "String"
+                        }
+                    },
+                    "vectors": {
+                        "description": null,
+                        "type": {
+                            "type": "array",
+                            "element_type": {
+                                "type": "array",
+                                "element_type": {
+                                    "type": "named",
+                                    "name": "Float"
+                                }
+                            }
+                        }
+                    },
+                    "vector_names": {
+                        "description": null,
+                        "type": {
+                            "type": "array",
+                            "element_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    }
+                }
+            },
+            "employee": {
+                "description": null,
+                "fields": {
+                    "address": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "birth_date": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "city": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "country": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "document": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "email": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "employee_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "fax": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "first_name": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "hire_date": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "last_name": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "phone": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "postal_code": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "reports_to": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "state": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "title": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "id": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "String"
+                        }
+                    },
+                    "score": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Float"
+                            }
+                        }
+                    },
+                    "vector": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "array",
+                                "element_type": {
+                                    "type": "named",
+                                    "name": "Float"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "employee_InsertType": {
+                "description": null,
+                "fields": {
+                    "address": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "birth_date": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "city": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "country": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "document": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "email": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "employee_id": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "fax": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "first_name": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "hire_date": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "last_name": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "phone": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "postal_code": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "reports_to": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "Int"
+                            }
+                        }
+                    },
+                    "state": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "title": {
+                        "description": null,
+                        "type": {
+                            "type": "nullable",
+                            "underlying_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    },
+                    "id": {
+                        "description": null,
+                        "type": {
+                            "type": "named",
+                            "name": "String"
+                        }
+                    },
+                    "vectors": {
+                        "description": null,
+                        "type": {
+                            "type": "array",
+                            "element_type": {
+                                "type": "array",
+                                "element_type": {
+                                    "type": "named",
+                                    "name": "Float"
+                                }
+                            }
+                        }
+                    },
+                    "vector_names": {
+                        "description": null,
+                        "type": {
+                            "type": "array",
+                            "element_type": {
+                                "type": "named",
+                                "name": "String"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "collection_vectors": {
+            "genre": true,
+            "media_type": true,
+            "invoice": true,
+            "artist": true,
+            "article": false,
+            "playlist": true,
+            "boolean": false,
+            "customer": true,
+            "invoice_line": true,
+            "album": true,
+            "playlist_track": true,
+            "track": true,
+            "employee": true
+        },
+        "functions": [],
+        "procedures": []
+    }
+}

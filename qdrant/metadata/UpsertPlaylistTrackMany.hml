@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpsertPlaylistTrackMany
+  outputType: Json!
+  arguments:
+    - name: objects
+      type: "[PlaylistTrackInsertType!]!"
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: upsert_playlist_track_many
+  graphql:
+    rootFieldName: qdrant_upsertPlaylistTrackMany
+    rootFieldKind: Mutation
+  description: Upsert multiple records into the playlist_track collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpsertPlaylistTrackMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

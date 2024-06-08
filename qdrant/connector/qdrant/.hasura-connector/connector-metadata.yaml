@@ -1,0 +1,18 @@
+packagingDefinition:
+  type: PrebuiltDockerImage
+  dockerImage: ghcr.io/hasura/ndc-qdrant:v0.2.0
+supportedEnvironmentVariables:
+  - name: QDRANT_URL
+    description: The url for the Qdrant database
+  - name: QDRANT_API_KEY
+    description: The Qdrant API Key
+commands:
+  update:
+    type: Dockerized
+    dockerImage: ghcr.io/hasura/ndc-qdrant:v0.2.0
+    commandArgs:
+      - update
+dockerComposeWatch:
+  - path: ./
+    target: /etc/connector
+    action: sync+restart

@@ -1,0 +1,30 @@
+---
+kind: Command
+version: v1
+definition:
+  name: DeletePlaylistByPk
+  outputType: "[PlaylistInsertType!]!"
+  arguments:
+    - name: pkColumns
+      type: PlaylistPkColumnsType!
+      description: The primary key columns of the record to delete in the playlist
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: delete_playlist_by_pk
+    argumentMapping:
+      pkColumns: pk_columns
+  graphql:
+    rootFieldName: turso_deletePlaylistByPk
+    rootFieldKind: Mutation
+  description: Delete a single record from the playlist collection by primary key.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeletePlaylistByPk
+  permissions:
+    - role: admin
+      allowExecution: true
+

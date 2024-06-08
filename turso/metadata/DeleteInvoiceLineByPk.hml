@@ -1,0 +1,30 @@
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteInvoiceLineByPk
+  outputType: "[InvoiceLineInsertType!]!"
+  arguments:
+    - name: pkColumns
+      type: InvoiceLinePkColumnsType!
+      description: The primary key columns of the record to delete in the invoice_line
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: delete_invoice_line_by_pk
+    argumentMapping:
+      pkColumns: pk_columns
+  graphql:
+    rootFieldName: turso_deleteInvoiceLineByPk
+    rootFieldKind: Mutation
+  description: Delete a single record from the invoice_line collection by primary key.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteInvoiceLineByPk
+  permissions:
+    - role: admin
+      allowExecution: true
+

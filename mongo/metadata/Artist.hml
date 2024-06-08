@@ -1,0 +1,99 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Artist
+  fields:
+    - name: id
+      type: ObjectId
+    - name: artistId
+      type: Int
+    - name: name
+      type: String
+  graphql:
+    typeName: Mongo_Artist
+    inputTypeName: Mongo_ArtistInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: mongo
+      dataConnectorObjectType: artist
+      fieldMapping:
+        id:
+          column:
+            name: _id
+        artistId:
+          column:
+            name: artist_id
+        name:
+          column:
+            name: name
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Artist
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - id
+          - artistId
+          - name
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: ArtistBoolExp
+  objectType: Artist
+  dataConnectorName: mongo
+  dataConnectorObjectType: artist
+  comparableFields:
+    - fieldName: id
+      operators:
+        enableAll: true
+    - fieldName: artistId
+      operators:
+        enableAll: true
+    - fieldName: name
+      operators:
+        enableAll: true
+  graphql:
+    typeName: Mongo_ArtistBoolExp
+
+---
+kind: Model
+version: v1
+definition:
+  name: Artist
+  objectType: Artist
+  source:
+    dataConnectorName: mongo
+    collection: artist
+  filterExpressionType: ArtistBoolExp
+  orderableFields:
+    - fieldName: id
+      orderByDirections:
+        enableAll: true
+    - fieldName: artistId
+      orderByDirections:
+        enableAll: true
+    - fieldName: name
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: mongo_artist
+    selectUniques: []
+    orderByExpressionType: Mongo_ArtistOrderBy
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Artist
+  permissions:
+    - role: admin
+      select:
+        filter: null
+

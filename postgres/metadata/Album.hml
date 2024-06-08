@@ -1,0 +1,138 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Album
+  fields:
+    - name: albumId
+      type: Int4!
+    - name: artistId
+      type: Int4!
+    - name: title
+      type: Varchar!
+  graphql:
+    typeName: Postgres_Album
+    inputTypeName: Postgres_AlbumInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: postgres
+      dataConnectorObjectType: album
+      fieldMapping:
+        albumId:
+          column:
+            name: album_id
+        artistId:
+          column:
+            name: artist_id
+        title:
+          column:
+            name: title
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Album
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - albumId
+          - artistId
+          - title
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: AlbumBoolExp
+  objectType: Album
+  dataConnectorName: postgres
+  dataConnectorObjectType: album
+  comparableFields:
+    - fieldName: albumId
+      operators:
+        enableAll: true
+    - fieldName: artistId
+      operators:
+        enableAll: true
+    - fieldName: title
+      operators:
+        enableAll: true
+  graphql:
+    typeName: Postgres_AlbumBoolExp
+
+---
+kind: Model
+version: v1
+definition:
+  name: Album
+  objectType: Album
+  source:
+    dataConnectorName: postgres
+    collection: album
+  filterExpressionType: AlbumBoolExp
+  orderableFields:
+    - fieldName: albumId
+      orderByDirections:
+        enableAll: true
+    - fieldName: artistId
+      orderByDirections:
+        enableAll: true
+    - fieldName: title
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: postgres_album
+    selectUniques:
+      - queryRootField: postgres_albumByAlbumId
+        uniqueIdentifier:
+          - albumId
+    orderByExpressionType: Postgres_AlbumOrderBy
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Album
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: artist
+  sourceType: Album
+  target:
+    model:
+      name: Artist
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: artistId
+      target:
+        modelField:
+          - fieldName: artistId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: tracks
+  sourceType: Album
+  target:
+    model:
+      name: Track
+      relationshipType: Array
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: albumId
+      target:
+        modelField:
+          - fieldName: albumId
+

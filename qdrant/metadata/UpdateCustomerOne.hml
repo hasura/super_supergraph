@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateCustomerOne
+  outputType: Json!
+  arguments:
+    - name: object
+      type: CustomerInsertType!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: update_customer_one
+  graphql:
+    rootFieldName: qdrant_updateCustomerOne
+    rootFieldKind: Mutation
+  description: Update a single record from the customer collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateCustomerOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteArticleMany
+  outputType: Json!
+  arguments:
+    - name: ids
+      type: "[Int!]!"
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: delete_article_many
+  graphql:
+    rootFieldName: qdrant_deleteArticleMany
+    rootFieldKind: Mutation
+  description: Delete multiple records from the article collection using their IDs
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteArticleMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

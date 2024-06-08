@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpdatePlaylistMany
+  outputType: Json!
+  arguments:
+    - name: objects
+      type: "[PlaylistInsertType!]!"
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: update_playlist_many
+  graphql:
+    rootFieldName: qdrant_updatePlaylistMany
+    rootFieldKind: Mutation
+  description: Update multiple records in the playlist collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdatePlaylistMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

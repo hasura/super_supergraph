@@ -1,0 +1,28 @@
+---
+kind: Command
+version: v1
+definition:
+  name: InsertMediaTypeMany
+  outputType: "[MediaTypeInsertType!]!"
+  arguments:
+    - name: objects
+      type: "[MediaTypeInsertType!]!"
+      description: The records to insert into the media_type
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: insert_media_type_many
+  graphql:
+    rootFieldName: turso_insertMediaTypeMany
+    rootFieldKind: Mutation
+  description: Insert multiple records into the media_type collection.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertMediaTypeMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

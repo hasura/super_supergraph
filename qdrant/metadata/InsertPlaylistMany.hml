@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: InsertPlaylistMany
+  outputType: Json!
+  arguments:
+    - name: objects
+      type: "[PlaylistInsertType!]!"
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: insert_playlist_many
+  graphql:
+    rootFieldName: qdrant_insertPlaylistMany
+    rootFieldKind: Mutation
+  description: Insert multiple records into the playlist collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertPlaylistMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

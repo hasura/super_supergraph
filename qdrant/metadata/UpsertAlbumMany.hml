@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpsertAlbumMany
+  outputType: Json!
+  arguments:
+    - name: objects
+      type: "[AlbumInsertType!]!"
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: upsert_album_many
+  graphql:
+    rootFieldName: qdrant_upsertAlbumMany
+    rootFieldKind: Mutation
+  description: Upsert multiple records into the album collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpsertAlbumMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

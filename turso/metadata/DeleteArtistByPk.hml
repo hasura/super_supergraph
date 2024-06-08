@@ -1,0 +1,30 @@
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteArtistByPk
+  outputType: "[ArtistInsertType!]!"
+  arguments:
+    - name: pkColumns
+      type: ArtistPkColumnsType!
+      description: The primary key columns of the record to delete in the artist
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: delete_artist_by_pk
+    argumentMapping:
+      pkColumns: pk_columns
+  graphql:
+    rootFieldName: turso_deleteArtistByPk
+    rootFieldKind: Mutation
+  description: Delete a single record from the artist collection by primary key.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteArtistByPk
+  permissions:
+    - role: admin
+      allowExecution: true
+

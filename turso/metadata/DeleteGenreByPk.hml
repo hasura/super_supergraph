@@ -1,0 +1,30 @@
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteGenreByPk
+  outputType: "[GenreInsertType!]!"
+  arguments:
+    - name: pkColumns
+      type: GenrePkColumnsType!
+      description: The primary key columns of the record to delete in the genre
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: delete_genre_by_pk
+    argumentMapping:
+      pkColumns: pk_columns
+  graphql:
+    rootFieldName: turso_deleteGenreByPk
+    rootFieldKind: Mutation
+  description: Delete a single record from the genre collection by primary key.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteGenreByPk
+  permissions:
+    - role: admin
+      allowExecution: true
+

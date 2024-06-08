@@ -1,0 +1,87 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: ChinookMainPlaylist
+  fields:
+    - name: name
+      type: String!
+    - name: playlistId
+      type: Int!
+  graphql:
+    typeName: Duckdb_ChinookMainPlaylist
+    inputTypeName: Duckdb_ChinookMainPlaylistInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: duckdb
+      dataConnectorObjectType: chinook_main_playlist
+      fieldMapping:
+        name:
+          column:
+            name: name
+        playlistId:
+          column:
+            name: playlist_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: ChinookMainPlaylist
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - name
+          - playlistId
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: ChinookMainPlaylistBoolExp
+  objectType: ChinookMainPlaylist
+  dataConnectorName: duckdb
+  dataConnectorObjectType: chinook_main_playlist
+  comparableFields:
+    - fieldName: name
+      operators:
+        enableAll: true
+    - fieldName: playlistId
+      operators:
+        enableAll: true
+  graphql:
+    typeName: Duckdb_ChinookMainPlaylistBoolExp
+
+---
+kind: Model
+version: v1
+definition:
+  name: ChinookMainPlaylist
+  objectType: ChinookMainPlaylist
+  source:
+    dataConnectorName: duckdb
+    collection: chinook_main_playlist
+  filterExpressionType: ChinookMainPlaylistBoolExp
+  orderableFields:
+    - fieldName: name
+      orderByDirections:
+        enableAll: true
+    - fieldName: playlistId
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: duckdb_chinookMainPlaylist
+    selectUniques: []
+    orderByExpressionType: Duckdb_ChinookMainPlaylistOrderBy
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: ChinookMainPlaylist
+  permissions:
+    - role: admin
+      select:
+        filter: null
+

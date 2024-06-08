@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpsertBooleanMany
+  outputType: Json!
+  arguments:
+    - name: objects
+      type: "[BooleanInsertType!]!"
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: upsert_boolean_many
+  graphql:
+    rootFieldName: qdrant_upsertBooleanMany
+    rootFieldKind: Mutation
+  description: Upsert multiple records into the boolean collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpsertBooleanMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

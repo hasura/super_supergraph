@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteCustomerOne
+  outputType: Json!
+  arguments:
+    - name: id
+      type: String!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: delete_customer_one
+  graphql:
+    rootFieldName: qdrant_deleteCustomerOne
+    rootFieldKind: Mutation
+  description: Delete a single record from the customer collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteCustomerOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

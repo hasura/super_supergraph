@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpdatePlaylistOne
+  outputType: Json!
+  arguments:
+    - name: object
+      type: PlaylistInsertType!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: update_playlist_one
+  graphql:
+    rootFieldName: qdrant_updatePlaylistOne
+    rootFieldKind: Mutation
+  description: Update a single record from the playlist collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdatePlaylistOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

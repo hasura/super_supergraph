@@ -1,0 +1,149 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: AlbumIncType
+  description: Numeric fields to increment for album
+  fields:
+    - name: albumId
+      type: Int
+    - name: artistId
+      type: Int
+  graphql:
+    typeName: Turso_AlbumIncType
+    inputTypeName: Turso_AlbumIncTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: album_IncType
+      fieldMapping:
+        albumId:
+          column:
+            name: album_id
+        artistId:
+          column:
+            name: artist_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: AlbumIncType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - albumId
+          - artistId
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: AlbumSetType
+  description: Fields to set for album
+  fields:
+    - name: albumId
+      type: Int
+    - name: artistId
+      type: Int
+    - name: title
+      type: String
+  graphql:
+    typeName: Turso_AlbumSetType
+    inputTypeName: Turso_AlbumSetTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: album_SetType
+      fieldMapping:
+        albumId:
+          column:
+            name: album_id
+        artistId:
+          column:
+            name: artist_id
+        title:
+          column:
+            name: title
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: AlbumSetType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - albumId
+          - artistId
+          - title
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: AlbumPkColumnsType
+  description: Primary key columns for album
+  fields:
+    - name: albumId
+      type: Int!
+  graphql:
+    typeName: Turso_AlbumPkColumnsType
+    inputTypeName: Turso_AlbumPkColumnsTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: album_PKColumnsType
+      fieldMapping:
+        albumId:
+          column:
+            name: album_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: AlbumPkColumnsType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - albumId
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateAlbumByPk
+  outputType: "[AlbumInsertType!]!"
+  arguments:
+    - name: inc
+      type: AlbumIncType
+      description: The numeric fields to increment for the album
+    - name: set
+      type: AlbumSetType
+      description: The fields to set for the album
+    - name: pkColumns
+      type: AlbumPkColumnsType!
+      description: The primary key columns of the record to update in the album
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: update_album_by_pk
+    argumentMapping:
+      inc: _inc
+      set: _set
+      pkColumns: pk_columns
+  graphql:
+    rootFieldName: turso_updateAlbumByPk
+    rootFieldKind: Mutation
+  description: Update a single record in the album collection by primary key.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateAlbumByPk
+  permissions:
+    - role: admin
+      allowExecution: true
+

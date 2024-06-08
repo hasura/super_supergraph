@@ -1,0 +1,93 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: AlbumInsertType
+  fields:
+    - name: albumId
+      type: Int
+    - name: artistId
+      type: Int
+    - name: document
+      type: String
+    - name: id
+      type: String!
+    - name: title
+      type: String
+    - name: vectorNames
+      type: "[String!]!"
+    - name: vectors
+      type: "[[Float!]!]!"
+  graphql:
+    typeName: Qdrant_AlbumInsertType
+    inputTypeName: Qdrant_AlbumInsertTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: qdrant
+      dataConnectorObjectType: album_InsertType
+      fieldMapping:
+        albumId:
+          column:
+            name: album_id
+        artistId:
+          column:
+            name: artist_id
+        document:
+          column:
+            name: document
+        id:
+          column:
+            name: id
+        title:
+          column:
+            name: title
+        vectorNames:
+          column:
+            name: vector_names
+        vectors:
+          column:
+            name: vectors
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: AlbumInsertType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - albumId
+          - artistId
+          - document
+          - id
+          - title
+          - vectorNames
+          - vectors
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertAlbumOne
+  outputType: Json!
+  arguments:
+    - name: object
+      type: AlbumInsertType!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: insert_album_one
+  graphql:
+    rootFieldName: qdrant_insertAlbumOne
+    rootFieldKind: Mutation
+  description: Insert a single record into the album collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertAlbumOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

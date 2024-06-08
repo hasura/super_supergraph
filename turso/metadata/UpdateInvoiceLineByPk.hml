@@ -1,0 +1,179 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InvoiceLineIncType
+  description: Numeric fields to increment for invoice_line
+  fields:
+    - name: invoiceId
+      type: Int
+    - name: invoiceLineId
+      type: Int
+    - name: quantity
+      type: Int
+    - name: trackId
+      type: Int
+    - name: unitPrice
+      type: Float
+  graphql:
+    typeName: Turso_InvoiceLineIncType
+    inputTypeName: Turso_InvoiceLineIncTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: invoice_line_IncType
+      fieldMapping:
+        invoiceId:
+          column:
+            name: invoice_id
+        invoiceLineId:
+          column:
+            name: invoice_line_id
+        quantity:
+          column:
+            name: quantity
+        trackId:
+          column:
+            name: track_id
+        unitPrice:
+          column:
+            name: unit_price
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InvoiceLineIncType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - invoiceId
+          - invoiceLineId
+          - quantity
+          - trackId
+          - unitPrice
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InvoiceLineSetType
+  description: Fields to set for invoice_line
+  fields:
+    - name: invoiceId
+      type: Int
+    - name: invoiceLineId
+      type: Int
+    - name: quantity
+      type: Int
+    - name: trackId
+      type: Int
+    - name: unitPrice
+      type: Float
+  graphql:
+    typeName: Turso_InvoiceLineSetType
+    inputTypeName: Turso_InvoiceLineSetTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: invoice_line_SetType
+      fieldMapping:
+        invoiceId:
+          column:
+            name: invoice_id
+        invoiceLineId:
+          column:
+            name: invoice_line_id
+        quantity:
+          column:
+            name: quantity
+        trackId:
+          column:
+            name: track_id
+        unitPrice:
+          column:
+            name: unit_price
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InvoiceLineSetType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - invoiceId
+          - invoiceLineId
+          - quantity
+          - trackId
+          - unitPrice
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InvoiceLinePkColumnsType
+  description: Primary key columns for invoice_line
+  fields:
+    - name: invoiceLineId
+      type: Int!
+  graphql:
+    typeName: Turso_InvoiceLinePkColumnsType
+    inputTypeName: Turso_InvoiceLinePkColumnsTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: invoice_line_PKColumnsType
+      fieldMapping:
+        invoiceLineId:
+          column:
+            name: invoice_line_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InvoiceLinePkColumnsType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - invoiceLineId
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateInvoiceLineByPk
+  outputType: "[InvoiceLineInsertType!]!"
+  arguments:
+    - name: inc
+      type: InvoiceLineIncType
+      description: The numeric fields to increment for the invoice_line
+    - name: set
+      type: InvoiceLineSetType
+      description: The fields to set for the invoice_line
+    - name: pkColumns
+      type: InvoiceLinePkColumnsType!
+      description: The primary key columns of the record to update in the invoice_line
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: update_invoice_line_by_pk
+    argumentMapping:
+      inc: _inc
+      set: _set
+      pkColumns: pk_columns
+  graphql:
+    rootFieldName: turso_updateInvoiceLineByPk
+    rootFieldKind: Mutation
+  description: Update a single record in the invoice_line collection by primary key.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateInvoiceLineByPk
+  permissions:
+    - role: admin
+      allowExecution: true
+

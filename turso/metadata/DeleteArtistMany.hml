@@ -1,0 +1,33 @@
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteArtistMany
+  outputType: "[ArtistInsertType!]!"
+  arguments:
+    - name: pkColumnsArray
+      type: "[ArtistPkColumnsType!]!"
+      description: An array of primary key structures for the records to delete in the
+        artist. Each item in the array represents a condition that identifies
+        one or more records to be deleted.
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: delete_artist_many
+    argumentMapping:
+      pkColumnsArray: pk_columns_array
+  graphql:
+    rootFieldName: turso_deleteArtistMany
+    rootFieldKind: Mutation
+  description: Delete multiple records from the artist collection based on primary
+    key conditions.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteArtistMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

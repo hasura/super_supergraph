@@ -1,0 +1,24 @@
+---
+kind: Command
+version: v1
+definition:
+  name: Sync
+  outputType: Int!
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: sync
+  graphql:
+    rootFieldName: turso_sync
+    rootFieldKind: Mutation
+  description: Sync the Local Database file with the Remote Primary Database
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: Sync
+  permissions:
+    - role: admin
+      allowExecution: true
+

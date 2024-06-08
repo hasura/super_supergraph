@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateEmployeeOne
+  outputType: Json!
+  arguments:
+    - name: object
+      type: EmployeeInsertType!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: update_employee_one
+  graphql:
+    rootFieldName: qdrant_updateEmployeeOne
+    rootFieldKind: Mutation
+  description: Update a single record from the employee collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateEmployeeOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

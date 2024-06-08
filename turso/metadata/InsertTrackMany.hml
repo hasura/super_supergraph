@@ -1,0 +1,28 @@
+---
+kind: Command
+version: v1
+definition:
+  name: InsertTrackMany
+  outputType: "[TrackInsertType!]!"
+  arguments:
+    - name: objects
+      type: "[TrackInsertType!]!"
+      description: The records to insert into the track
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: insert_track_many
+  graphql:
+    rootFieldName: turso_insertTrackMany
+    rootFieldKind: Mutation
+  description: Insert multiple records into the track collection.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertTrackMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

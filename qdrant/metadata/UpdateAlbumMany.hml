@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateAlbumMany
+  outputType: Json!
+  arguments:
+    - name: objects
+      type: "[AlbumInsertType!]!"
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: update_album_many
+  graphql:
+    rootFieldName: qdrant_updateAlbumMany
+    rootFieldKind: Mutation
+  description: Update multiple records in the album collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateAlbumMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

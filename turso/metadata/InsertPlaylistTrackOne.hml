@@ -1,0 +1,65 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: PlaylistTrackInsertType
+  description: Insert type for playlist_track
+  fields:
+    - name: playlistId
+      type: Int!
+    - name: trackId
+      type: Int!
+  graphql:
+    typeName: Turso_PlaylistTrackInsertType
+    inputTypeName: Turso_PlaylistTrackInsertTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: playlist_track_InsertType
+      fieldMapping:
+        playlistId:
+          column:
+            name: playlist_id
+        trackId:
+          column:
+            name: track_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: PlaylistTrackInsertType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - playlistId
+          - trackId
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertPlaylistTrackOne
+  outputType: "[PlaylistTrackInsertType!]!"
+  arguments:
+    - name: object
+      type: PlaylistTrackInsertType!
+      description: The record to insert into the playlist_track
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: insert_playlist_track_one
+  graphql:
+    rootFieldName: turso_insertPlaylistTrackOne
+    rootFieldKind: Mutation
+  description: Insert a single record into the playlist_track collection.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertPlaylistTrackOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

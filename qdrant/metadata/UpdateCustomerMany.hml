@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateCustomerMany
+  outputType: Json!
+  arguments:
+    - name: objects
+      type: "[CustomerInsertType!]!"
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: update_customer_many
+  graphql:
+    rootFieldName: qdrant_updateCustomerMany
+    rootFieldKind: Mutation
+  description: Update multiple records in the customer collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateCustomerMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

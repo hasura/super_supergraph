@@ -1,0 +1,30 @@
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteMediaTypeByPk
+  outputType: "[MediaTypeInsertType!]!"
+  arguments:
+    - name: pkColumns
+      type: MediaTypePkColumnsType!
+      description: The primary key columns of the record to delete in the media_type
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: delete_media_type_by_pk
+    argumentMapping:
+      pkColumns: pk_columns
+  graphql:
+    rootFieldName: turso_deleteMediaTypeByPk
+    rootFieldKind: Mutation
+  description: Delete a single record from the media_type collection by primary key.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteMediaTypeByPk
+  permissions:
+    - role: admin
+      allowExecution: true
+

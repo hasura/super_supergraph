@@ -1,0 +1,144 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Artist
+  fields:
+    - name: artistId
+      type: Int
+    - name: document
+      type: String
+    - name: id
+      type: String!
+    - name: name
+      type: String
+    - name: score
+      type: Float
+    - name: vector
+      type: "[Float!]"
+  graphql:
+    typeName: Qdrant_Artist
+    inputTypeName: Qdrant_ArtistInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: qdrant
+      dataConnectorObjectType: artist
+      fieldMapping:
+        artistId:
+          column:
+            name: artist_id
+        document:
+          column:
+            name: document
+        id:
+          column:
+            name: id
+        name:
+          column:
+            name: name
+        score:
+          column:
+            name: score
+        vector:
+          column:
+            name: vector
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Artist
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - artistId
+          - document
+          - id
+          - name
+          - score
+          - vector
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: ArtistBoolExp
+  objectType: Artist
+  dataConnectorName: qdrant
+  dataConnectorObjectType: artist
+  comparableFields:
+    - fieldName: artistId
+      operators:
+        enableAll: true
+    - fieldName: document
+      operators:
+        enableAll: true
+    - fieldName: id
+      operators:
+        enableAll: true
+    - fieldName: name
+      operators:
+        enableAll: true
+    - fieldName: score
+      operators:
+        enableAll: true
+    - fieldName: vector
+      operators:
+        enableAll: true
+  graphql:
+    typeName: Qdrant_ArtistBoolExp
+
+---
+kind: Model
+version: v1
+definition:
+  name: Artist
+  objectType: Artist
+  arguments:
+    - name: recommend
+      type: RecommendStringVector
+    - name: search
+      type: SearchVector
+  source:
+    dataConnectorName: qdrant
+    collection: artist
+  filterExpressionType: ArtistBoolExp
+  orderableFields:
+    - fieldName: artistId
+      orderByDirections:
+        enableAll: true
+    - fieldName: document
+      orderByDirections:
+        enableAll: true
+    - fieldName: id
+      orderByDirections:
+        enableAll: true
+    - fieldName: name
+      orderByDirections:
+        enableAll: true
+    - fieldName: score
+      orderByDirections:
+        enableAll: true
+    - fieldName: vector
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: qdrant_artist
+    selectUniques:
+      - queryRootField: qdrant_artistById
+        uniqueIdentifier:
+          - id
+    argumentsInputType: Qdrant_ArtistArguments
+    orderByExpressionType: Qdrant_ArtistOrderBy
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Artist
+  permissions:
+    - role: admin
+      select:
+        filter: null
+

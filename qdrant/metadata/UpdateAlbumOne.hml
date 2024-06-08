@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateAlbumOne
+  outputType: Json!
+  arguments:
+    - name: object
+      type: AlbumInsertType!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: update_album_one
+  graphql:
+    rootFieldName: qdrant_updateAlbumOne
+    rootFieldKind: Mutation
+  description: Update a single record from the album collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateAlbumOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

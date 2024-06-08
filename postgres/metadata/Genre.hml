@@ -1,0 +1,108 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Genre
+  fields:
+    - name: genreId
+      type: Int4!
+    - name: name
+      type: Varchar
+  graphql:
+    typeName: Postgres_Genre
+    inputTypeName: Postgres_GenreInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: postgres
+      dataConnectorObjectType: genre
+      fieldMapping:
+        genreId:
+          column:
+            name: genre_id
+        name:
+          column:
+            name: name
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Genre
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - genreId
+          - name
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: GenreBoolExp
+  objectType: Genre
+  dataConnectorName: postgres
+  dataConnectorObjectType: genre
+  comparableFields:
+    - fieldName: genreId
+      operators:
+        enableAll: true
+    - fieldName: name
+      operators:
+        enableAll: true
+  graphql:
+    typeName: Postgres_GenreBoolExp
+
+---
+kind: Model
+version: v1
+definition:
+  name: Genre
+  objectType: Genre
+  source:
+    dataConnectorName: postgres
+    collection: genre
+  filterExpressionType: GenreBoolExp
+  orderableFields:
+    - fieldName: genreId
+      orderByDirections:
+        enableAll: true
+    - fieldName: name
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: postgres_genre
+    selectUniques:
+      - queryRootField: postgres_genreByGenreId
+        uniqueIdentifier:
+          - genreId
+    orderByExpressionType: Postgres_GenreOrderBy
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Genre
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: tracks
+  sourceType: Genre
+  target:
+    model:
+      name: Track
+      relationshipType: Array
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: genreId
+      target:
+        modelField:
+          - fieldName: genreId
+

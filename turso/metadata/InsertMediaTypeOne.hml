@@ -1,0 +1,65 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: MediaTypeInsertType
+  description: Insert type for media_type
+  fields:
+    - name: mediaTypeId
+      type: Int!
+    - name: name
+      type: String
+  graphql:
+    typeName: Turso_MediaTypeInsertType
+    inputTypeName: Turso_MediaTypeInsertTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: media_type_InsertType
+      fieldMapping:
+        mediaTypeId:
+          column:
+            name: media_type_id
+        name:
+          column:
+            name: name
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: MediaTypeInsertType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - mediaTypeId
+          - name
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertMediaTypeOne
+  outputType: "[MediaTypeInsertType!]!"
+  arguments:
+    - name: object
+      type: MediaTypeInsertType!
+      description: The record to insert into the media_type
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: insert_media_type_one
+  graphql:
+    rootFieldName: turso_insertMediaTypeOne
+    rootFieldKind: Mutation
+  description: Insert a single record into the media_type collection.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertMediaTypeOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

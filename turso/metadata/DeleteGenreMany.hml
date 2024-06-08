@@ -1,0 +1,33 @@
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteGenreMany
+  outputType: "[GenreInsertType!]!"
+  arguments:
+    - name: pkColumnsArray
+      type: "[GenrePkColumnsType!]!"
+      description: An array of primary key structures for the records to delete in the
+        genre. Each item in the array represents a condition that identifies one
+        or more records to be deleted.
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: delete_genre_many
+    argumentMapping:
+      pkColumnsArray: pk_columns_array
+  graphql:
+    rootFieldName: turso_deleteGenreMany
+    rootFieldKind: Mutation
+  description: Delete multiple records from the genre collection based on primary
+    key conditions.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteGenreMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,8 @@
+kind: Connector
+version: v1
+definition:
+  name: turso
+  subgraph: turso
+  source: hasura/turso:v0.0.14
+  context: .
+  envFile: .env.local

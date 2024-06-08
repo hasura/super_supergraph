@@ -1,0 +1,99 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Playlist
+  fields:
+    - name: id
+      type: ObjectId
+    - name: name
+      type: String
+    - name: playlistId
+      type: Int
+  graphql:
+    typeName: Mongo_Playlist
+    inputTypeName: Mongo_PlaylistInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: mongo
+      dataConnectorObjectType: playlist
+      fieldMapping:
+        id:
+          column:
+            name: _id
+        name:
+          column:
+            name: name
+        playlistId:
+          column:
+            name: playlist_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Playlist
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - id
+          - name
+          - playlistId
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: PlaylistBoolExp
+  objectType: Playlist
+  dataConnectorName: mongo
+  dataConnectorObjectType: playlist
+  comparableFields:
+    - fieldName: id
+      operators:
+        enableAll: true
+    - fieldName: name
+      operators:
+        enableAll: true
+    - fieldName: playlistId
+      operators:
+        enableAll: true
+  graphql:
+    typeName: Mongo_PlaylistBoolExp
+
+---
+kind: Model
+version: v1
+definition:
+  name: Playlist
+  objectType: Playlist
+  source:
+    dataConnectorName: mongo
+    collection: playlist
+  filterExpressionType: PlaylistBoolExp
+  orderableFields:
+    - fieldName: id
+      orderByDirections:
+        enableAll: true
+    - fieldName: name
+      orderByDirections:
+        enableAll: true
+    - fieldName: playlistId
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: mongo_playlist
+    selectUniques: []
+    orderByExpressionType: Mongo_PlaylistOrderBy
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Playlist
+  permissions:
+    - role: admin
+      select:
+        filter: null
+

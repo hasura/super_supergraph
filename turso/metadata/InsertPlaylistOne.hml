@@ -1,0 +1,65 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: PlaylistInsertType
+  description: Insert type for playlist
+  fields:
+    - name: name
+      type: String
+    - name: playlistId
+      type: Int!
+  graphql:
+    typeName: Turso_PlaylistInsertType
+    inputTypeName: Turso_PlaylistInsertTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: playlist_InsertType
+      fieldMapping:
+        name:
+          column:
+            name: name
+        playlistId:
+          column:
+            name: playlist_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: PlaylistInsertType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - name
+          - playlistId
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertPlaylistOne
+  outputType: "[PlaylistInsertType!]!"
+  arguments:
+    - name: object
+      type: PlaylistInsertType!
+      description: The record to insert into the playlist
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: insert_playlist_one
+  graphql:
+    rootFieldName: turso_insertPlaylistOne
+    rootFieldKind: Mutation
+  description: Insert a single record into the playlist collection.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertPlaylistOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

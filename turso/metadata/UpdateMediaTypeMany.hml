@@ -1,0 +1,40 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateMediaTypeMany
+  outputType: "[MediaTypeInsertType!]!"
+  arguments:
+    - name: incArray
+      type: "[MediaTypeIncType!]!"
+      description: An array of _inc objects for incrementing fields in the media_type
+    - name: setArray
+      type: "[MediaTypeSetType!]!"
+      description: An array of _set objects for updating the media_type
+    - name: pkColumnsArray
+      type: "[MediaTypePkColumnsType!]!"
+      description: An array of primary key structures for the records to update in the
+        media_type
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: update_media_type_many
+    argumentMapping:
+      incArray: _inc_array
+      setArray: _set_array
+      pkColumnsArray: pk_columns_array
+  graphql:
+    rootFieldName: turso_updateMediaTypeMany
+    rootFieldKind: Mutation
+  description: Update multiple records in the media_type collection, with separate
+    arrays for PKs, _set, and _inc.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateMediaTypeMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

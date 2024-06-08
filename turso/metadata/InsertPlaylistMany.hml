@@ -1,0 +1,28 @@
+---
+kind: Command
+version: v1
+definition:
+  name: InsertPlaylistMany
+  outputType: "[PlaylistInsertType!]!"
+  arguments:
+    - name: objects
+      type: "[PlaylistInsertType!]!"
+      description: The records to insert into the playlist
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: insert_playlist_many
+  graphql:
+    rootFieldName: turso_insertPlaylistMany
+    rootFieldKind: Mutation
+  description: Insert multiple records into the playlist collection.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertPlaylistMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

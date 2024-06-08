@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteMediaTypeOne
+  outputType: Json!
+  arguments:
+    - name: id
+      type: String!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: delete_media_type_one
+  graphql:
+    rootFieldName: qdrant_deleteMediaTypeOne
+    rootFieldKind: Mutation
+  description: Delete a single record from the media_type collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteMediaTypeOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

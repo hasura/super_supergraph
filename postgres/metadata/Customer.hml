@@ -1,0 +1,258 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Customer
+  fields:
+    - name: address
+      type: Varchar
+    - name: city
+      type: Varchar
+    - name: company
+      type: Varchar
+    - name: country
+      type: Varchar
+    - name: customerId
+      type: Int4!
+    - name: email
+      type: Varchar!
+    - name: fax
+      type: Varchar
+    - name: firstName
+      type: Varchar!
+    - name: lastName
+      type: Varchar!
+    - name: phone
+      type: Varchar
+    - name: postalCode
+      type: Varchar
+    - name: state
+      type: Varchar
+    - name: supportRepId
+      type: Int4
+  graphql:
+    typeName: Postgres_Customer
+    inputTypeName: Postgres_CustomerInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: postgres
+      dataConnectorObjectType: customer
+      fieldMapping:
+        address:
+          column:
+            name: address
+        city:
+          column:
+            name: city
+        company:
+          column:
+            name: company
+        country:
+          column:
+            name: country
+        customerId:
+          column:
+            name: customer_id
+        email:
+          column:
+            name: email
+        fax:
+          column:
+            name: fax
+        firstName:
+          column:
+            name: first_name
+        lastName:
+          column:
+            name: last_name
+        phone:
+          column:
+            name: phone
+        postalCode:
+          column:
+            name: postal_code
+        state:
+          column:
+            name: state
+        supportRepId:
+          column:
+            name: support_rep_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Customer
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - address
+          - city
+          - company
+          - country
+          - customerId
+          - email
+          - fax
+          - firstName
+          - lastName
+          - phone
+          - postalCode
+          - state
+          - supportRepId
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: CustomerBoolExp
+  objectType: Customer
+  dataConnectorName: postgres
+  dataConnectorObjectType: customer
+  comparableFields:
+    - fieldName: address
+      operators:
+        enableAll: true
+    - fieldName: city
+      operators:
+        enableAll: true
+    - fieldName: company
+      operators:
+        enableAll: true
+    - fieldName: country
+      operators:
+        enableAll: true
+    - fieldName: customerId
+      operators:
+        enableAll: true
+    - fieldName: email
+      operators:
+        enableAll: true
+    - fieldName: fax
+      operators:
+        enableAll: true
+    - fieldName: firstName
+      operators:
+        enableAll: true
+    - fieldName: lastName
+      operators:
+        enableAll: true
+    - fieldName: phone
+      operators:
+        enableAll: true
+    - fieldName: postalCode
+      operators:
+        enableAll: true
+    - fieldName: state
+      operators:
+        enableAll: true
+    - fieldName: supportRepId
+      operators:
+        enableAll: true
+  graphql:
+    typeName: Postgres_CustomerBoolExp
+
+---
+kind: Model
+version: v1
+definition:
+  name: Customer
+  objectType: Customer
+  source:
+    dataConnectorName: postgres
+    collection: customer
+  filterExpressionType: CustomerBoolExp
+  orderableFields:
+    - fieldName: address
+      orderByDirections:
+        enableAll: true
+    - fieldName: city
+      orderByDirections:
+        enableAll: true
+    - fieldName: company
+      orderByDirections:
+        enableAll: true
+    - fieldName: country
+      orderByDirections:
+        enableAll: true
+    - fieldName: customerId
+      orderByDirections:
+        enableAll: true
+    - fieldName: email
+      orderByDirections:
+        enableAll: true
+    - fieldName: fax
+      orderByDirections:
+        enableAll: true
+    - fieldName: firstName
+      orderByDirections:
+        enableAll: true
+    - fieldName: lastName
+      orderByDirections:
+        enableAll: true
+    - fieldName: phone
+      orderByDirections:
+        enableAll: true
+    - fieldName: postalCode
+      orderByDirections:
+        enableAll: true
+    - fieldName: state
+      orderByDirections:
+        enableAll: true
+    - fieldName: supportRepId
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: postgres_customer
+    selectUniques:
+      - queryRootField: postgres_customerByCustomerId
+        uniqueIdentifier:
+          - customerId
+    orderByExpressionType: Postgres_CustomerOrderBy
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Customer
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: employee
+  sourceType: Customer
+  target:
+    model:
+      name: Employee
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: supportRepId
+      target:
+        modelField:
+          - fieldName: employeeId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: invoices
+  sourceType: Customer
+  target:
+    model:
+      name: Invoice
+      relationshipType: Array
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: customerId
+      target:
+        modelField:
+          - fieldName: customerId
+

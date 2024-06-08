@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: InsertMediaTypeMany
+  outputType: Json!
+  arguments:
+    - name: objects
+      type: "[MediaTypeInsertType!]!"
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: insert_media_type_many
+  graphql:
+    rootFieldName: qdrant_insertMediaTypeMany
+    rootFieldKind: Mutation
+  description: Insert multiple records into the media_type collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertMediaTypeMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

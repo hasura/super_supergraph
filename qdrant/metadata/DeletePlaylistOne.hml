@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: DeletePlaylistOne
+  outputType: Json!
+  arguments:
+    - name: id
+      type: String!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: delete_playlist_one
+  graphql:
+    rootFieldName: qdrant_deletePlaylistOne
+    rootFieldKind: Mutation
+  description: Delete a single record from the playlist collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeletePlaylistOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

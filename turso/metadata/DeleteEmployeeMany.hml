@@ -1,0 +1,33 @@
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteEmployeeMany
+  outputType: "[EmployeeInsertType!]!"
+  arguments:
+    - name: pkColumnsArray
+      type: "[EmployeePkColumnsType!]!"
+      description: An array of primary key structures for the records to delete in the
+        employee. Each item in the array represents a condition that identifies
+        one or more records to be deleted.
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: delete_employee_many
+    argumentMapping:
+      pkColumnsArray: pk_columns_array
+  graphql:
+    rootFieldName: turso_deleteEmployeeMany
+    rootFieldKind: Mutation
+  description: Delete multiple records from the employee collection based on
+    primary key conditions.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteEmployeeMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

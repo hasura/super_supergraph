@@ -1,0 +1,33 @@
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteAlbumMany
+  outputType: "[AlbumInsertType!]!"
+  arguments:
+    - name: pkColumnsArray
+      type: "[AlbumPkColumnsType!]!"
+      description: An array of primary key structures for the records to delete in the
+        album. Each item in the array represents a condition that identifies one
+        or more records to be deleted.
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: delete_album_many
+    argumentMapping:
+      pkColumnsArray: pk_columns_array
+  graphql:
+    rootFieldName: turso_deleteAlbumMany
+    rootFieldKind: Mutation
+  description: Delete multiple records from the album collection based on primary
+    key conditions.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteAlbumMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

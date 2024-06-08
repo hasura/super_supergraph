@@ -1,0 +1,87 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: MediaTypeInsertType
+  fields:
+    - name: document
+      type: String
+    - name: id
+      type: String!
+    - name: mediaTypeId
+      type: Int
+    - name: name
+      type: String
+    - name: vectorNames
+      type: "[String!]!"
+    - name: vectors
+      type: "[[Float!]!]!"
+  graphql:
+    typeName: Qdrant_MediaTypeInsertType
+    inputTypeName: Qdrant_MediaTypeInsertTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: qdrant
+      dataConnectorObjectType: media_type_InsertType
+      fieldMapping:
+        document:
+          column:
+            name: document
+        id:
+          column:
+            name: id
+        mediaTypeId:
+          column:
+            name: media_type_id
+        name:
+          column:
+            name: name
+        vectorNames:
+          column:
+            name: vector_names
+        vectors:
+          column:
+            name: vectors
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: MediaTypeInsertType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - document
+          - id
+          - mediaTypeId
+          - name
+          - vectorNames
+          - vectors
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertMediaTypeOne
+  outputType: Json!
+  arguments:
+    - name: object
+      type: MediaTypeInsertType!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: insert_media_type_one
+  graphql:
+    rootFieldName: qdrant_insertMediaTypeOne
+    rootFieldKind: Mutation
+  description: Insert a single record into the media_type collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertMediaTypeOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

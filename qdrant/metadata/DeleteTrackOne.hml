@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteTrackOne
+  outputType: Json!
+  arguments:
+    - name: id
+      type: String!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: delete_track_one
+  graphql:
+    rootFieldName: qdrant_deleteTrackOne
+    rootFieldKind: Mutation
+  description: Delete a single record from the track collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteTrackOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

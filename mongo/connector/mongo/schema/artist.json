@@ -1,0 +1,35 @@
+{
+  "name": "artist",
+  "collections": {
+    "artist": {
+      "type": "artist"
+    }
+  },
+  "objectTypes": {
+    "artist": {
+      "fields": {
+        "_id": {
+          "type": {
+            "nullable": {
+              "scalar": "objectId"
+            }
+          }
+        },
+        "artist_id": {
+          "type": {
+            "nullable": {
+              "scalar": "int"
+            }
+          }
+        },
+        "name": {
+          "type": {
+            "nullable": {
+              "scalar": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

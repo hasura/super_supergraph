@@ -1,0 +1,463 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Quantization
+  description: Quantization Parameters for Qdrant
+  fields:
+    - name: ignore
+      type: Bool
+    - name: oversampling
+      type: Float
+    - name: rescore
+      type: Bool
+  graphql:
+    typeName: Qdrant_Quantization
+    inputTypeName: Qdrant_QuantizationInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: qdrant
+      dataConnectorObjectType: _quantization
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Quantization
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - ignore
+          - oversampling
+          - rescore
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Params
+  description: Search parameters for Qdrant
+  fields:
+    - name: exact
+      type: Bool
+    - name: hnswEf
+      type: Int
+    - name: indexedOnly
+      type: Bool
+    - name: quantization
+      type: Quantization
+  graphql:
+    typeName: Qdrant_Params
+    inputTypeName: Qdrant_ParamsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: qdrant
+      dataConnectorObjectType: _params
+      fieldMapping:
+        exact:
+          column:
+            name: exact
+        hnswEf:
+          column:
+            name: hnsw_ef
+        indexedOnly:
+          column:
+            name: indexed_only
+        quantization:
+          column:
+            name: quantization
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Params
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - exact
+          - hnswEf
+          - indexedOnly
+          - quantization
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: RecommendStringVector
+  description: Provide an array of positive and negative example points and get a
+    recommendation
+  fields:
+    - name: negative
+      type: "[String!]"
+    - name: params
+      type: Params
+    - name: positive
+      type: "[String!]!"
+    - name: scoreThreshold
+      type: Float
+    - name: using
+      type: String!
+  graphql:
+    typeName: Qdrant_RecommendStringVector
+    inputTypeName: Qdrant_RecommendStringVectorInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: qdrant
+      dataConnectorObjectType: _recommendStringVector
+      fieldMapping:
+        negative:
+          column:
+            name: negative
+        params:
+          column:
+            name: params
+        positive:
+          column:
+            name: positive
+        scoreThreshold:
+          column:
+            name: score_threshold
+        using:
+          column:
+            name: using
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: RecommendStringVector
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - negative
+          - params
+          - positive
+          - scoreThreshold
+          - using
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: SearchVector
+  description: Search the vector database for similar vectors
+  fields:
+    - name: name
+      type: String!
+    - name: params
+      type: Params
+    - name: scoreThreshold
+      type: Float
+    - name: vector
+      type: "[Float!]!"
+  graphql:
+    typeName: Qdrant_SearchVector
+    inputTypeName: Qdrant_SearchVectorInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: qdrant
+      dataConnectorObjectType: _searchVector
+      fieldMapping:
+        name:
+          column:
+            name: name
+        params:
+          column:
+            name: params
+        scoreThreshold:
+          column:
+            name: score_threshold
+        vector:
+          column:
+            name: vector
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: SearchVector
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - name
+          - params
+          - scoreThreshold
+          - vector
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Customer
+  fields:
+    - name: address
+      type: String
+    - name: city
+      type: String
+    - name: company
+      type: Json!
+    - name: country
+      type: String
+    - name: customerId
+      type: Int
+    - name: document
+      type: String
+    - name: email
+      type: String
+    - name: fax
+      type: Json!
+    - name: firstName
+      type: String
+    - name: id
+      type: String!
+    - name: lastName
+      type: String
+    - name: phone
+      type: String
+    - name: postalCode
+      type: String
+    - name: score
+      type: Float
+    - name: state
+      type: Json!
+    - name: supportRepId
+      type: Int
+    - name: vector
+      type: "[Float!]"
+  graphql:
+    typeName: Qdrant_Customer
+    inputTypeName: Qdrant_CustomerInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: qdrant
+      dataConnectorObjectType: customer
+      fieldMapping:
+        address:
+          column:
+            name: address
+        city:
+          column:
+            name: city
+        company:
+          column:
+            name: company
+        country:
+          column:
+            name: country
+        customerId:
+          column:
+            name: customer_id
+        document:
+          column:
+            name: document
+        email:
+          column:
+            name: email
+        fax:
+          column:
+            name: fax
+        firstName:
+          column:
+            name: first_name
+        id:
+          column:
+            name: id
+        lastName:
+          column:
+            name: last_name
+        phone:
+          column:
+            name: phone
+        postalCode:
+          column:
+            name: postal_code
+        score:
+          column:
+            name: score
+        state:
+          column:
+            name: state
+        supportRepId:
+          column:
+            name: support_rep_id
+        vector:
+          column:
+            name: vector
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Customer
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - address
+          - city
+          - company
+          - country
+          - customerId
+          - document
+          - email
+          - fax
+          - firstName
+          - id
+          - lastName
+          - phone
+          - postalCode
+          - score
+          - state
+          - supportRepId
+          - vector
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: CustomerBoolExp
+  objectType: Customer
+  dataConnectorName: qdrant
+  dataConnectorObjectType: customer
+  comparableFields:
+    - fieldName: address
+      operators:
+        enableAll: true
+    - fieldName: city
+      operators:
+        enableAll: true
+    - fieldName: company
+      operators:
+        enableAll: true
+    - fieldName: country
+      operators:
+        enableAll: true
+    - fieldName: customerId
+      operators:
+        enableAll: true
+    - fieldName: document
+      operators:
+        enableAll: true
+    - fieldName: email
+      operators:
+        enableAll: true
+    - fieldName: fax
+      operators:
+        enableAll: true
+    - fieldName: firstName
+      operators:
+        enableAll: true
+    - fieldName: id
+      operators:
+        enableAll: true
+    - fieldName: lastName
+      operators:
+        enableAll: true
+    - fieldName: phone
+      operators:
+        enableAll: true
+    - fieldName: postalCode
+      operators:
+        enableAll: true
+    - fieldName: score
+      operators:
+        enableAll: true
+    - fieldName: state
+      operators:
+        enableAll: true
+    - fieldName: supportRepId
+      operators:
+        enableAll: true
+    - fieldName: vector
+      operators:
+        enableAll: true
+  graphql:
+    typeName: Qdrant_CustomerBoolExp
+
+---
+kind: Model
+version: v1
+definition:
+  name: Customer
+  objectType: Customer
+  arguments:
+    - name: recommend
+      type: RecommendStringVector
+    - name: search
+      type: SearchVector
+  source:
+    dataConnectorName: qdrant
+    collection: customer
+  filterExpressionType: CustomerBoolExp
+  orderableFields:
+    - fieldName: address
+      orderByDirections:
+        enableAll: true
+    - fieldName: city
+      orderByDirections:
+        enableAll: true
+    - fieldName: company
+      orderByDirections:
+        enableAll: true
+    - fieldName: country
+      orderByDirections:
+        enableAll: true
+    - fieldName: customerId
+      orderByDirections:
+        enableAll: true
+    - fieldName: document
+      orderByDirections:
+        enableAll: true
+    - fieldName: email
+      orderByDirections:
+        enableAll: true
+    - fieldName: fax
+      orderByDirections:
+        enableAll: true
+    - fieldName: firstName
+      orderByDirections:
+        enableAll: true
+    - fieldName: id
+      orderByDirections:
+        enableAll: true
+    - fieldName: lastName
+      orderByDirections:
+        enableAll: true
+    - fieldName: phone
+      orderByDirections:
+        enableAll: true
+    - fieldName: postalCode
+      orderByDirections:
+        enableAll: true
+    - fieldName: score
+      orderByDirections:
+        enableAll: true
+    - fieldName: state
+      orderByDirections:
+        enableAll: true
+    - fieldName: supportRepId
+      orderByDirections:
+        enableAll: true
+    - fieldName: vector
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: qdrant_customer
+    selectUniques:
+      - queryRootField: qdrant_customerById
+        uniqueIdentifier:
+          - id
+    argumentsInputType: Qdrant_CustomerArguments
+    orderByExpressionType: Qdrant_CustomerOrderBy
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Customer
+  permissions:
+    - role: admin
+      select:
+        filter: null
+

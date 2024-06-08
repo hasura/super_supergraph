@@ -1,0 +1,87 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: ChinookMainGenre
+  fields:
+    - name: genreId
+      type: Int!
+    - name: name
+      type: String!
+  graphql:
+    typeName: Duckdb_ChinookMainGenre
+    inputTypeName: Duckdb_ChinookMainGenreInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: duckdb
+      dataConnectorObjectType: chinook_main_genre
+      fieldMapping:
+        genreId:
+          column:
+            name: genre_id
+        name:
+          column:
+            name: name
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: ChinookMainGenre
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - genreId
+          - name
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: ChinookMainGenreBoolExp
+  objectType: ChinookMainGenre
+  dataConnectorName: duckdb
+  dataConnectorObjectType: chinook_main_genre
+  comparableFields:
+    - fieldName: genreId
+      operators:
+        enableAll: true
+    - fieldName: name
+      operators:
+        enableAll: true
+  graphql:
+    typeName: Duckdb_ChinookMainGenreBoolExp
+
+---
+kind: Model
+version: v1
+definition:
+  name: ChinookMainGenre
+  objectType: ChinookMainGenre
+  source:
+    dataConnectorName: duckdb
+    collection: chinook_main_genre
+  filterExpressionType: ChinookMainGenreBoolExp
+  orderableFields:
+    - fieldName: genreId
+      orderByDirections:
+        enableAll: true
+    - fieldName: name
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: duckdb_chinookMainGenre
+    selectUniques: []
+    orderByExpressionType: Duckdb_ChinookMainGenreOrderBy
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: ChinookMainGenre
+  permissions:
+    - role: admin
+      select:
+        filter: null
+

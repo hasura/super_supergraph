@@ -1,0 +1,87 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: PlaylistInsertType
+  fields:
+    - name: document
+      type: String
+    - name: id
+      type: String!
+    - name: name
+      type: String
+    - name: playlistId
+      type: Int
+    - name: vectorNames
+      type: "[String!]!"
+    - name: vectors
+      type: "[[Float!]!]!"
+  graphql:
+    typeName: Qdrant_PlaylistInsertType
+    inputTypeName: Qdrant_PlaylistInsertTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: qdrant
+      dataConnectorObjectType: playlist_InsertType
+      fieldMapping:
+        document:
+          column:
+            name: document
+        id:
+          column:
+            name: id
+        name:
+          column:
+            name: name
+        playlistId:
+          column:
+            name: playlist_id
+        vectorNames:
+          column:
+            name: vector_names
+        vectors:
+          column:
+            name: vectors
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: PlaylistInsertType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - document
+          - id
+          - name
+          - playlistId
+          - vectorNames
+          - vectors
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertPlaylistOne
+  outputType: Json!
+  arguments:
+    - name: object
+      type: PlaylistInsertType!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: insert_playlist_one
+  graphql:
+    rootFieldName: qdrant_insertPlaylistOne
+    rootFieldKind: Mutation
+  description: Insert a single record into the playlist collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertPlaylistOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

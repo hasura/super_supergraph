@@ -1,0 +1,137 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: GenreIncType
+  description: Numeric fields to increment for genre
+  fields:
+    - name: genreId
+      type: Int
+  graphql:
+    typeName: Turso_GenreIncType
+    inputTypeName: Turso_GenreIncTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: genre_IncType
+      fieldMapping:
+        genreId:
+          column:
+            name: genre_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: GenreIncType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - genreId
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: GenreSetType
+  description: Fields to set for genre
+  fields:
+    - name: genreId
+      type: Int
+    - name: name
+      type: String
+  graphql:
+    typeName: Turso_GenreSetType
+    inputTypeName: Turso_GenreSetTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: genre_SetType
+      fieldMapping:
+        genreId:
+          column:
+            name: genre_id
+        name:
+          column:
+            name: name
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: GenreSetType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - genreId
+          - name
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: GenrePkColumnsType
+  description: Primary key columns for genre
+  fields:
+    - name: genreId
+      type: Int!
+  graphql:
+    typeName: Turso_GenrePkColumnsType
+    inputTypeName: Turso_GenrePkColumnsTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: turso
+      dataConnectorObjectType: genre_PKColumnsType
+      fieldMapping:
+        genreId:
+          column:
+            name: genre_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: GenrePkColumnsType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - genreId
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateGenreByPk
+  outputType: "[GenreInsertType!]!"
+  arguments:
+    - name: inc
+      type: GenreIncType
+      description: The numeric fields to increment for the genre
+    - name: set
+      type: GenreSetType
+      description: The fields to set for the genre
+    - name: pkColumns
+      type: GenrePkColumnsType!
+      description: The primary key columns of the record to update in the genre
+  source:
+    dataConnectorName: turso
+    dataConnectorCommand:
+      procedure: update_genre_by_pk
+    argumentMapping:
+      inc: _inc
+      set: _set
+      pkColumns: pk_columns
+  graphql:
+    rootFieldName: turso_updateGenreByPk
+    rootFieldKind: Mutation
+  description: Update a single record in the genre collection by primary key.
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateGenreByPk
+  permissions:
+    - role: admin
+      allowExecution: true
+

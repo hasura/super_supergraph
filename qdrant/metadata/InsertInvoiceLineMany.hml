@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: InsertInvoiceLineMany
+  outputType: Json!
+  arguments:
+    - name: objects
+      type: "[InvoiceLineInsertType!]!"
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: insert_invoice_line_many
+  graphql:
+    rootFieldName: qdrant_insertInvoiceLineMany
+    rootFieldKind: Mutation
+  description: Insert multiple records into the invoice_line collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertInvoiceLineMany
+  permissions:
+    - role: admin
+      allowExecution: true
+

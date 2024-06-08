@@ -1,0 +1,129 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InvoiceInsertType
+  fields:
+    - name: billingAddress
+      type: String
+    - name: billingCity
+      type: String
+    - name: billingCountry
+      type: String
+    - name: billingPostalCode
+      type: String
+    - name: billingState
+      type: Json!
+    - name: customerId
+      type: Int
+    - name: document
+      type: String
+    - name: id
+      type: String!
+    - name: invoiceDate
+      type: String
+    - name: invoiceId
+      type: Int
+    - name: total
+      type: String
+    - name: vectorNames
+      type: "[String!]!"
+    - name: vectors
+      type: "[[Float!]!]!"
+  graphql:
+    typeName: Qdrant_InvoiceInsertType
+    inputTypeName: Qdrant_InvoiceInsertTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: qdrant
+      dataConnectorObjectType: invoice_InsertType
+      fieldMapping:
+        billingAddress:
+          column:
+            name: billing_address
+        billingCity:
+          column:
+            name: billing_city
+        billingCountry:
+          column:
+            name: billing_country
+        billingPostalCode:
+          column:
+            name: billing_postal_code
+        billingState:
+          column:
+            name: billing_state
+        customerId:
+          column:
+            name: customer_id
+        document:
+          column:
+            name: document
+        id:
+          column:
+            name: id
+        invoiceDate:
+          column:
+            name: invoice_date
+        invoiceId:
+          column:
+            name: invoice_id
+        total:
+          column:
+            name: total
+        vectorNames:
+          column:
+            name: vector_names
+        vectors:
+          column:
+            name: vectors
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InvoiceInsertType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - billingAddress
+          - billingCity
+          - billingCountry
+          - billingPostalCode
+          - billingState
+          - customerId
+          - document
+          - id
+          - invoiceDate
+          - invoiceId
+          - total
+          - vectorNames
+          - vectors
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertInvoiceOne
+  outputType: Json!
+  arguments:
+    - name: object
+      type: InvoiceInsertType!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: insert_invoice_one
+  graphql:
+    rootFieldName: qdrant_insertInvoiceOne
+    rootFieldKind: Mutation
+  description: Insert a single record into the invoice collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertInvoiceOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,3222 @@
+kind: DataConnectorLink
+version: v1
+definition:
+  name: qdrant
+  url:
+    readWriteUrls:
+      read:
+        valueFromEnv: QDRANT_QDRANT_READ_URL
+      write:
+        valueFromEnv: QDRANT_QDRANT_WRITE_URL
+  schema:
+    version: v0.1
+    schema:
+      scalar_types:
+        Bool:
+          aggregate_functions: {}
+          comparison_operators:
+            eq:
+              type: equal
+        Float:
+          aggregate_functions: {}
+          comparison_operators:
+            eq:
+              type: equal
+            gt:
+              type: custom
+              argument_type:
+                type: named
+                name: Float
+            gte:
+              type: custom
+              argument_type:
+                type: named
+                name: Float
+            lt:
+              type: custom
+              argument_type:
+                type: named
+                name: Float
+            lte:
+              type: custom
+              argument_type:
+                type: named
+                name: Float
+        Int:
+          aggregate_functions: {}
+          comparison_operators:
+            eq:
+              type: equal
+            gt:
+              type: custom
+              argument_type:
+                type: named
+                name: Int
+            gte:
+              type: custom
+              argument_type:
+                type: named
+                name: Int
+            lt:
+              type: custom
+              argument_type:
+                type: named
+                name: Int
+            lte:
+              type: custom
+              argument_type:
+                type: named
+                name: Int
+        JSON:
+          aggregate_functions: {}
+          comparison_operators: {}
+        String:
+          aggregate_functions: {}
+          comparison_operators:
+            eq:
+              type: equal
+            like:
+              type: custom
+              argument_type:
+                type: named
+                name: String
+      object_types:
+        _params:
+          description: Search parameters for Qdrant
+          fields:
+            exact:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Bool
+            hnsw_ef:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            indexed_only:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Bool
+            quantization:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _quantization
+        _quantization:
+          description: Quantization Parameters for Qdrant
+          fields:
+            ignore:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Bool
+            oversampling:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Float
+            rescore:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Bool
+        _recommendInt:
+          description: Provide an array of positive and negative example points and get a recommendation
+          fields:
+            negative:
+              type:
+                type: nullable
+                underlying_type:
+                  type: array
+                  element_type:
+                    type: named
+                    name: Int
+            params:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _params
+            positive:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: Int
+            score_threshold:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Float
+        _recommendIntVector:
+          description: Provide an array of positive and negative example points and get a recommendation
+          fields:
+            negative:
+              type:
+                type: nullable
+                underlying_type:
+                  type: array
+                  element_type:
+                    type: named
+                    name: Int
+            params:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _params
+            positive:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: Int
+            score_threshold:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Float
+            using:
+              type:
+                type: named
+                name: String
+        _recommendString:
+          description: Provide an array of positive and negative example points and get a recommendation
+          fields:
+            negative:
+              type:
+                type: nullable
+                underlying_type:
+                  type: array
+                  element_type:
+                    type: named
+                    name: String
+            params:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _params
+            positive:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: String
+            score_threshold:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Float
+        _recommendStringVector:
+          description: Provide an array of positive and negative example points and get a recommendation
+          fields:
+            negative:
+              type:
+                type: nullable
+                underlying_type:
+                  type: array
+                  element_type:
+                    type: named
+                    name: String
+            params:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _params
+            positive:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: String
+            score_threshold:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Float
+            using:
+              type:
+                type: named
+                name: String
+        _search:
+          description: Search the vector database for similar vectors
+          fields:
+            params:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _params
+            score_threshold:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Float
+            vector:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: Float
+        _searchVector:
+          description: Search the vector database for similar vectors
+          fields:
+            name:
+              type:
+                type: named
+                name: String
+            params:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _params
+            score_threshold:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Float
+            vector:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: Float
+        album:
+          fields:
+            album_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            artist_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            document:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            id:
+              type:
+                type: named
+                name: String
+            score:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Float
+            title:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            vector:
+              type:
+                type: nullable
+                underlying_type:
+                  type: array
+                  element_type:
+                    type: named
+                    name: Float
+        album_InsertType:
+          fields:
+            album_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            artist_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            document:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            id:
+              type:
+                type: named
+                name: String
+            title:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            vector_names:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: String
+            vectors:
+              type:
+                type: array
+                element_type:
+                  type: array
+                  element_type:
+                    type: named
+                    name: Float
+        article:
+          fields:
+            arr:
+              type:
+                type: nullable
+                underlying_type:
+                  type: array
+                  element_type:
+                    type: nullable
+                    underlying_type:
+                      type: named
+                      name: Int
+            bool:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Bool
+            float:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Float
+            id:
+              type:
+                type: named
+                name: Int
+            int:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            score:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Float
+            string:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            vector:
+              type:
+                type: nullable
+                underlying_type:
+                  type: array
+                  element_type:
+                    type: named
+                    name: Float
+        article_InsertType:
+          fields:
+            arr:
+              type:
+                type: nullable
+                underlying_type:
+                  type: array
+                  element_type:
+                    type: nullable
+                    underlying_type:
+                      type: named
+                      name: Int
+            bool:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Bool
+            float:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Float
+            id:
+              type:
+                type: named
+                name: Int
+            int:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            string:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            vector:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: Float
+        artist:
+          fields:
+            artist_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            document:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            id:
+              type:
+                type: named
+                name: String
+            name:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            score:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Float
+            vector:
+              type:
+                type: nullable
+                underlying_type:
+                  type: array
+                  element_type:
+                    type: named
+                    name: Float
+        artist_InsertType:
+          fields:
+            artist_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            document:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            id:
+              type:
+                type: named
+                name: String
+            name:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            vector_names:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: String
+            vectors:
+              type:
+                type: array
+                element_type:
+                  type: array
+                  element_type:
+                    type: named
+                    name: Float
+        boolean:
+          fields:
+            A:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Bool
+            B:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Bool
+            C:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Bool
+            D:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Bool
+            id:
+              type:
+                type: named
+                name: Int
+            score:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Float
+            vector:
+              type:
+                type: nullable
+                underlying_type:
+                  type: array
+                  element_type:
+                    type: named
+                    name: Float
+        boolean_InsertType:
+          fields:
+            A:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Bool
+            B:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Bool
+            C:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Bool
+            D:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Bool
+            id:
+              type:
+                type: named
+                name: Int
+            vector:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: Float
+        customer:
+          fields:
+            address:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            city:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            company:
+              type:
+                type: named
+                name: JSON
+            country:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            customer_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            document:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            email:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            fax:
+              type:
+                type: named
+                name: JSON
+            first_name:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            id:
+              type:
+                type: named
+                name: String
+            last_name:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            phone:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            postal_code:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            score:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Float
+            state:
+              type:
+                type: named
+                name: JSON
+            support_rep_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            vector:
+              type:
+                type: nullable
+                underlying_type:
+                  type: array
+                  element_type:
+                    type: named
+                    name: Float
+        customer_InsertType:
+          fields:
+            address:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            city:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            company:
+              type:
+                type: named
+                name: JSON
+            country:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            customer_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            document:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            email:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            fax:
+              type:
+                type: named
+                name: JSON
+            first_name:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            id:
+              type:
+                type: named
+                name: String
+            last_name:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            phone:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            postal_code:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            state:
+              type:
+                type: named
+                name: JSON
+            support_rep_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            vector_names:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: String
+            vectors:
+              type:
+                type: array
+                element_type:
+                  type: array
+                  element_type:
+                    type: named
+                    name: Float
+        employee:
+          fields:
+            address:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            birth_date:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            city:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            country:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            document:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            email:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            employee_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            fax:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            first_name:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            hire_date:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            id:
+              type:
+                type: named
+                name: String
+            last_name:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            phone:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            postal_code:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            reports_to:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            score:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Float
+            state:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            title:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            vector:
+              type:
+                type: nullable
+                underlying_type:
+                  type: array
+                  element_type:
+                    type: named
+                    name: Float
+        employee_InsertType:
+          fields:
+            address:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            birth_date:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            city:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            country:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            document:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            email:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            employee_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            fax:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            first_name:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            hire_date:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            id:
+              type:
+                type: named
+                name: String
+            last_name:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            phone:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            postal_code:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            reports_to:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            state:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            title:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            vector_names:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: String
+            vectors:
+              type:
+                type: array
+                element_type:
+                  type: array
+                  element_type:
+                    type: named
+                    name: Float
+        genre:
+          fields:
+            document:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            genre_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            id:
+              type:
+                type: named
+                name: String
+            name:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            score:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Float
+            vector:
+              type:
+                type: nullable
+                underlying_type:
+                  type: array
+                  element_type:
+                    type: named
+                    name: Float
+        genre_InsertType:
+          fields:
+            document:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            genre_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            id:
+              type:
+                type: named
+                name: String
+            name:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            vector_names:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: String
+            vectors:
+              type:
+                type: array
+                element_type:
+                  type: array
+                  element_type:
+                    type: named
+                    name: Float
+        invoice:
+          fields:
+            billing_address:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            billing_city:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            billing_country:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            billing_postal_code:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            billing_state:
+              type:
+                type: named
+                name: JSON
+            customer_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            document:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            id:
+              type:
+                type: named
+                name: String
+            invoice_date:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            invoice_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            score:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Float
+            total:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            vector:
+              type:
+                type: nullable
+                underlying_type:
+                  type: array
+                  element_type:
+                    type: named
+                    name: Float
+        invoice_InsertType:
+          fields:
+            billing_address:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            billing_city:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            billing_country:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            billing_postal_code:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            billing_state:
+              type:
+                type: named
+                name: JSON
+            customer_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            document:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            id:
+              type:
+                type: named
+                name: String
+            invoice_date:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            invoice_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            total:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            vector_names:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: String
+            vectors:
+              type:
+                type: array
+                element_type:
+                  type: array
+                  element_type:
+                    type: named
+                    name: Float
+        invoice_line:
+          fields:
+            document:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            id:
+              type:
+                type: named
+                name: String
+            invoice_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            invoice_line_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            quantity:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            score:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Float
+            track_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            unit_price:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            vector:
+              type:
+                type: nullable
+                underlying_type:
+                  type: array
+                  element_type:
+                    type: named
+                    name: Float
+        invoice_line_InsertType:
+          fields:
+            document:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            id:
+              type:
+                type: named
+                name: String
+            invoice_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            invoice_line_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            quantity:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            track_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            unit_price:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            vector_names:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: String
+            vectors:
+              type:
+                type: array
+                element_type:
+                  type: array
+                  element_type:
+                    type: named
+                    name: Float
+        media_type:
+          fields:
+            document:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            id:
+              type:
+                type: named
+                name: String
+            media_type_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            name:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            score:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Float
+            vector:
+              type:
+                type: nullable
+                underlying_type:
+                  type: array
+                  element_type:
+                    type: named
+                    name: Float
+        media_type_InsertType:
+          fields:
+            document:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            id:
+              type:
+                type: named
+                name: String
+            media_type_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            name:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            vector_names:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: String
+            vectors:
+              type:
+                type: array
+                element_type:
+                  type: array
+                  element_type:
+                    type: named
+                    name: Float
+        playlist:
+          fields:
+            document:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            id:
+              type:
+                type: named
+                name: String
+            name:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            playlist_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            score:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Float
+            vector:
+              type:
+                type: nullable
+                underlying_type:
+                  type: array
+                  element_type:
+                    type: named
+                    name: Float
+        playlist_InsertType:
+          fields:
+            document:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            id:
+              type:
+                type: named
+                name: String
+            name:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            playlist_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            vector_names:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: String
+            vectors:
+              type:
+                type: array
+                element_type:
+                  type: array
+                  element_type:
+                    type: named
+                    name: Float
+        playlist_track:
+          fields:
+            document:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            id:
+              type:
+                type: named
+                name: String
+            playlist_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            score:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Float
+            track_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            vector:
+              type:
+                type: nullable
+                underlying_type:
+                  type: array
+                  element_type:
+                    type: named
+                    name: Float
+        playlist_track_InsertType:
+          fields:
+            document:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            id:
+              type:
+                type: named
+                name: String
+            playlist_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            track_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            vector_names:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: String
+            vectors:
+              type:
+                type: array
+                element_type:
+                  type: array
+                  element_type:
+                    type: named
+                    name: Float
+        track:
+          fields:
+            album_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            bytes:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            composer:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            document:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            genre_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            id:
+              type:
+                type: named
+                name: String
+            media_type_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            milliseconds:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            name:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            score:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Float
+            track_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            unit_price:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            vector:
+              type:
+                type: nullable
+                underlying_type:
+                  type: array
+                  element_type:
+                    type: named
+                    name: Float
+        track_InsertType:
+          fields:
+            album_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            bytes:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            composer:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            document:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            genre_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            id:
+              type:
+                type: named
+                name: String
+            media_type_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            milliseconds:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            name:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            track_id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: Int
+            unit_price:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+            vector_names:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: String
+            vectors:
+              type:
+                type: array
+                element_type:
+                  type: array
+                  element_type:
+                    type: named
+                    name: Float
+      collections:
+        - name: genre
+          arguments:
+            recommend:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _recommendStringVector
+            search:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _searchVector
+          type: genre
+          uniqueness_constraints:
+            GenreByID:
+              unique_columns:
+                - id
+          foreign_keys: {}
+        - name: media_type
+          arguments:
+            recommend:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _recommendStringVector
+            search:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _searchVector
+          type: media_type
+          uniqueness_constraints:
+            Media_typeByID:
+              unique_columns:
+                - id
+          foreign_keys: {}
+        - name: invoice
+          arguments:
+            recommend:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _recommendStringVector
+            search:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _searchVector
+          type: invoice
+          uniqueness_constraints:
+            InvoiceByID:
+              unique_columns:
+                - id
+          foreign_keys: {}
+        - name: artist
+          arguments:
+            recommend:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _recommendStringVector
+            search:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _searchVector
+          type: artist
+          uniqueness_constraints:
+            ArtistByID:
+              unique_columns:
+                - id
+          foreign_keys: {}
+        - name: article
+          arguments:
+            recommend:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _recommendInt
+            search:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _search
+          type: article
+          uniqueness_constraints:
+            ArticleByID:
+              unique_columns:
+                - id
+          foreign_keys: {}
+        - name: playlist
+          arguments:
+            recommend:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _recommendStringVector
+            search:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _searchVector
+          type: playlist
+          uniqueness_constraints:
+            PlaylistByID:
+              unique_columns:
+                - id
+          foreign_keys: {}
+        - name: boolean
+          arguments:
+            recommend:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _recommendInt
+            search:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _search
+          type: boolean
+          uniqueness_constraints:
+            BooleanByID:
+              unique_columns:
+                - id
+          foreign_keys: {}
+        - name: customer
+          arguments:
+            recommend:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _recommendStringVector
+            search:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _searchVector
+          type: customer
+          uniqueness_constraints:
+            CustomerByID:
+              unique_columns:
+                - id
+          foreign_keys: {}
+        - name: invoice_line
+          arguments:
+            recommend:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _recommendStringVector
+            search:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _searchVector
+          type: invoice_line
+          uniqueness_constraints:
+            Invoice_lineByID:
+              unique_columns:
+                - id
+          foreign_keys: {}
+        - name: album
+          arguments:
+            recommend:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _recommendStringVector
+            search:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _searchVector
+          type: album
+          uniqueness_constraints:
+            AlbumByID:
+              unique_columns:
+                - id
+          foreign_keys: {}
+        - name: playlist_track
+          arguments:
+            recommend:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _recommendStringVector
+            search:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _searchVector
+          type: playlist_track
+          uniqueness_constraints:
+            Playlist_trackByID:
+              unique_columns:
+                - id
+          foreign_keys: {}
+        - name: track
+          arguments:
+            recommend:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _recommendStringVector
+            search:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _searchVector
+          type: track
+          uniqueness_constraints:
+            TrackByID:
+              unique_columns:
+                - id
+          foreign_keys: {}
+        - name: employee
+          arguments:
+            recommend:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _recommendStringVector
+            search:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: _searchVector
+          type: employee
+          uniqueness_constraints:
+            EmployeeByID:
+              unique_columns:
+                - id
+          foreign_keys: {}
+      functions: []
+      procedures:
+        - name: insert_genre_one
+          description: Insert a single record into the genre collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: genre_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: upsert_genre_one
+          description: Upsert a single record into the genre collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: genre_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: delete_genre_one
+          description: Delete a single record from the genre collection
+          arguments:
+            id:
+              type:
+                type: named
+                name: String
+          result_type:
+            type: named
+            name: JSON
+        - name: update_genre_one
+          description: Update a single record from the genre collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: genre_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: insert_genre_many
+          description: Insert multiple records into the genre collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: genre_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: upsert_genre_many
+          description: Upsert multiple records into the genre collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: genre_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: update_genre_many
+          description: Update multiple records in the genre collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: genre_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: delete_genre_many
+          description: Delete multiple records from the genre collection using their IDs
+          arguments:
+            ids:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: String
+          result_type:
+            type: named
+            name: JSON
+        - name: insert_media_type_one
+          description: Insert a single record into the media_type collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: media_type_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: upsert_media_type_one
+          description: Upsert a single record into the media_type collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: media_type_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: delete_media_type_one
+          description: Delete a single record from the media_type collection
+          arguments:
+            id:
+              type:
+                type: named
+                name: String
+          result_type:
+            type: named
+            name: JSON
+        - name: update_media_type_one
+          description: Update a single record from the media_type collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: media_type_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: insert_media_type_many
+          description: Insert multiple records into the media_type collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: media_type_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: upsert_media_type_many
+          description: Upsert multiple records into the media_type collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: media_type_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: update_media_type_many
+          description: Update multiple records in the media_type collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: media_type_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: delete_media_type_many
+          description: Delete multiple records from the media_type collection using their IDs
+          arguments:
+            ids:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: String
+          result_type:
+            type: named
+            name: JSON
+        - name: insert_invoice_one
+          description: Insert a single record into the invoice collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: invoice_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: upsert_invoice_one
+          description: Upsert a single record into the invoice collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: invoice_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: delete_invoice_one
+          description: Delete a single record from the invoice collection
+          arguments:
+            id:
+              type:
+                type: named
+                name: String
+          result_type:
+            type: named
+            name: JSON
+        - name: update_invoice_one
+          description: Update a single record from the invoice collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: invoice_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: insert_invoice_many
+          description: Insert multiple records into the invoice collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: invoice_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: upsert_invoice_many
+          description: Upsert multiple records into the invoice collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: invoice_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: update_invoice_many
+          description: Update multiple records in the invoice collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: invoice_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: delete_invoice_many
+          description: Delete multiple records from the invoice collection using their IDs
+          arguments:
+            ids:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: String
+          result_type:
+            type: named
+            name: JSON
+        - name: insert_artist_one
+          description: Insert a single record into the artist collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: artist_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: upsert_artist_one
+          description: Upsert a single record into the artist collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: artist_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: delete_artist_one
+          description: Delete a single record from the artist collection
+          arguments:
+            id:
+              type:
+                type: named
+                name: String
+          result_type:
+            type: named
+            name: JSON
+        - name: update_artist_one
+          description: Update a single record from the artist collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: artist_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: insert_artist_many
+          description: Insert multiple records into the artist collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: artist_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: upsert_artist_many
+          description: Upsert multiple records into the artist collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: artist_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: update_artist_many
+          description: Update multiple records in the artist collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: artist_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: delete_artist_many
+          description: Delete multiple records from the artist collection using their IDs
+          arguments:
+            ids:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: String
+          result_type:
+            type: named
+            name: JSON
+        - name: insert_article_one
+          description: Insert a single record into the article collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: article_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: upsert_article_one
+          description: Upsert a single record into the article collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: article_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: delete_article_one
+          description: Delete a single record from the article collection
+          arguments:
+            id:
+              type:
+                type: named
+                name: Int
+          result_type:
+            type: named
+            name: JSON
+        - name: update_article_one
+          description: Update a single record from the article collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: article_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: insert_article_many
+          description: Insert multiple records into the article collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: article_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: upsert_article_many
+          description: Upsert multiple records into the article collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: article_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: update_article_many
+          description: Update multiple records in the article collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: article_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: delete_article_many
+          description: Delete multiple records from the article collection using their IDs
+          arguments:
+            ids:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: Int
+          result_type:
+            type: named
+            name: JSON
+        - name: insert_playlist_one
+          description: Insert a single record into the playlist collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: playlist_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: upsert_playlist_one
+          description: Upsert a single record into the playlist collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: playlist_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: delete_playlist_one
+          description: Delete a single record from the playlist collection
+          arguments:
+            id:
+              type:
+                type: named
+                name: String
+          result_type:
+            type: named
+            name: JSON
+        - name: update_playlist_one
+          description: Update a single record from the playlist collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: playlist_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: insert_playlist_many
+          description: Insert multiple records into the playlist collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: playlist_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: upsert_playlist_many
+          description: Upsert multiple records into the playlist collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: playlist_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: update_playlist_many
+          description: Update multiple records in the playlist collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: playlist_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: delete_playlist_many
+          description: Delete multiple records from the playlist collection using their IDs
+          arguments:
+            ids:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: String
+          result_type:
+            type: named
+            name: JSON
+        - name: insert_boolean_one
+          description: Insert a single record into the boolean collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: boolean_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: upsert_boolean_one
+          description: Upsert a single record into the boolean collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: boolean_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: delete_boolean_one
+          description: Delete a single record from the boolean collection
+          arguments:
+            id:
+              type:
+                type: named
+                name: Int
+          result_type:
+            type: named
+            name: JSON
+        - name: update_boolean_one
+          description: Update a single record from the boolean collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: boolean_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: insert_boolean_many
+          description: Insert multiple records into the boolean collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: boolean_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: upsert_boolean_many
+          description: Upsert multiple records into the boolean collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: boolean_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: update_boolean_many
+          description: Update multiple records in the boolean collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: boolean_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: delete_boolean_many
+          description: Delete multiple records from the boolean collection using their IDs
+          arguments:
+            ids:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: Int
+          result_type:
+            type: named
+            name: JSON
+        - name: insert_customer_one
+          description: Insert a single record into the customer collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: customer_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: upsert_customer_one
+          description: Upsert a single record into the customer collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: customer_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: delete_customer_one
+          description: Delete a single record from the customer collection
+          arguments:
+            id:
+              type:
+                type: named
+                name: String
+          result_type:
+            type: named
+            name: JSON
+        - name: update_customer_one
+          description: Update a single record from the customer collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: customer_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: insert_customer_many
+          description: Insert multiple records into the customer collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: customer_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: upsert_customer_many
+          description: Upsert multiple records into the customer collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: customer_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: update_customer_many
+          description: Update multiple records in the customer collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: customer_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: delete_customer_many
+          description: Delete multiple records from the customer collection using their IDs
+          arguments:
+            ids:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: String
+          result_type:
+            type: named
+            name: JSON
+        - name: insert_invoice_line_one
+          description: Insert a single record into the invoice_line collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: invoice_line_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: upsert_invoice_line_one
+          description: Upsert a single record into the invoice_line collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: invoice_line_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: delete_invoice_line_one
+          description: Delete a single record from the invoice_line collection
+          arguments:
+            id:
+              type:
+                type: named
+                name: String
+          result_type:
+            type: named
+            name: JSON
+        - name: update_invoice_line_one
+          description: Update a single record from the invoice_line collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: invoice_line_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: insert_invoice_line_many
+          description: Insert multiple records into the invoice_line collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: invoice_line_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: upsert_invoice_line_many
+          description: Upsert multiple records into the invoice_line collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: invoice_line_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: update_invoice_line_many
+          description: Update multiple records in the invoice_line collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: invoice_line_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: delete_invoice_line_many
+          description: Delete multiple records from the invoice_line collection using their IDs
+          arguments:
+            ids:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: String
+          result_type:
+            type: named
+            name: JSON
+        - name: insert_album_one
+          description: Insert a single record into the album collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: album_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: upsert_album_one
+          description: Upsert a single record into the album collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: album_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: delete_album_one
+          description: Delete a single record from the album collection
+          arguments:
+            id:
+              type:
+                type: named
+                name: String
+          result_type:
+            type: named
+            name: JSON
+        - name: update_album_one
+          description: Update a single record from the album collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: album_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: insert_album_many
+          description: Insert multiple records into the album collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: album_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: upsert_album_many
+          description: Upsert multiple records into the album collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: album_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: update_album_many
+          description: Update multiple records in the album collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: album_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: delete_album_many
+          description: Delete multiple records from the album collection using their IDs
+          arguments:
+            ids:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: String
+          result_type:
+            type: named
+            name: JSON
+        - name: insert_playlist_track_one
+          description: Insert a single record into the playlist_track collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: playlist_track_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: upsert_playlist_track_one
+          description: Upsert a single record into the playlist_track collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: playlist_track_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: delete_playlist_track_one
+          description: Delete a single record from the playlist_track collection
+          arguments:
+            id:
+              type:
+                type: named
+                name: String
+          result_type:
+            type: named
+            name: JSON
+        - name: update_playlist_track_one
+          description: Update a single record from the playlist_track collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: playlist_track_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: insert_playlist_track_many
+          description: Insert multiple records into the playlist_track collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: playlist_track_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: upsert_playlist_track_many
+          description: Upsert multiple records into the playlist_track collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: playlist_track_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: update_playlist_track_many
+          description: Update multiple records in the playlist_track collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: playlist_track_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: delete_playlist_track_many
+          description: Delete multiple records from the playlist_track collection using their IDs
+          arguments:
+            ids:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: String
+          result_type:
+            type: named
+            name: JSON
+        - name: insert_track_one
+          description: Insert a single record into the track collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: track_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: upsert_track_one
+          description: Upsert a single record into the track collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: track_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: delete_track_one
+          description: Delete a single record from the track collection
+          arguments:
+            id:
+              type:
+                type: named
+                name: String
+          result_type:
+            type: named
+            name: JSON
+        - name: update_track_one
+          description: Update a single record from the track collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: track_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: insert_track_many
+          description: Insert multiple records into the track collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: track_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: upsert_track_many
+          description: Upsert multiple records into the track collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: track_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: update_track_many
+          description: Update multiple records in the track collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: track_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: delete_track_many
+          description: Delete multiple records from the track collection using their IDs
+          arguments:
+            ids:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: String
+          result_type:
+            type: named
+            name: JSON
+        - name: insert_employee_one
+          description: Insert a single record into the employee collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: employee_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: upsert_employee_one
+          description: Upsert a single record into the employee collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: employee_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: delete_employee_one
+          description: Delete a single record from the employee collection
+          arguments:
+            id:
+              type:
+                type: named
+                name: String
+          result_type:
+            type: named
+            name: JSON
+        - name: update_employee_one
+          description: Update a single record from the employee collection
+          arguments:
+            object:
+              type:
+                type: named
+                name: employee_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: insert_employee_many
+          description: Insert multiple records into the employee collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: employee_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: upsert_employee_many
+          description: Upsert multiple records into the employee collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: employee_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: update_employee_many
+          description: Update multiple records in the employee collection
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: employee_InsertType
+          result_type:
+            type: named
+            name: JSON
+        - name: delete_employee_many
+          description: Delete multiple records from the employee collection using their IDs
+          arguments:
+            ids:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: String
+          result_type:
+            type: named
+            name: JSON
+    capabilities:
+      version: ^0.1.0
+      capabilities:
+        query:
+          variables: {}
+        mutation:
+          transactional: {}
+          explain: {}
+        relationships:
+          order_by_aggregate: {}

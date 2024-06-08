@@ -1,0 +1,249 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: RecommendInt
+  description: Provide an array of positive and negative example points and get a
+    recommendation
+  fields:
+    - name: negative
+      type: "[Int!]"
+    - name: params
+      type: Params
+    - name: positive
+      type: "[Int!]!"
+    - name: scoreThreshold
+      type: Float
+  graphql:
+    typeName: Qdrant_RecommendInt
+    inputTypeName: Qdrant_RecommendIntInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: qdrant
+      dataConnectorObjectType: _recommendInt
+      fieldMapping:
+        negative:
+          column:
+            name: negative
+        params:
+          column:
+            name: params
+        positive:
+          column:
+            name: positive
+        scoreThreshold:
+          column:
+            name: score_threshold
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: RecommendInt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - negative
+          - params
+          - positive
+          - scoreThreshold
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Search
+  description: Search the vector database for similar vectors
+  fields:
+    - name: params
+      type: Params
+    - name: scoreThreshold
+      type: Float
+    - name: vector
+      type: "[Float!]!"
+  graphql:
+    typeName: Qdrant_Search
+    inputTypeName: Qdrant_SearchInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: qdrant
+      dataConnectorObjectType: _search
+      fieldMapping:
+        params:
+          column:
+            name: params
+        scoreThreshold:
+          column:
+            name: score_threshold
+        vector:
+          column:
+            name: vector
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Search
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - params
+          - scoreThreshold
+          - vector
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Boolean_1
+  fields:
+    - name: a
+      type: Bool
+    - name: b
+      type: Bool
+    - name: c
+      type: Bool
+    - name: d
+      type: Bool
+    - name: id
+      type: Int!
+    - name: score
+      type: Float
+    - name: vector
+      type: "[Float!]"
+  graphql:
+    typeName: Qdrant_Boolean1
+    inputTypeName: Qdrant_Boolean1Input
+  dataConnectorTypeMapping:
+    - dataConnectorName: qdrant
+      dataConnectorObjectType: boolean
+      fieldMapping:
+        a:
+          column:
+            name: A
+        b:
+          column:
+            name: B
+        c:
+          column:
+            name: C
+        d:
+          column:
+            name: D
+        id:
+          column:
+            name: id
+        score:
+          column:
+            name: score
+        vector:
+          column:
+            name: vector
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Boolean_1
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - a
+          - b
+          - c
+          - d
+          - id
+          - score
+          - vector
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: BooleanBoolExp
+  objectType: Boolean_1
+  dataConnectorName: qdrant
+  dataConnectorObjectType: boolean
+  comparableFields:
+    - fieldName: a
+      operators:
+        enableAll: true
+    - fieldName: b
+      operators:
+        enableAll: true
+    - fieldName: c
+      operators:
+        enableAll: true
+    - fieldName: d
+      operators:
+        enableAll: true
+    - fieldName: id
+      operators:
+        enableAll: true
+    - fieldName: score
+      operators:
+        enableAll: true
+    - fieldName: vector
+      operators:
+        enableAll: true
+  graphql:
+    typeName: Qdrant_BooleanBoolExp
+
+---
+kind: Model
+version: v1
+definition:
+  name: Boolean
+  objectType: Boolean_1
+  arguments:
+    - name: recommend
+      type: RecommendInt
+    - name: search
+      type: Search
+  source:
+    dataConnectorName: qdrant
+    collection: boolean
+  filterExpressionType: BooleanBoolExp
+  orderableFields:
+    - fieldName: a
+      orderByDirections:
+        enableAll: true
+    - fieldName: b
+      orderByDirections:
+        enableAll: true
+    - fieldName: c
+      orderByDirections:
+        enableAll: true
+    - fieldName: d
+      orderByDirections:
+        enableAll: true
+    - fieldName: id
+      orderByDirections:
+        enableAll: true
+    - fieldName: score
+      orderByDirections:
+        enableAll: true
+    - fieldName: vector
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: qdrant_boolean
+    selectUniques:
+      - queryRootField: qdrant_booleanById
+        uniqueIdentifier:
+          - id
+    argumentsInputType: Qdrant_BooleanArguments
+    orderByExpressionType: Qdrant_BooleanOrderBy
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Boolean
+  permissions:
+    - role: admin
+      select:
+        filter: null
+

@@ -1,0 +1,465 @@
+kind: DataConnectorLink
+version: v1
+definition:
+  name: duckdb
+  url:
+    readWriteUrls:
+      read:
+        valueFromEnv: DUCKDB_DUCKDB_READ_URL
+      write:
+        valueFromEnv: DUCKDB_DUCKDB_WRITE_URL
+  schema:
+    version: v0.1
+    schema:
+      scalar_types:
+        Boolean:
+          aggregate_functions: {}
+          comparison_operators:
+            _eq:
+              type: equal
+        Float:
+          aggregate_functions: {}
+          comparison_operators:
+            _eq:
+              type: equal
+            _gt:
+              type: custom
+              argument_type:
+                type: named
+                name: Float
+            _gte:
+              type: custom
+              argument_type:
+                type: named
+                name: Float
+            _lt:
+              type: custom
+              argument_type:
+                type: named
+                name: Float
+            _lte:
+              type: custom
+              argument_type:
+                type: named
+                name: Float
+            _neq:
+              type: custom
+              argument_type:
+                type: named
+                name: Float
+        Int:
+          aggregate_functions: {}
+          comparison_operators:
+            _eq:
+              type: equal
+            _gt:
+              type: custom
+              argument_type:
+                type: named
+                name: Int
+            _gte:
+              type: custom
+              argument_type:
+                type: named
+                name: Int
+            _lt:
+              type: custom
+              argument_type:
+                type: named
+                name: Int
+            _lte:
+              type: custom
+              argument_type:
+                type: named
+                name: Int
+            _neq:
+              type: custom
+              argument_type:
+                type: named
+                name: Int
+        String:
+          aggregate_functions: {}
+          comparison_operators:
+            _eq:
+              type: equal
+            _glob:
+              type: custom
+              argument_type:
+                type: named
+                name: String
+            _gt:
+              type: custom
+              argument_type:
+                type: named
+                name: String
+            _gte:
+              type: custom
+              argument_type:
+                type: named
+                name: String
+            _like:
+              type: custom
+              argument_type:
+                type: named
+                name: String
+            _lt:
+              type: custom
+              argument_type:
+                type: named
+                name: String
+            _lte:
+              type: custom
+              argument_type:
+                type: named
+                name: String
+            _neq:
+              type: custom
+              argument_type:
+                type: named
+                name: String
+      object_types:
+        chinook_main_album:
+          fields:
+            album_id:
+              type:
+                type: named
+                name: Int
+            artist_id:
+              type:
+                type: named
+                name: Int
+            title:
+              type:
+                type: named
+                name: String
+        chinook_main_artist:
+          fields:
+            artist_id:
+              type:
+                type: named
+                name: Int
+            name:
+              type:
+                type: named
+                name: String
+        chinook_main_customer:
+          fields:
+            address:
+              type:
+                type: named
+                name: String
+            city:
+              type:
+                type: named
+                name: String
+            company:
+              type:
+                type: named
+                name: String
+            country:
+              type:
+                type: named
+                name: String
+            customer_id:
+              type:
+                type: named
+                name: Int
+            email:
+              type:
+                type: named
+                name: String
+            fax:
+              type:
+                type: named
+                name: String
+            first_name:
+              type:
+                type: named
+                name: String
+            last_name:
+              type:
+                type: named
+                name: String
+            phone:
+              type:
+                type: named
+                name: String
+            postal_code:
+              type:
+                type: named
+                name: String
+            state:
+              type:
+                type: named
+                name: String
+            support_rep_id:
+              type:
+                type: named
+                name: Int
+        chinook_main_employee:
+          fields:
+            address:
+              type:
+                type: named
+                name: String
+            birth_date:
+              type:
+                type: named
+                name: String
+            city:
+              type:
+                type: named
+                name: String
+            country:
+              type:
+                type: named
+                name: String
+            email:
+              type:
+                type: named
+                name: String
+            employee_id:
+              type:
+                type: named
+                name: Int
+            fax:
+              type:
+                type: named
+                name: String
+            first_name:
+              type:
+                type: named
+                name: String
+            hire_date:
+              type:
+                type: named
+                name: String
+            last_name:
+              type:
+                type: named
+                name: String
+            phone:
+              type:
+                type: named
+                name: String
+            postal_code:
+              type:
+                type: named
+                name: String
+            reports_to:
+              type:
+                type: named
+                name: Int
+            state:
+              type:
+                type: named
+                name: String
+            title:
+              type:
+                type: named
+                name: String
+        chinook_main_genre:
+          fields:
+            genre_id:
+              type:
+                type: named
+                name: Int
+            name:
+              type:
+                type: named
+                name: String
+        chinook_main_invoice:
+          fields:
+            billing_address:
+              type:
+                type: named
+                name: String
+            billing_city:
+              type:
+                type: named
+                name: String
+            billing_country:
+              type:
+                type: named
+                name: String
+            billing_postal_code:
+              type:
+                type: named
+                name: String
+            billing_state:
+              type:
+                type: named
+                name: String
+            customer_id:
+              type:
+                type: named
+                name: Int
+            invoice_date:
+              type:
+                type: named
+                name: String
+            invoice_id:
+              type:
+                type: named
+                name: Int
+            total:
+              type:
+                type: named
+                name: Float
+        chinook_main_invoice_line:
+          fields:
+            invoice_id:
+              type:
+                type: named
+                name: Int
+            invoice_line_id:
+              type:
+                type: named
+                name: Int
+            quantity:
+              type:
+                type: named
+                name: Int
+            track_id:
+              type:
+                type: named
+                name: Int
+            unit_price:
+              type:
+                type: named
+                name: Float
+        chinook_main_media_type:
+          fields:
+            media_type_id:
+              type:
+                type: named
+                name: Int
+            name:
+              type:
+                type: named
+                name: String
+        chinook_main_playlist:
+          fields:
+            name:
+              type:
+                type: named
+                name: String
+            playlist_id:
+              type:
+                type: named
+                name: Int
+        chinook_main_playlist_track:
+          fields:
+            playlist_id:
+              type:
+                type: named
+                name: Int
+            track_id:
+              type:
+                type: named
+                name: Int
+        chinook_main_track:
+          fields:
+            album_id:
+              type:
+                type: named
+                name: Int
+            bytes:
+              type:
+                type: named
+                name: Int
+            composer:
+              type:
+                type: named
+                name: String
+            genre_id:
+              type:
+                type: named
+                name: Int
+            media_type_id:
+              type:
+                type: named
+                name: Int
+            milliseconds:
+              type:
+                type: named
+                name: Int
+            name:
+              type:
+                type: named
+                name: String
+            track_id:
+              type:
+                type: named
+                name: Int
+            unit_price:
+              type:
+                type: named
+                name: Float
+      collections:
+        - name: chinook_main_album
+          arguments: {}
+          type: chinook_main_album
+          uniqueness_constraints: {}
+          foreign_keys: {}
+        - name: chinook_main_artist
+          arguments: {}
+          type: chinook_main_artist
+          uniqueness_constraints: {}
+          foreign_keys: {}
+        - name: chinook_main_customer
+          arguments: {}
+          type: chinook_main_customer
+          uniqueness_constraints: {}
+          foreign_keys: {}
+        - name: chinook_main_employee
+          arguments: {}
+          type: chinook_main_employee
+          uniqueness_constraints: {}
+          foreign_keys: {}
+        - name: chinook_main_genre
+          arguments: {}
+          type: chinook_main_genre
+          uniqueness_constraints: {}
+          foreign_keys: {}
+        - name: chinook_main_invoice
+          arguments: {}
+          type: chinook_main_invoice
+          uniqueness_constraints: {}
+          foreign_keys: {}
+        - name: chinook_main_invoice_line
+          arguments: {}
+          type: chinook_main_invoice_line
+          uniqueness_constraints: {}
+          foreign_keys: {}
+        - name: chinook_main_media_type
+          arguments: {}
+          type: chinook_main_media_type
+          uniqueness_constraints: {}
+          foreign_keys: {}
+        - name: chinook_main_playlist
+          arguments: {}
+          type: chinook_main_playlist
+          uniqueness_constraints: {}
+          foreign_keys: {}
+        - name: chinook_main_playlist_track
+          arguments: {}
+          type: chinook_main_playlist_track
+          uniqueness_constraints: {}
+          foreign_keys: {}
+        - name: chinook_main_track
+          arguments: {}
+          type: chinook_main_track
+          uniqueness_constraints: {}
+          foreign_keys: {}
+      functions: []
+      procedures: []
+    capabilities:
+      version: ^0.1.0
+      capabilities:
+        query:
+          variables: {}
+        mutation: {}
+        relationships:
+          relation_comparisons: {}
+          order_by_aggregate: {}

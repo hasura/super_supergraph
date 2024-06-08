@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateArticleOne
+  outputType: Json!
+  arguments:
+    - name: object
+      type: ArticleInsertType!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: update_article_one
+  graphql:
+    rootFieldName: qdrant_updateArticleOne
+    rootFieldKind: Mutation
+  description: Update a single record from the article collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateArticleOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

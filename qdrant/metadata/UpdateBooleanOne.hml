@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateBooleanOne
+  outputType: Json!
+  arguments:
+    - name: object
+      type: BooleanInsertType!
+  source:
+    dataConnectorName: qdrant
+    dataConnectorCommand:
+      procedure: update_boolean_one
+  graphql:
+    rootFieldName: qdrant_updateBooleanOne
+    rootFieldKind: Mutation
+  description: Update a single record from the boolean collection
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateBooleanOne
+  permissions:
+    - role: admin
+      allowExecution: true
+

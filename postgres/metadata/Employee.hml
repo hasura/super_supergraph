@@ -1,0 +1,300 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Employee
+  fields:
+    - name: address
+      type: Varchar
+    - name: birthDate
+      type: Timestamp
+    - name: city
+      type: Varchar
+    - name: country
+      type: Varchar
+    - name: email
+      type: Varchar
+    - name: employeeId
+      type: Int4!
+    - name: fax
+      type: Varchar
+    - name: firstName
+      type: Varchar!
+    - name: hireDate
+      type: Timestamp
+    - name: lastName
+      type: Varchar!
+    - name: phone
+      type: Varchar
+    - name: postalCode
+      type: Varchar
+    - name: reportsTo
+      type: Int4
+    - name: state
+      type: Varchar
+    - name: title
+      type: Varchar
+  graphql:
+    typeName: Postgres_Employee
+    inputTypeName: Postgres_EmployeeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: postgres
+      dataConnectorObjectType: employee
+      fieldMapping:
+        address:
+          column:
+            name: address
+        birthDate:
+          column:
+            name: birth_date
+        city:
+          column:
+            name: city
+        country:
+          column:
+            name: country
+        email:
+          column:
+            name: email
+        employeeId:
+          column:
+            name: employee_id
+        fax:
+          column:
+            name: fax
+        firstName:
+          column:
+            name: first_name
+        hireDate:
+          column:
+            name: hire_date
+        lastName:
+          column:
+            name: last_name
+        phone:
+          column:
+            name: phone
+        postalCode:
+          column:
+            name: postal_code
+        reportsTo:
+          column:
+            name: reports_to
+        state:
+          column:
+            name: state
+        title:
+          column:
+            name: title
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Employee
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - address
+          - birthDate
+          - city
+          - country
+          - email
+          - employeeId
+          - fax
+          - firstName
+          - hireDate
+          - lastName
+          - phone
+          - postalCode
+          - reportsTo
+          - state
+          - title
+
+---
+kind: ObjectBooleanExpressionType
+version: v1
+definition:
+  name: EmployeeBoolExp
+  objectType: Employee
+  dataConnectorName: postgres
+  dataConnectorObjectType: employee
+  comparableFields:
+    - fieldName: address
+      operators:
+        enableAll: true
+    - fieldName: birthDate
+      operators:
+        enableAll: true
+    - fieldName: city
+      operators:
+        enableAll: true
+    - fieldName: country
+      operators:
+        enableAll: true
+    - fieldName: email
+      operators:
+        enableAll: true
+    - fieldName: employeeId
+      operators:
+        enableAll: true
+    - fieldName: fax
+      operators:
+        enableAll: true
+    - fieldName: firstName
+      operators:
+        enableAll: true
+    - fieldName: hireDate
+      operators:
+        enableAll: true
+    - fieldName: lastName
+      operators:
+        enableAll: true
+    - fieldName: phone
+      operators:
+        enableAll: true
+    - fieldName: postalCode
+      operators:
+        enableAll: true
+    - fieldName: reportsTo
+      operators:
+        enableAll: true
+    - fieldName: state
+      operators:
+        enableAll: true
+    - fieldName: title
+      operators:
+        enableAll: true
+  graphql:
+    typeName: Postgres_EmployeeBoolExp
+
+---
+kind: Model
+version: v1
+definition:
+  name: Employee
+  objectType: Employee
+  source:
+    dataConnectorName: postgres
+    collection: employee
+  filterExpressionType: EmployeeBoolExp
+  orderableFields:
+    - fieldName: address
+      orderByDirections:
+        enableAll: true
+    - fieldName: birthDate
+      orderByDirections:
+        enableAll: true
+    - fieldName: city
+      orderByDirections:
+        enableAll: true
+    - fieldName: country
+      orderByDirections:
+        enableAll: true
+    - fieldName: email
+      orderByDirections:
+        enableAll: true
+    - fieldName: employeeId
+      orderByDirections:
+        enableAll: true
+    - fieldName: fax
+      orderByDirections:
+        enableAll: true
+    - fieldName: firstName
+      orderByDirections:
+        enableAll: true
+    - fieldName: hireDate
+      orderByDirections:
+        enableAll: true
+    - fieldName: lastName
+      orderByDirections:
+        enableAll: true
+    - fieldName: phone
+      orderByDirections:
+        enableAll: true
+    - fieldName: postalCode
+      orderByDirections:
+        enableAll: true
+    - fieldName: reportsTo
+      orderByDirections:
+        enableAll: true
+    - fieldName: state
+      orderByDirections:
+        enableAll: true
+    - fieldName: title
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: postgres_employee
+    selectUniques:
+      - queryRootField: postgres_employeeByEmployeeId
+        uniqueIdentifier:
+          - employeeId
+    orderByExpressionType: Postgres_EmployeeOrderBy
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Employee
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: customers
+  sourceType: Employee
+  target:
+    model:
+      name: Customer
+      relationshipType: Array
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: employeeId
+      target:
+        modelField:
+          - fieldName: supportRepId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: employee
+  sourceType: Employee
+  target:
+    model:
+      name: Employee
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: reportsTo
+      target:
+        modelField:
+          - fieldName: employeeId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: employees
+  sourceType: Employee
+  target:
+    model:
+      name: Employee
+      relationshipType: Array
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: employeeId
+      target:
+        modelField:
+          - fieldName: reportsTo
+
